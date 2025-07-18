@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Efeito criativo de partículas no fundo -->
+    <div class="particles-bg">
+      <div class="particle" style="top:10%;left:15%;width:18px;height:18px;animation-delay:0s;"></div>
+      <div class="particle" style="top:40%;left:70%;width:24px;height:24px;animation-delay:2s;"></div>
+      <div class="particle" style="top:80%;left:30%;width:14px;height:14px;animation-delay:4s;"></div>
+      <div class="particle" style="top:60%;left:50%;width:22px;height:22px;animation-delay:6s;"></div>
+      <div class="particle" style="top:20%;left:80%;width:16px;height:16px;animation-delay:8s;"></div>
+    </div>
+
     <header class="header-dark">
         <nav class="nav-dark">
             <div class="logo-dark">Mundoteknologia</div>
@@ -96,19 +105,19 @@
         <section id="contact" class="contact-section-dark">
             <h3>Entre em Contato</h3>
             <form>
-                <input type="text" placeholder="Seu Nome">
-                <input type="email" placeholder="Seu Email">
-                <textarea placeholder="Sua Mensagem"></textarea>
+                <input type="text" placeholder="Seu Nome" required>
+                <input type="email" placeholder="Seu Email" required>
+                <textarea placeholder="Sua Mensagem" required></textarea>
                 <button type="submit" class="btn-dark highlight">Enviar Mensagem</button>
             </form>
             <p style="text-align:center; color:#bdbdbd; margin-top:1rem;">
                 Ou envie um e-mail para <b>contato@mundoteknologia.com</b>
             </p>
             <div style="text-align:center; margin-top:1rem;">
-                <a id="btn-whatsapp" class="btn-dark small" style="margin-right:10px;">
+                <a id="btn-whatsapp" class="btn-dark small" style="margin-right:10px;" href="https://wa.me/seunumerowhatsapp" target="_blank">
                     <img src="images/whats.png" alt="WhatsApp" style="height:24px;vertical-align:middle;margin-right:6px;">WhatsApp
                 </a>
-                <a id="btn-instagram" class="btn-dark small">
+                <a id="btn-instagram" class="btn-dark small" href="https://instagram.com/seuusuario" target="_blank">
                     <img src="images/insta.png" alt="Instagram" style="height:24px;vertical-align:middle;margin-right:6px;">Instagram
                 </a>
             </div>
