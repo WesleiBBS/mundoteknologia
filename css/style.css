@@ -48,19 +48,18 @@ body {
 body .particles-bg {
     position: fixed;
     inset: 0;
-    z-index: -1; /* Garante que as partículas fiquem atrás de tudo */
+    z-index: -1;
     pointer-events: none;
     overflow: hidden;
 }
 .particle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.10; /* Mais transparente */
+    opacity: 0.10;
     background: radial-gradient(circle, #dcdede 0%, #111112 80%, transparent 100%);
     animation: particle-move 12s linear infinite;
     transition: opacity 0.3s, transform 0.3s;
 }
-/* Efeito de explosão ao tocar o cabeçalho */
 .particle.explode {
     animation: explode-particle 0.6s linear;
     opacity: 0 !important;
@@ -71,28 +70,10 @@ body .particles-bg {
     100% { transform: scale(0); opacity: 0; }
 }
 @keyframes particle-move {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.7;
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(-60px) scale(1.2);
-    }
-    100% {
-        transform: translateY(-120px) scale(0.8);
-        opacity: 0.5;
-    }
+    0% { transform: translateY(0) scale(1); opacity: 0.7; }
+    50% { opacity: 1; transform: translateY(-60px) scale(1.2); }
+    100% { transform: translateY(-120px) scale(0.8); opacity: 0.5; }
 }
-/* Adicione no HTML logo após o <body>:
-<div class="particles-bg">
-  <div class="particle" style="top:10%;left:15%;width:18px;height:18px;animation-delay:0s;"></div>
-  <div class="particle" style="top:40%;left:70%;width:24px;height:24px;animation-delay:2s;"></div>
-  <div class="particle" style="top:80%;left:30%;width:14px;height:14px;animation-delay:4s;"></div>
-  <div class="particle" style="top:60%;left:50%;width:22px;height:22px;animation-delay:6s;"></div>
-  <div class="particle" style="top:20%;left:80%;width:16px;height:16px;animation-delay:8s;"></div>
-</div>
-*/
 
 /* Header e Navegação */
 header {
@@ -163,14 +144,9 @@ nav ul li.active a {
     padding: 4rem 0 2rem 0;
 }
 
-/* Efeito animado para o bloco principal do site */
 @keyframes gradient-move {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 .hero-content-dark {
@@ -342,29 +318,48 @@ nav ul li.active a {
     display: block;
     align-self: center;
 }
-
-.btn-dark.small {
-    font-family: 'Inter', 'Poppins', Arial, sans-serif;
-    background: var(--card-dark);
-    color: var(--accent);
-    border: none;
-    font-size: 0.95rem;
-    padding: 0.4rem 1rem;
-    margin-top: 0.7rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow-btn);
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    width: 100%;
-    text-align: center;
+/* Botão "Modo Escuro" no modo claro */
+body.light-mode .toggle-darkmode-btn {
+    background: #ffffff;
+    color: #151515;
     font-weight: 700;
-    cursor: pointer;
-    align-self: stretch;
-    letter-spacing: 0.02em;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px #00b4d833;
+    border: none;
+    padding: 0.32rem 0.9rem;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
 }
 
-.btn-dark.small:hover {
+/* Botões pequenos e destaque - tamanho ajustado para ambos os modos */
+.btn-dark.small,
+.btn-dark.highlight,
+body.light-mode .btn-dark.small,
+body.light-mode .btn-dark.highlight {
+    font-size: 0.85rem !important;
+    padding: 0.28rem 0.7rem !important;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    cursor: pointer;
+    align-self: stretch;
+    box-shadow: var(--shadow-btn);
+    border: none;
+    width: 100%;
+    margin-top: 0.7rem;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.btn-dark.small:hover,
+.btn-dark.highlight:hover,
+body.light-mode .btn-dark.small:hover,
+body.light-mode .btn-dark.highlight:hover {
     background: var(--accent-gradient);
-    color: var(--card-dark);
+    color: #fff;
     box-shadow: 0 0 0 2px var(--accent-hover);
 }
 
@@ -510,71 +505,125 @@ nav ul li.active a {
     }
 }
 
-/* Tema claro */
+/* Modo claro aprimorado para textos e botões visíveis e bonitos */
 body.light-mode {
-    background: linear-gradient(120deg, #f1f3f8 0%, #e3e7ee 50%, #c7e9f7 100%);
+    background: linear-gradient(120deg, #f8fafc 0%, #91969e 50%, #a7abad 100%);
     color: #23272f;
 }
+
+body.light-mode header {
+    background: linear-gradient(90deg, #e3e7ee 40%, #c7e9f7 80%, #0e0e0e 100%);
+    box-shadow: 0 4px 24px #c7e9f7;
+}
+
+body.light-mode .logo-dark {
+    color: #262728;
+    text-shadow: 2px 2px 8px #e3e7ee, -2px -2px 8px #c7e9f7;
+    filter: drop-shadow(0 2px 8px #c7e9f7);
+}
+
+body.light-mode nav ul li a {
+    color: #23272f;
+    background: #d5d0d0;
+    box-shadow: 0 2px 8px #3e4d67;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+body.light-mode nav ul li a:hover,
+body.light-mode nav ul li.active a {
+    color: #151616;
+    background: #e3e7ee;
+    box-shadow: 0 0 0 2px #151617, 0 2px 8px #c7e9f7;
+}
+
+body.light-mode .hero-content-dark {
+    background: linear-gradient(120deg, #19191a 0%, #c7e9f7 50%, #18191a 100%);
+    color: #23272f;
+    box-shadow: 0 8px 32px #c7e9f7;
+}
+
+body.light-mode .portfolio-section-dark h3,
+body.light-mode .about-section-dark h3,
+body.light-mode .contact-section-dark h3 {
+    color: #101112;
+    text-shadow: 2px 2px 8px #e3e7ee;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-align: center;
+    padding: 0.32rem 0.9rem;
+    font-size: 0.95rem;
+}
+
+body.light-mode .about-section-dark p,
+body.light-mode .contact-section-dark p {
+    color: #23272f;
+    font-size: 1.12rem;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0.98;
+    padding: 0.32rem 0.9rem;
+    font-size: 0.95rem;
+}
+
+body.light-mode .portfolio-card-dark,
+body.light-mode .about-section-dark,
+body.light-mode .contact-section-dark,
+body.light-mode .footer-dark {
+    background: #ffffff;
+    color: #23272f;
+    box-shadow: 0 4px 24px #e3e7ee;
+    border-radius: var(--border-radius);
+}
+
+body.light-mode .card-info-dark {
+    background: #f8fafc;
+    color: #23272f;
+    box-shadow: 0 2px 12px #e3e7ee;
+}
+
+body.light-mode .card-info-dark h4,
+body.light-mode .card-price-dark {
+    color: #141414;
+    font-weight: 700;
+    text-shadow: 1px 1px 6px #e3e7ee;
+}
+
+body.light-mode .card-info-dark p {
+    color: #23272f;
+    font-size: 1.05rem;
+}
+
+body.light-mode .portfolio-card-dark img {
+    background: linear-gradient(135deg, #e3e7ee 0%, #c7e9f7 100%);
+    box-shadow: 0 2px 12px #e3e7ee;
+}
+
+body.light-mode .contact-section-dark input,
+body.light-mode .contact-section-dark textarea {
+    background: #e3e7ee;
+    color: #23272f;
+    box-shadow: 0 2px 8px #c7e9f7;
+}
+
+body.light-mode .contact-section-dark input:focus,
+body.light-mode .contact-section-dark textarea:focus {
+    box-shadow: 0 0 0 2px rgb(21, 23, 23), 0 2px 8px #c7e9f7;
+}
+
+body.light-mode .footer-dark {
+    background: #f8fafc;
+    color: #23272f;
+    border-top: 2px solid #111111;
+    box-shadow: 0 -2px 12px #e3e7ee;
+}
+
 body.light-mode .particles-bg {
     z-index: -1;
 }
 body.light-mode .particle {
     background: radial-gradient(circle, #b0b6c3 0%, #f1f3f8 80%, transparent 100%);
     opacity: 0.13;
-}
-body.light-mode header {
-    background: linear-gradient(90deg, #e3e7ee 40%, #c7e9f7 80%, #00b4d8 100%);
-    box-shadow: var(--shadow);
-}
-body.light-mode .logo-dark {
-    color: #0077b6;
-    text-shadow: 2px 2px 8px #e3e7ee, -2px -2px 8px #c7e9f7;
-}
-body.light-mode nav ul li a {
-    color: #23272f;
-    background: #f1f3f8;
-}
-body.light-mode nav ul li a:hover,
-body.light-mode nav ul li.active a {
-    color: #00b4d8;
-    background: #e3e7ee;
-    box-shadow: 0 0 0 2px #00b4d8;
-}
-body.light-mode .hero-content-dark {
-    background: linear-gradient(120deg, #e3e7ee 0%, #c7e9f7 50%, #00b4d8 100%);
-    color: #23272f;
-}
-body.light-mode .portfolio-section-dark h3,
-body.light-mode .about-section-dark h3,
-body.light-mode .contact-section-dark h3 {
-    color: #0077b6;
-    text-shadow: 2px 2px 8px #e3e7ee;
-}
-body.light-mode .portfolio-card-dark,
-body.light-mode .about-section-dark,
-body.light-mode .contact-section-dark,
-body.light-mode .footer-dark {
-    background: #f1f3f8;
-    color: #23272f;
-    box-shadow: var(--shadow-inset);
-}
-body.light-mode .card-info-dark h4,
-body.light-mode .card-price-dark {
-    color: #0077b6;
-}
-body.light-mode .btn-dark.small,
-body.light-mode .btn-dark.highlight {
-    background: #e3e7ee;
-    color: #0077b6;
-}
-body.light-mode .btn-dark.small:hover,
-body.light-mode .btn-dark.highlight:hover {
-    background: var(--accent-gradient);
-    color: #f1f3f8;
-}
-body.light-mode .footer-dark {
-    border-top: 2px solid #00b4d8;
-    color: #23272f;
 }
 
 /* Animações de scroll */
