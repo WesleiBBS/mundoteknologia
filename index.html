@@ -9,6 +9,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Botão para alternar tema -->
+    <button id="toggle-theme" style="
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 100;
+        background: var(--card-dark);
+        color: var(--accent);
+        border: none;
+        border-radius: 14px;
+        box-shadow: 4px 4px 12px #14161c, -4px -4px 12px #23272f;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 0.5rem 1.2rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    ">
+        🌙 Modo Claro
+    </button>
     <!-- Efeito criativo de partículas no fundo -->
     <div class="particles-bg">
       <div class="particle" style="top:10%;left:15%;width:18px;height:18px;animation-delay:0s;"></div>
@@ -128,5 +147,12 @@
         <p>&copy; 2025 Mundoteknologia. Todos os direitos reservados.</p>
     </footer>
     <script src="js/script.js"></script>
+    <script>
+    // Alterna tema claro/escuro
+    document.getElementById('toggle-theme').addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        this.textContent = document.body.classList.contains('light-mode') ? '🌑 Modo Escuro' : '🌙 Modo Claro';
+    });
+    </script>
 </body>
 </html>

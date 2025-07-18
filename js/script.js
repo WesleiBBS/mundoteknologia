@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
 
     function updateCarousel() {
-        const cardWidth = cards[0].offsetWidth + 32; // 32 = gap
+        if (cards.length === 0) return;
+        const gap = parseInt(getComputedStyle(carousel).gap) || 32;
+        const cardWidth = cards[0].offsetWidth + gap;
         carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
     }
 
@@ -27,13 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // WhatsApp e Instagram direcionamento
     const whatsappBtn = document.getElementById('btn-whatsapp');
     if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', function() {
+        whatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             window.open('https://wa.me/5547992566217', '_blank');
         });
     }
     const instaBtn = document.getElementById('btn-instagram');
     if (instaBtn) {
-        instaBtn.addEventListener('click', function() {
+        instaBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             window.open('https://www.instagram.com/mundoteknologia?igsh=MWRzdm9tZDJrM25mOQ==', '_blank');
         });
     }
@@ -87,4 +91,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Alterna tema claro/escuro
+    const themeBtn = document.getElementById('toggle-theme');
+    if (themeBtn) {
+        themeBtn.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            this.textContent = document.body.classList.contains('light-mode') ? '🌑 Modo Escuro' : '🌙 Modo Claro';
+        });
+    }
 });
