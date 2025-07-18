@@ -48,16 +48,27 @@ body {
 body .particles-bg {
     position: fixed;
     inset: 0;
-    z-index: 0;
+    z-index: -1; /* Garante que as partículas fiquem atrás de tudo */
     pointer-events: none;
     overflow: hidden;
 }
 .particle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.5;
-    background: radial-gradient(circle, #00b4d8 0%, #4361ee 80%, transparent 100%);
+    opacity: 0.10; /* Mais transparente */
+    background: radial-gradient(circle, #dcdede 0%, #111112 80%, transparent 100%);
     animation: particle-move 12s linear infinite;
+    transition: opacity 0.3s, transform 0.3s;
+}
+/* Efeito de explosão ao tocar o cabeçalho */
+.particle.explode {
+    animation: explode-particle 0.6s linear;
+    opacity: 0 !important;
+}
+@keyframes explode-particle {
+    0% { transform: scale(1); opacity: 1; }
+    60% { transform: scale(2.5); opacity: 0.7; }
+    100% { transform: scale(0); opacity: 0; }
 }
 @keyframes particle-move {
     0% {
@@ -110,7 +121,7 @@ nav {
     letter-spacing: 2px;
     text-shadow:
         2px 2px 8px #23272f,
-        -2px -2px 8px #48cae4,
+        -2px -2px 8px #171717,
         1px 1px 0px #181a20,
         0 2px 4px #181a20;
     filter: drop-shadow(0 2px 8px #23272f);

@@ -71,4 +71,20 @@ document.addEventListener('DOMContentLoaded', function() {
     elements.forEach(element => {
         observer.observe(element);
     });
+
+    // Efeito de explosão das partículas ao tocar o cabeçalho
+    const particles = document.querySelectorAll('.particle');
+    const header = document.querySelector('header');
+    particles.forEach(particle => {
+        particle.addEventListener('animationiteration', () => {
+            const rect = particle.getBoundingClientRect();
+            const headerRect = header.getBoundingClientRect();
+            if (rect.top <= headerRect.bottom) {
+                particle.classList.add('explode');
+                setTimeout(() => {
+                    particle.classList.remove('explode');
+                }, 600);
+            }
+        });
+    });
 });
