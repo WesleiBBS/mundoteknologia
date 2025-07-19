@@ -199,9 +199,13 @@ nav ul li.active a {
     font-size: 1.1rem;
     font-weight: 800;
     padding: 0.7rem 2.2rem;
+    text-decoration: none;
     cursor: pointer;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     letter-spacing: 0.02em;
+}
+.btn-dark.highlight a {
+    text-decoration: none;
 }
 
 .btn-dark.highlight:hover {
@@ -214,12 +218,14 @@ nav ul li.active a {
 .portfolio-section-dark {
     background: transparent;
     padding: 3rem 0 2rem 0;
+     font-weight: 800;
 }
 
 .portfolio-section-dark h3 {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     text-align: center;
     font-size: 2rem;
+     font-weight: 800;
     align-items: center;
     text-align: center;
     color: var(--accent);
@@ -233,14 +239,23 @@ nav ul li.active a {
     position: relative;
     max-width: 100%;
     margin: 0 auto 2rem auto;
-    overflow: hidden;
+    overflow-x: auto; /* permite arrastar horizontalmente */
+    overflow-y: hidden;
     padding: 0 40px;
+    cursor: grab; /* indica que pode arrastar */
+    scroll-behavior: smooth;
 }
 
 .portfolio-carousel {
-    display: flex;
-    transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
+     display: flex;
     gap: 2rem;
+    transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
+    /* permite scroll horizontal */
+    min-width: max-content;
+}
+/* Opcional: melhora a experiência em dispositivos touch */
+.portfolio-carousel-wrapper:active {
+    cursor: grabbing;
 }
 
 .portfolio-card-dark {
@@ -376,6 +391,7 @@ body.light-mode .btn-dark.highlight {
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
+
 /* Cor do texto do botão "Ver detalhes" no modo escuro */
 .btn-dark.small {
     color: #00b4d8; /* azul claro */
@@ -458,6 +474,7 @@ body.light-mode .btn-dark.highlight:hover {
     margin: 2rem auto;
     max-width: 700px;
     animation: neumorph-fade-in 1.2s;
+    
 }
 
 .about-section-dark h3,
@@ -527,7 +544,14 @@ body.light-mode .btn-dark.highlight:hover {
         padding-right: 1rem;
     }
     .portfolio-carousel-wrapper {
-        padding: 0 10px;
+        position: relative;
+    max-width: 100%;
+    margin: 0 auto 2rem auto;
+    overflow-x: auto; /* permite arrastar horizontalmente */
+    overflow-y: hidden;
+    padding: 0 40px;
+    cursor: grab; /* indica que pode arrastar */
+    scroll-behavior: smooth;
     }
 }
 
@@ -612,13 +636,15 @@ body.light-mode .hero-content-dark p {
 body.light-mode .portfolio-section-dark h3,
 body.light-mode .about-section-dark h3,
 body.light-mode .contact-section-dark h3 {
-    color: #101112;
+    font-family: 'Poppins', 'Inter', Arial, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #23272f;
     text-shadow: 2px 2px 8px #e3e7ee;
-    font-weight: 700;
     letter-spacing: 0.03em;
     text-align: center;
-    padding: 0.32rem 0.9rem;
-    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    padding: 0;
 }
 
 body.light-mode .about-section-dark p,
