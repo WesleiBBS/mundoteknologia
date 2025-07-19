@@ -153,7 +153,7 @@ nav ul li.active a {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    background: linear-gradient(120deg, #23272f 0%, #2f0a60 50%, #00b4d8 100%);
+    background: linear-gradient(120deg, #23272f 0%, #121213 50%, #00b4d8 100%);
     background-size: 200% 200%;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -338,6 +338,7 @@ body.light-mode .toggle-darkmode-btn {
 .btn-dark.small,
 .btn-dark.highlight,
 body.light-mode .btn-dark.small,
+
 body.light-mode .btn-dark.highlight {
     font-size: 0.85rem !important;
     padding: 0.28rem 0.7rem !important;
@@ -350,8 +351,55 @@ body.light-mode .btn-dark.highlight {
     box-shadow: var(--shadow-btn);
     border: none;
     width: 100%;
+    color: #0a0a0a;
     margin-top: 0.7rem;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+body.light-mode .btn-dark.highlight {
+    font-size: 0.85rem !important;
+    padding: 0.28rem 0.7rem !important;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    cursor: pointer;
+    align-self: stretch;
+    box-shadow: var(--shadow-btn);
+    border: none;
+    width: 100%;
+    color: #e9e6e6;
+    margin-top: 0.7rem;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+/* Cor do texto do botão "Ver detalhes" no modo escuro */
+.btn-dark.small {
+    color: #00b4d8; /* azul claro */
+    text-decoration: none;
+}
+
+/* Cor do texto do botão "Ver detalhes" no modo claro */
+body.light-mode .btn-dark.small {
+    color: #0077b6; /* azul escuro */
+    text-decoration: none;
+}
+/* Ajuste individual para o botão "Enviar Mensagem" no modo claro */
+body.light-mode .btn-dark.highlight {
+    color: #dbddde; /* azul escuro ou escolha sua cor */
+    max-width: 320px; /* ou outro valor desejado */
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Ajuste individual para o botão "Enviar Mensagem" no modo escuro */
+.btn-dark.highlight {
+    color: #00b4d8; /* azul claro ou escolha sua cor */
+    max-width: 320px; /* ou outro valor desejado */
+    width: 100%;
+    text-align: center;
+     margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-dark.small:hover,
@@ -413,6 +461,7 @@ body.light-mode .btn-dark.highlight:hover {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     color: var(--accent);
     font-size: 1.5rem;
+    text-align: center;
     margin-bottom: 1rem;
     text-shadow: 1px 1px 6px #23272f;
 }
@@ -500,7 +549,7 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 1rem;
     }
     .footer-dark {
-        padding: 1rem 0 0.5rem 0;
+        padding: 0.5rem 0 0.5rem 0;
         font-size: 0.95rem;
     }
 }
