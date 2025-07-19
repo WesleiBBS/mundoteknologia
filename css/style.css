@@ -98,13 +98,15 @@ nav {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
-    color: var(--accent);
+    background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
     letter-spacing: 2px;
-    text-shadow:
-        2px 2px 8px #23272f,
-        -2px -2px 8px #171717,
-        1px 1px 0px #181a20,
-        0 2px 4px #181a20;
+    
+        
+        
     filter: drop-shadow(0 2px 8px #23272f);
 }
 
@@ -169,7 +171,7 @@ nav ul li.active a {
 .hero-content-dark h2 {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 200;
     color: var(--text-light);
     margin-bottom: 1.2rem;
     line-height: 1.2;
@@ -195,7 +197,7 @@ nav ul li.active a {
     text-align: center;
     box-shadow: var(--shadow-btn);
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 800;
     padding: 0.7rem 2.2rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
@@ -221,6 +223,7 @@ nav ul li.active a {
     align-items: center;
     text-align: center;
     color: var(--accent);
+    color: #dddee1;
     margin-bottom: 2rem;
     text-shadow: 2px 2px 8px #23272f;
 }
@@ -334,6 +337,7 @@ body.light-mode .toggle-darkmode-btn {
     gap: 0.45rem;
 }
 
+
 /* Botões pequenos e destaque - tamanho ajustado para ambos os modos */
 .btn-dark.small,
 .btn-dark.highlight,
@@ -394,8 +398,8 @@ body.light-mode .btn-dark.highlight {
 }
 /* Ajuste individual para o botão "Enviar Mensagem" no modo escuro */
 .btn-dark.highlight {
-    color: #00b4d8; /* azul claro ou escolha sua cor */
-    max-width: 320px; /* ou outro valor desejado */
+    color: #daddde; /* azul claro ou escolha sua cor */
+    max-width: 420px; /* ou outro valor desejado */
     width: 100%;
     text-align: center;
      margin-left: auto;
@@ -566,9 +570,17 @@ body.light-mode header {
 }
 
 body.light-mode .logo-dark {
-    color: #262728;
-    text-shadow: 2px 2px 8px #e3e7ee, -2px -2px 8px #c7e9f7;
-    filter: drop-shadow(0 2px 8px #c7e9f7);
+    font-family: 'Poppins', 'Inter', Arial, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    letter-spacing: 2px;
+   
+    
 }
 
 body.light-mode nav ul li a {
@@ -590,6 +602,11 @@ body.light-mode .hero-content-dark {
     background: linear-gradient(120deg, #19191a 0%, #c7e9f7 50%, #18191a 100%);
     color: #23272f;
     box-shadow: 0 8px 32px #c7e9f7;
+}
+/* Cor do texto do hero no modo claro */
+body.light-mode .hero-content-dark p {
+    color: #23272f;
+    opacity: 0.98;
 }
 
 body.light-mode .portfolio-section-dark h3,
