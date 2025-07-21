@@ -178,7 +178,7 @@
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
@@ -239,31 +239,40 @@
         adminModal.style.display = 'none';
     });
 
-    // Login admin
+    // Login admin (corrigido: só permite login de e-mails autorizados)
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         loginErro.style.display = 'none';
-        const email = document.getElementById('admin-login-email').value;
+        const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
         const senha = document.getElementById('admin-login-senha').value;
-        const methods = await fetchSignInMethodsForEmail(auth, email);
-        if (methods.length === 0) {
-            // Não cadastrado, mostra tela de cadastro
-            loginForm.style.display = 'none';
-            registerForm.style.display = 'block';
-            document.getElementById('admin-register-email').value = email;
+
+        // Permitir login apenas para estes e-mails:
+        const emailsPermitidos = [
+            "wesleicostabbs@hotmail.com",
+            "mundoteknologia@gmail.com"
+        ];
+        if (!emailsPermitidos.includes(email)) {
+            loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
+            loginErro.style.display = 'block';
             return;
         }
-        signInWithEmailAndPassword(auth, email, senha)
-            .then(() => {
-                adminModal.style.display = 'none';
-                document.getElementById('admin').style.display = 'block';
-                document.getElementById('logout-admin').style.display = 'inline-block';
-                carregarMensagens();
-            })
-            .catch(() => {
+
+        try {
+            await signInWithEmailAndPassword(auth, email, senha);
+            adminModal.style.display = 'none';
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            carregarMensagens();
+        } catch (error) {
+            if (error.code === "auth/user-not-found") {
+                loginErro.textContent = "Usuário não encontrado. Verifique o e-mail digitado.";
+            } else if (error.code === "auth/wrong-password") {
+                loginErro.textContent = "Senha incorreta.";
+            } else {
                 loginErro.textContent = "E-mail ou senha inválidos.";
-                loginErro.style.display = 'block';
-            });
+            }
+            loginErro.style.display = 'block';
+        }
     });
 
     // Cadastro admin com restrição de e-mails permitidos
@@ -332,9 +341,16 @@
         });
     }
 
-    // Exibe admin se já autenticado
+    // Exibe admin se já autenticado e autorizado
     onAuthStateChanged(auth, (user) => {
-        if (user && user.emailVerified) {
+        if (
+            user &&
+            user.emailVerified &&
+            (
+                user.email === "wesleicostabbs@hotmail.com" ||
+                user.email === "mundoteknologia@gmail.com"
+            )
+        ) {
             document.getElementById('admin').style.display = 'block';
             document.getElementById('logout-admin').style.display = 'inline-block';
             carregarMensagens();
