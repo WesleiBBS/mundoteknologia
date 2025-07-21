@@ -104,9 +104,6 @@ nav {
     background-clip: text;
     text-fill-color: transparent;
     letter-spacing: 2px;
-    
-        
-        
     filter: drop-shadow(0 2px 8px #23272f);
 }
 
@@ -218,14 +215,14 @@ nav ul li.active a {
 .portfolio-section-dark {
     background: transparent;
     padding: 3rem 0 2rem 0;
-     font-weight: 800;
+    font-weight: 800;
 }
 
 .portfolio-section-dark h3 {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     text-align: center;
     font-size: 2rem;
-     font-weight: 800;
+    font-weight: 800;
     align-items: center;
     text-align: center;
     color: var(--accent);
@@ -247,7 +244,7 @@ nav ul li.active a {
 }
 
 .portfolio-carousel {
-     display: flex;
+    display: flex;
     gap: 2rem;
     transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
     /* permite scroll horizontal */
@@ -474,7 +471,6 @@ body.light-mode .btn-dark.highlight:hover {
     margin: 2rem auto;
     max-width: 700px;
     animation: neumorph-fade-in 1.2s;
-    
 }
 
 .about-section-dark h3,
@@ -545,13 +541,13 @@ body.light-mode .btn-dark.highlight:hover {
     }
     .portfolio-carousel-wrapper {
         position: relative;
-    max-width: 100%;
-    margin: 0 auto 2rem auto;
-    overflow-x: auto; /* permite arrastar horizontalmente */
-    overflow-y: hidden;
-    padding: 0 40px;
-    cursor: grab; /* indica que pode arrastar */
-    scroll-behavior: smooth;
+        max-width: 100%;
+        margin: 0 auto 2rem auto;
+        overflow-x: auto; /* permite arrastar horizontalmente */
+        overflow-y: hidden;
+        padding: 0 40px;
+        cursor: grab; /* indica que pode arrastar */
+        scroll-behavior: smooth;
     }
 }
 
@@ -564,21 +560,125 @@ body.light-mode .btn-dark.highlight:hover {
 }
 
 @media (max-width: 600px) {
-    nav ul {
-        gap: 1rem;
-        font-size: 1rem;
+    body {
+        font-size: 0.97rem;
+        padding: 0;
+        overflow-x: hidden;
     }
-    .portfolio-card-dark { min-width: 90vw; max-width: 90vw; }
-    .portfolio-carousel-wrapper { padding: 0; }
-    .portfolio-card-dark img { height: 120px; }
-    .hero-content-dark h2 { font-size: 1.3rem; }
+    header {
+        padding: 1rem 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 0 0 18px 18px;
+    }
+    nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+    }
+    .logo-dark {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    nav ul {
+        flex-direction: row;
+        gap: 0.5rem;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+    }
+    .hero-dark {
+        padding: 1.2rem 0 1rem 0;
+        min-height: 40vh;
+    }
+    .hero-content-dark {
+        padding: 1.2rem 0.5rem;
+        margin: 0 0.2rem;
+        border-radius: 18px;
+    }
+    .hero-content-dark h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.7rem;
+    }
+    .hero-content-dark p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .btn-dark.highlight {
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+        width: 100%;
+    }
+    .portfolio-section-dark {
+        padding: 1.2rem 0 1rem 0;
+    }
+    .portfolio-section-dark h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    .portfolio-carousel-wrapper {
+        padding: 0;
+        margin: 0 auto 1rem auto;
+        max-width: 100vw;
+    }
+    .portfolio-carousel {
+        gap: 0.7rem;
+    }
+    .portfolio-card-dark {
+        min-width: 92vw;
+        max-width: 92vw;
+        margin: 0 auto 1rem auto;
+        border-radius: 18px;
+    }
+    .portfolio-card-dark img {
+        height: 120px;
+        border-radius: 18px 18px 0 0;
+    }
+    .card-info-dark {
+        padding: 0.7rem;
+        border-radius: 0 0 18px 18px;
+    }
+    .card-info-dark h4 {
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+    }
+    .card-info-dark p {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+    .card-price-dark {
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+    }
     .about-section-dark,
     .contact-section-dark {
-        padding: 1rem;
+        padding: 1rem 0.5rem;
+        margin: 1rem auto;
+        max-width: 98vw;
+        border-radius: 18px;
+    }
+    .about-section-dark h3,
+    .contact-section-dark h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.7rem;
+    }
+    .about-section-dark p,
+    .contact-section-dark p {
+        font-size: 0.97rem;
+        padding: 0.2rem 0.5rem;
+    }
+    .contact-section-dark input,
+    .contact-section-dark textarea {
+        font-size: 0.97rem;
+        padding: 0.6rem;
+        border-radius: 10px;
     }
     .footer-dark {
         padding: 0.5rem 0 0.5rem 0;
-        font-size: 0.95rem;
+        font-size: 0.92rem;
+        border-radius: 0 0 18px 18px;
     }
 }
 
@@ -603,8 +703,6 @@ body.light-mode .logo-dark {
     background-clip: text;
     text-fill-color: transparent;
     letter-spacing: 2px;
-   
-    
 }
 
 body.light-mode nav ul li a {
