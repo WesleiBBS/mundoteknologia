@@ -119,6 +119,11 @@
     // Login admin seguro usando Firebase Authentication
     document.getElementById('admin-btn').addEventListener('click', async function(e) {
         e.preventDefault();
+        // Sempre inicia escondendo o painel admin e formulário de cadastro
+        document.getElementById('admin').style.display = 'none';
+        document.getElementById('logout-admin').style.display = 'none';
+        document.getElementById('admin-register-form').style.display = 'none';
+
         if (!auth.currentUser) {
             const email = prompt("Digite o e-mail do administrador:");
             if (!email) return;
@@ -198,6 +203,7 @@
 
     // Exibe admin se já autenticado
     onAuthStateChanged(auth, (user) => {
+        // Só mostra o painel admin se estiver autenticado
         if (user) {
             document.getElementById('admin').style.display = 'block';
             document.getElementById('logout-admin').style.display = 'inline-block';
