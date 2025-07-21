@@ -99,14 +99,20 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.toggle('light-mode');
             // Altera cor do botão conforme o tema
             if (document.body.classList.contains('light-mode')) {
-                this.textContent = '🌙';
+                this.textContent = '🌙 Modo';
                 this.style.background = '#e3e7ee';
                 this.style.color = '#0077b6';
             } else {
-                this.textContent = '☀️';
+                this.textContent = '☀️ Modo';
                 this.style.background = '#23272f';
                 this.style.color = '#00b4d8';
             }
         });
+    }
+
+    // Exibe botão admin na navegação
+    const adminBtn = document.getElementById('admin-btn');
+    if (adminBtn) {
+        adminBtn.style.display = 'inline-block';
     }
 });
