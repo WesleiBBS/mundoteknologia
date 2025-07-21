@@ -107,6 +107,14 @@ nav ul {
     gap: 2.5rem;
 }
 
+nav ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
 nav ul li a {
     font-family: 'Inter', 'Roboto', Arial, sans-serif;
     color: var(--text-light);
