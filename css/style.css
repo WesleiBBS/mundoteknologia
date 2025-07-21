@@ -569,11 +569,11 @@ body.light-mode .btn-dark.highlight:hover {
         flex-direction: row !important;
         flex-wrap: wrap !important;
         gap: 0.3rem !important;
-        justify-content: flex-start !important; /* Alinha para a direita */
+        justify-content: center !important; /* Centraliza os botões */
         align-items: center !important;
-        padding-left: 12vw !important; /* Espaço à esquerda para centralizar visualmente */
+        padding-left: 0 !important; /* Remove espaço à esquerda */
         padding-right: 0 !important;
-        margin: 0 !important;
+        margin: 0 auto !important; /* Centraliza horizontalmente */
         width: 100vw !important;
         box-sizing: border-box !important;
     }
