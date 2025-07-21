@@ -533,7 +533,6 @@ body.light-mode .btn-dark.highlight:hover {
     header,
     nav,
     .logo-dark,
-    nav ul,
     .hero-dark,
     .hero-content-dark,
     .portfolio-section-dark,
@@ -566,23 +565,34 @@ body.light-mode .btn-dark.highlight:hover {
         text-align: center !important;
     }
     nav ul {
+        display: flex !important;
         flex-direction: row !important;
-        flex-wrap: wrap !important;
+        flex-wrap: nowrap !important;
         gap: 0.3rem !important;
-        justify-content: center !important; /* Centraliza os botões */
+        justify-content: flex-start !important;
         align-items: center !important;
-        padding-left: 0 !important; /* Remove espaço à esquerda */
-        padding-right: 0 !important;
-        margin: 0 auto !important; /* Centraliza horizontalmente */
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        margin: 0 !important;
         width: 100vw !important;
         box-sizing: border-box !important;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
     }
     nav ul li {
-        flex: 1 1 40% !important;
+        flex: 0 0 auto !important;
         min-width: 120px !important;
-        max-width: 48vw !important;
+        max-width: 70vw !important;
         margin: 0 !important;
         box-sizing: border-box !important;
+    }
+    nav ul::-webkit-scrollbar {
+        height: 6px;
+        background: transparent;
+    }
+    nav ul::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 3px;
     }
     nav ul li a {
         display: block !important;
