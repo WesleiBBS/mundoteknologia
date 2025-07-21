@@ -9,6 +9,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
 </head>
 <body>
     <!-- Botão para alternar tema -->
@@ -60,6 +61,13 @@
         <section id="admin" class="about-section-dark" style="display:none;">
             <h3>Mensagens Recebidas</h3>
             <div id="mensagens-list"></div>
+            <button id="logout-admin" class="btn-dark small" style="margin-top:1rem;display:none;">Sair</button>
+            <form id="admin-register-form" style="display:none; margin-top:2rem;">
+                <h4>Criar Conta de Administrador</h4>
+                <input type="email" id="admin-register-email" placeholder="E-mail do administrador" required style="margin-bottom:8px;">
+                <input type="password" id="admin-register-senha" placeholder="Senha" required style="margin-bottom:8px;">
+                <button type="submit" class="btn-dark small">Criar Conta</button>
+            </form>
         </section>
     </main>
 
@@ -68,11 +76,10 @@
     </footer>
     <script src="js/script.js"></script>
     <script type="module">
-    // Importação dos módulos Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    // Configuração do Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
         authDomain: "site-mundoteknologia.firebaseapp.com",
@@ -85,6 +92,7 @@
     };
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const auth = getAuth(app);
 
     // Envio do formulário para o Firebase
     document.getElementById('contact-form').addEventListener('submit', function(e) {
@@ -105,20 +113,68 @@
         });
     });
 
-    // Simples controle de acesso admin (exemplo: senha fixa, troque por autenticação real)
-    function adminLogin() {
-        const senha = prompt("Digite a senha de administrador:");
-        if (senha === "admin123") {
-            document.getElementById('admin').style.display = 'block';
-            carregarMensagens();
-        } else {
-            alert("Acesso negado.");
-        }
-    }
+    // Exibe botão admin
     document.getElementById('admin-btn').style.display = 'inline-block';
-    document.getElementById('admin-btn').addEventListener('click', function(e) {
+
+    // Login admin seguro usando Firebase Authentication
+    document.getElementById('admin-btn').addEventListener('click', async function(e) {
         e.preventDefault();
-        adminLogin();
+        if (!auth.currentUser) {
+            const email = prompt("Digite o e-mail do administrador:");
+            if (!email) return;
+            // Verifica se o e-mail já está cadastrado
+            const methods = await fetchSignInMethodsForEmail(auth, email);
+            if (methods.length === 0) {
+                // Não cadastrado, exibe formulário de cadastro
+                document.getElementById('admin-register-form').style.display = 'block';
+                document.getElementById('admin-register-email').value = email;
+            } else {
+                // Já cadastrado, pede senha e faz login
+                const senha = prompt("Digite a senha:");
+                signInWithEmailAndPassword(auth, email, senha)
+                    .then(() => {
+                        document.getElementById('admin').style.display = 'block';
+                        document.getElementById('logout-admin').style.display = 'inline-block';
+                        document.getElementById('admin-register-form').style.display = 'none';
+                        carregarMensagens();
+                    })
+                    .catch(() => {
+                        alert("Acesso negado.");
+                    });
+            }
+        } else {
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            document.getElementById('admin-register-form').style.display = 'none';
+            carregarMensagens();
+        }
+    });
+
+    // Cadastro de novo admin
+    document.getElementById('admin-register-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('admin-register-email').value;
+        const senha = document.getElementById('admin-register-senha').value;
+        createUserWithEmailAndPassword(auth, email, senha)
+            .then(() => {
+                alert('Administrador cadastrado com sucesso!');
+                document.getElementById('admin').style.display = 'block';
+                document.getElementById('logout-admin').style.display = 'inline-block';
+                document.getElementById('admin-register-form').style.display = 'none';
+                carregarMensagens();
+            })
+            .catch((error) => {
+                alert('Erro ao cadastrar administrador: ' + error.message);
+            });
+    });
+
+    // Logout admin
+    document.getElementById('logout-admin').addEventListener('click', function() {
+        signOut(auth).then(() => {
+            document.getElementById('admin').style.display = 'none';
+            document.getElementById('logout-admin').style.display = 'none';
+            document.getElementById('admin-register-form').style.display = 'none';
+        });
     });
 
     // Carregar mensagens do Firebase
@@ -139,6 +195,20 @@
             lista.innerHTML = html || "<p>Nenhuma mensagem recebida.</p>";
         });
     }
+
+    // Exibe admin se já autenticado
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            document.getElementById('admin-register-form').style.display = 'none';
+            carregarMensagens();
+        } else {
+            document.getElementById('admin').style.display = 'none';
+            document.getElementById('logout-admin').style.display = 'none';
+            document.getElementById('admin-register-form').style.display = 'none';
+        }
+    });
     </script>
 </body>
 </html>
