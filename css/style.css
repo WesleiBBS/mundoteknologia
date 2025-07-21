@@ -561,6 +561,7 @@ body.light-mode .btn-dark.highlight:hover {
     .logo-dark {
         font-size: 1.5rem !important;
         letter-spacing: 1px !important;
+        margin-top: 1.2rem !important;    /* Adiciona espaço do topo */
         margin-bottom: 0.5rem !important;
         text-align: center !important;
     }
