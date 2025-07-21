@@ -148,13 +148,27 @@
             <h3>Mensagens Recebidas</h3>
             <div id="mensagens-list"></div>
             <button id="logout-admin" class="btn-dark small" style="margin-top:1rem;display:none;">Sair</button>
-            <form id="admin-register-form" style="display:none; margin-top:2rem;">
-                <h4>Criar Conta de Administrador</h4>
-                <input type="email" id="admin-register-email" placeholder="E-mail do administrador" required style="margin-bottom:8px;">
-                <input type="password" id="admin-register-senha" placeholder="Senha" required style="margin-bottom:8px;">
-                <button type="submit" class="btn-dark small">Criar Conta</button>
-            </form>
         </section>
+        <!-- Modal de Login/Cadastro Admin -->
+        <div id="admin-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+            <div style="background:#23272f;padding:2rem 2rem 1.5rem 2rem;border-radius:16px;max-width:350px;width:90%;margin:auto;position:relative;">
+                <button id="close-admin-modal" style="position:absolute;top:10px;right:14px;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">&times;</button>
+                <form id="admin-login-form">
+                    <h4 style="color:#00b4d8;">Login Administrador</h4>
+                    <input type="email" id="admin-login-email" placeholder="E-mail" required style="margin-bottom:8px;width:100%;">
+                    <input type="password" id="admin-login-senha" placeholder="Senha" required style="margin-bottom:8px;width:100%;">
+                    <button type="submit" class="btn-dark small" style="width:100%;">Entrar</button>
+                    <p id="admin-login-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
+                </form>
+                <form id="admin-register-form" style="display:none;">
+                    <h4 style="color:#00b4d8;">Cadastrar Administrador</h4>
+                    <input type="email" id="admin-register-email" placeholder="E-mail do administrador" required style="margin-bottom:8px;width:100%;">
+                    <input type="password" id="admin-register-senha" placeholder="Senha" required style="margin-bottom:8px;width:100%;">
+                    <button type="submit" class="btn-dark small" style="width:100%;">Cadastrar</button>
+                    <p id="admin-register-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
+                </form>
+            </div>
+        </div>
     </main>
 
     <footer class="footer-dark">
@@ -202,60 +216,72 @@
     // Exibe botão admin
     document.getElementById('admin-btn').style.display = 'inline-block';
 
-    // Login admin seguro usando Firebase Authentication
-    document.getElementById('admin-btn').addEventListener('click', async function(e) {
-        e.preventDefault();
-        // Sempre inicia escondendo o painel admin e formulário de cadastro
-        document.getElementById('admin').style.display = 'none';
-        document.getElementById('logout-admin').style.display = 'none';
-        document.getElementById('admin-register-form').style.display = 'none';
+    // Modal login/cadastro admin
+    const adminModal = document.getElementById('admin-modal');
+    const closeAdminModal = document.getElementById('close-admin-modal');
+    const loginForm = document.getElementById('admin-login-form');
+    const registerForm = document.getElementById('admin-register-form');
+    const loginErro = document.getElementById('admin-login-erro');
+    const registerErro = document.getElementById('admin-register-erro');
 
-        if (!auth.currentUser) {
-            const email = prompt("Digite o e-mail do administrador:");
-            if (!email) return;
-            // Verifica se o e-mail já está cadastrado
-            const methods = await fetchSignInMethodsForEmail(auth, email);
-            if (methods.length === 0) {
-                // Não cadastrado, exibe formulário de cadastro
-                document.getElementById('admin-register-form').style.display = 'block';
-                document.getElementById('admin-register-email').value = email;
-            } else {
-                // Já cadastrado, pede senha e faz login
-                const senha = prompt("Digite a senha:");
-                signInWithEmailAndPassword(auth, email, senha)
-                    .then(() => {
-                        document.getElementById('admin').style.display = 'block';
-                        document.getElementById('logout-admin').style.display = 'inline-block';
-                        document.getElementById('admin-register-form').style.display = 'none';
-                        carregarMensagens();
-                    })
-                    .catch(() => {
-                        alert("Acesso negado.");
-                    });
-            }
-        } else {
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('logout-admin').style.display = 'inline-block';
-            document.getElementById('admin-register-form').style.display = 'none';
-            carregarMensagens();
-        }
+    document.getElementById('admin-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        adminModal.style.display = 'flex';
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        loginErro.style.display = 'none';
+        registerErro.style.display = 'none';
+        loginForm.reset();
+        registerForm.reset();
     });
 
-    // Cadastro de novo admin
-    document.getElementById('admin-register-form').addEventListener('submit', function(e) {
+    closeAdminModal.addEventListener('click', function() {
+        adminModal.style.display = 'none';
+    });
+
+    // Login admin
+    loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        loginErro.style.display = 'none';
+        const email = document.getElementById('admin-login-email').value;
+        const senha = document.getElementById('admin-login-senha').value;
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        if (methods.length === 0) {
+            // Não cadastrado, mostra tela de cadastro
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            document.getElementById('admin-register-email').value = email;
+            return;
+        }
+        signInWithEmailAndPassword(auth, email, senha)
+            .then(() => {
+                adminModal.style.display = 'none';
+                document.getElementById('admin').style.display = 'block';
+                document.getElementById('logout-admin').style.display = 'inline-block';
+                carregarMensagens();
+            })
+            .catch(() => {
+                loginErro.textContent = "E-mail ou senha inválidos.";
+                loginErro.style.display = 'block';
+            });
+    });
+
+    // Cadastro admin
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        registerErro.style.display = 'none';
         const email = document.getElementById('admin-register-email').value;
         const senha = document.getElementById('admin-register-senha').value;
         createUserWithEmailAndPassword(auth, email, senha)
             .then(() => {
-                alert('Administrador cadastrado com sucesso!');
+                adminModal.style.display = 'none';
                 document.getElementById('admin').style.display = 'block';
                 document.getElementById('logout-admin').style.display = 'inline-block';
-                document.getElementById('admin-register-form').style.display = 'none';
                 carregarMensagens();
             })
             .catch((error) => {
-                alert('Erro ao cadastrar administrador: ' + error.message);
+                registerErro.textContent = error.message;
+                registerErro.style.display = 'block';
             });
     });
 
@@ -264,7 +290,6 @@
         signOut(auth).then(() => {
             document.getElementById('admin').style.display = 'none';
             document.getElementById('logout-admin').style.display = 'none';
-            document.getElementById('admin-register-form').style.display = 'none';
         });
     });
 
@@ -289,16 +314,13 @@
 
     // Exibe admin se já autenticado
     onAuthStateChanged(auth, (user) => {
-        // Só mostra o painel admin se estiver autenticado
         if (user) {
             document.getElementById('admin').style.display = 'block';
             document.getElementById('logout-admin').style.display = 'inline-block';
-            document.getElementById('admin-register-form').style.display = 'none';
             carregarMensagens();
         } else {
             document.getElementById('admin').style.display = 'none';
             document.getElementById('logout-admin').style.display = 'none';
-            document.getElementById('admin-register-form').style.display = 'none';
         }
     });
     </script>
