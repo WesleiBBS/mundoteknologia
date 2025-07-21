@@ -296,7 +296,8 @@
         // Permitir cadastro apenas para estes e-mails:
         const emailsPermitidos = [
             "wesleicostabbs@hotmail.com",
-            "mundoteknologia@gmail.com"
+            "mundoteknologia@gmail.com",
+            "alandigdez@gmail.com"
         ];
         if (!emailsPermitidos.includes(email)) {
             registerErro.textContent = "Cadastro permitido apenas para administradores autorizados.";
@@ -359,6 +360,7 @@
             user.emailVerified &&
             (
                 user.email === "wesleicostabbs@hotmail.com" ||
+                user.email === "alandigdez@gmail.com" ||
                 user.email === "mundoteknologia@gmail.com"
             )
         ) {
