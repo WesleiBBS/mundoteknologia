@@ -72,7 +72,7 @@
                             <h4>Dashboard Web</h4>
                             <p>Painel administrativo responsivo para gestão de dados em tempo real.</p>
                             <span class="card-price-dark">Projeto Web</span>
-                            <a href="#" class="btn-dark small">Ver detalhes</a>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
                         </div>
                     </div>
                     <div class="portfolio-card-dark">
@@ -81,7 +81,7 @@
                             <h4>App Delivery Mobile</h4>
                             <p>Aplicativo mobile para pedidos e entregas, disponível para Android e iOS.</p>
                             <span class="card-price-dark">Projeto Mobile</span>
-                            <a href="#" class="btn-dark small">Ver detalhes</a>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
                         </div>
                     </div>
                     <div class="portfolio-card-dark">
@@ -90,7 +90,7 @@
                             <h4>E-commerce</h4>
                             <p>Loja virtual completa, com integração de pagamentos e painel do vendedor.</p>
                             <span class="card-price-dark">Projeto Web/Mobile</span>
-                            <a href="#" class="btn-dark small">Ver detalhes</a>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
                         </div>
                     </div>
                     <div class="portfolio-card-dark">
@@ -99,7 +99,7 @@
                             <h4>App Educação</h4>
                             <p>Plataforma de cursos online, videoaulas, quizzes interativos e muito mais.</p>
                             <span class="card-price-dark">Projeto Mobile</span>
-                            <a href="#" class="btn-dark small">Ver detalhes</a>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
                         </div>
                     </div>
                     <div class="portfolio-card-dark">
@@ -108,7 +108,7 @@
                             <h4>App Instituição Religiosa</h4>
                             <p>Aplicativo para instituições religiosas: agendas, notícias e comunicação com membros.</p>
                             <span class="card-price-dark">Projeto Web/Mobile</span>
-                            <a href="#" class="btn-dark small">Ver detalhes</a>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
                         </div>
                     </div>
                     <!-- Adicione mais cards conforme necessário -->
@@ -167,6 +167,16 @@
                     <button type="submit" class="btn-dark small" style="width:100%;">Cadastrar</button>
                     <p id="admin-register-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
                 </form>
+            </div>
+        </div>
+
+        <!-- Modal de detalhes do projeto -->
+        <div id="modal-detalhes" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+            <div id="modal-conteudo" style="background:#23272f;padding:2rem;border-radius:16px;max-width:400px;width:90%;margin:auto;position:relative;color:#fff;">
+                <button id="fechar-modal-detalhes" style="position:absolute;top:10px;right:14px;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">&times;</button>
+                <h4 id="modal-titulo"></h4>
+                <p id="modal-descricao"></p>
+                <span id="modal-tipo" style="color:#00b4d8;font-weight:bold;"></span>
             </div>
         </div>
     </main>
@@ -361,6 +371,67 @@
                 alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
             }
         }
+    });
+
+    // Modal de detalhes dos projetos
+    document.addEventListener('DOMContentLoaded', function() {
+        const detalhesBtns = document.querySelectorAll('.btn-detalhes');
+        const modal = document.getElementById('modal-detalhes');
+        const fecharModal = document.getElementById('fechar-modal-detalhes');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const modalDescricao = document.getElementById('modal-descricao');
+        const modalTipo = document.getElementById('modal-tipo');
+
+        // Dados dos projetos
+        const projetos = [
+            {
+                titulo: "Dashboard Web",
+                descricao: "Painel administrativo responsivo para gestão de dados em tempo real.",
+                tipo: "Projeto Web"
+            },
+            {
+                titulo: "App Delivery Mobile",
+                descricao: "Aplicativo mobile para pedidos e entregas, disponível para Android e iOS.",
+                tipo: "Projeto Mobile"
+            },
+            {
+                titulo: "E-commerce",
+                descricao: "Loja virtual completa, com integração de pagamentos e painel do vendedor.",
+                tipo: "Projeto Web/Mobile"
+            },
+            {
+                titulo: "App Educação",
+                descricao: "Plataforma de cursos online, videoaulas, quizzes interativos e muito mais.",
+                tipo: "Projeto Mobile"
+            },
+            {
+                titulo: "App Instituição Religiosa",
+                descricao: "Aplicativo para instituições religiosas: agendas, notícias e comunicação com membros.",
+                tipo: "Projeto Web/Mobile"
+            }
+        ];
+
+        detalhesBtns.forEach((btn, idx) => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projeto = projetos[idx];
+                modalTitulo.textContent = projeto.titulo;
+                modalDescricao.textContent = projeto.descricao;
+                modalTipo.textContent = projeto.tipo;
+                modal.style.display = 'flex';
+            });
+        });
+
+        if (fecharModal) {
+            fecharModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+        }
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     });
     </script>
 </body>

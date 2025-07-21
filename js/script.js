@@ -116,4 +116,63 @@ document.addEventListener('DOMContentLoaded', function() {
         adminBtn.style.display = 'inline-block';
         // O painel admin só será exibido após login, controlado pelo código do index.html
     }
+
+    // Modal de detalhes dos projetos
+    const detalhesBtns = document.querySelectorAll('.btn-detalhes');
+    const modal = document.getElementById('modal-detalhes');
+    const fecharModal = document.getElementById('fechar-modal-detalhes');
+    const modalTitulo = document.getElementById('modal-titulo');
+    const modalDescricao = document.getElementById('modal-descricao');
+    const modalTipo = document.getElementById('modal-tipo');
+
+    // Dados dos projetos
+    const projetos = [
+        {
+            titulo: "Dashboard Web",
+            descricao: "Painel administrativo responsivo para gestão de dados em tempo real.",
+            tipo: "Projeto Web"
+        },
+        {
+            titulo: "App Delivery Mobile",
+            descricao: "Aplicativo mobile para pedidos e entregas, disponível para Android e iOS.",
+            tipo: "Projeto Mobile"
+        },
+        {
+            titulo: "E-commerce",
+            descricao: "Loja virtual completa, com integração de pagamentos e painel do vendedor.",
+            tipo: "Projeto Web/Mobile"
+        },
+        {
+            titulo: "App Educação",
+            descricao: "Plataforma de cursos online, videoaulas, quizzes interativos e muito mais.",
+            tipo: "Projeto Mobile"
+        },
+        {
+            titulo: "App Instituição Religiosa",
+            descricao: "Aplicativo para instituições religiosas: agendas, notícias e comunicação com membros.",
+            tipo: "Projeto Web/Mobile"
+        }
+    ];
+
+    detalhesBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const projeto = projetos[idx];
+            modalTitulo.textContent = projeto.titulo;
+            modalDescricao.textContent = projeto.descricao;
+            modalTipo.textContent = projeto.tipo;
+            modal.style.display = 'flex';
+        });
+    });
+
+    if (fecharModal) {
+        fecharModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    }
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 });
