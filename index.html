@@ -331,10 +331,10 @@
             snapshot.forEach(function(child) {
                 const msg = child.val();
                 html += `<div style="border:1px solid #ccc;padding:8px;margin-bottom:8px;">
-                    <b>Nome:</b> ${msg.nome}<br>
-                    <b>Email:</b> ${msg.email}<br>
-                    <b>Mensagem:</b> ${msg.mensagem}<br>
-                    <small>${msg.data}</small>
+                    <b>Nome:</b> ${msg.nome || ''}<br>
+                    <b>Email:</b> ${msg.email || ''}<br>
+                    <b>Mensagem:</b> ${msg.mensagem || ''}<br>
+                    <small>${msg.data || ''}</small>
                 </div>`;
             });
             lista.innerHTML = html || "<p>Nenhuma mensagem recebida.</p>";
