@@ -99,11 +99,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.toggle('light-mode');
             // Altera cor do botão conforme o tema
             if (document.body.classList.contains('light-mode')) {
-                this.textContent = '🌙Escuro';
+                this.textContent = '🌙';
                 this.style.background = '#e3e7ee';
                 this.style.color = '#0077b6';
             } else {
-                this.textContent = '☀️Claro';
+                this.textContent = '☀️';
                 this.style.background = '#23272f';
                 this.style.color = '#00b4d8';
             }
