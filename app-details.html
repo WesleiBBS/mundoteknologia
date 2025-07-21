@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main style="max-width: 500px; margin: 40px auto; background: #23272f; padding: 2rem; border-radius: 16px;">
+        <h2 style="color:#00b4d8;">Adicionar Detalhes do App</h2>
+        <form id="app-form">
+            <label for="nome-app">Nome do App:</label>
+            <input type="text" id="nome-app" name="nome-app" required style="width:100%;margin-bottom:1rem;">
+            
+            <label for="funcao-app">Função do App:</label>
+            <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
+            
+            <label for="imagens-app">Imagens do App:</label>
+            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;">
+            
+            <button type="submit" class="btn-dark highlight">Salvar</button>
+        </form>
+        <div id="preview" style="margin-top:1.5rem;"></div>
+    </main>
+    <script>
+    // Preview das imagens selecionadas
+    document.getElementById('imagens-app').addEventListener('change', function(e) {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.style.maxWidth = '120px';
+                img.style.margin = '8px';
+                img.style.borderRadius = '8px';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+    </script>
+</body>
+</html>
