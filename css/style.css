@@ -559,10 +559,21 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 0.5rem 0.2rem 0.2rem 0.2rem !important;
     }
     .logo-dark {
-        font-size: 1.2rem !important;
-        letter-spacing: 1px !important;
-        margin-bottom: 0.5rem !important;
+        position: static !important;
+        display: block !important;
+        width: 100vw !important;
         text-align: center !important;
+        margin-bottom: 0.5rem !important;
+        z-index: 1 !important;
+    }
+    .toggle-darkmode-btn {
+        position: relative !important;
+        display: block !important;
+        margin: 0.5rem auto 0 auto !important;
+        top: 0 !important;
+        right: 0 !important;
+        z-index: 2 !important;
+        float: none !important;
     }
     nav ul {
         display: flex !important;
@@ -606,14 +617,6 @@ body.light-mode .btn-dark.highlight:hover {
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         box-sizing: border-box !important;
-    }
-    .toggle-darkmode-btn {
-        position: absolute !important;
-        top: 10px !important;
-        right: 10px !important;
-        z-index: 10 !important;
-        font-size: 0.95rem !important;
-        padding: 0.3rem 0.7rem !important;
     }
     .hero-dark {
         padding: 1.2rem 0 1rem 0 !important;
