@@ -110,9 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Exibe botão admin na navegação
+    // Exibe botão admin na navegação, mas não mostra painel admin até login
     const adminBtn = document.getElementById('admin-btn');
     if (adminBtn) {
         adminBtn.style.display = 'inline-block';
+        // O painel admin só será exibido após login, controlado pelo código do index.html
     }
 });
