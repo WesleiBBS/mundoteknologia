@@ -178,7 +178,7 @@
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
@@ -266,14 +266,22 @@
             });
     });
 
-    // Cadastro admin
+    // Cadastro admin com envio de e-mail de verificação
     registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
         registerErro.style.display = 'none';
         const email = document.getElementById('admin-register-email').value;
         const senha = document.getElementById('admin-register-senha').value;
         createUserWithEmailAndPassword(auth, email, senha)
-            .then(() => {
+            .then((userCredential) => {
+                // Envia o e-mail de verificação
+                sendEmailVerification(userCredential.user)
+                    .then(() => {
+                        alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
+                    })
+                    .catch(() => {
+                        alert('Administrador cadastrado, mas não foi possível enviar o e-mail de verificação.');
+                    });
                 adminModal.style.display = 'none';
                 document.getElementById('admin').style.display = 'block';
                 document.getElementById('logout-admin').style.display = 'inline-block';
