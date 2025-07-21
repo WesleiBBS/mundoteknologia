@@ -330,7 +330,7 @@ nav ul li.active a {
 body.light-mode .toggle-darkmode-btn {
     background: #ffffff;
     color: #151515;
-    font-weight: 700;
+    font-weight: 500;
     border-radius: 12px;
     box-shadow: 0 2px 10px #00b4d833;
     border: none;
@@ -569,10 +569,13 @@ body.light-mode .btn-dark.highlight:hover {
         flex-direction: row !important;
         flex-wrap: wrap !important;
         gap: 0.3rem !important;
-        justify-content: center !important;
+        justify-content: flex-start !important; /* Alinha para a direita */
         align-items: center !important;
-        padding: 0 !important;
+        padding-left: 12vw !important; /* Espaço à esquerda para centralizar visualmente */
+        padding-right: 0 !important;
         margin: 0 !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
     }
     nav ul li {
         flex: 1 1 40% !important;
