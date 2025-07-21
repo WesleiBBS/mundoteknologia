@@ -62,6 +62,12 @@
             <h3>Mensagens Recebidas</h3>
             <div id="mensagens-list"></div>
             <button id="logout-admin" class="btn-dark small" style="margin-top:1rem;display:none;">Sair</button>
+            <form id="admin-register-form" style="display:none; margin-top:2rem;">
+                <h4>Criar Conta de Administrador</h4>
+                <input type="email" id="admin-register-email" placeholder="E-mail do administrador" required style="margin-bottom:8px;">
+                <input type="password" id="admin-register-senha" placeholder="Senha" required style="margin-bottom:8px;">
+                <button type="submit" class="btn-dark small">Criar Conta</button>
+            </form>
         </section>
     </main>
 
@@ -72,7 +78,7 @@
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
@@ -111,25 +117,55 @@
     document.getElementById('admin-btn').style.display = 'inline-block';
 
     // Login admin seguro usando Firebase Authentication
-    document.getElementById('admin-btn').addEventListener('click', function(e) {
+    document.getElementById('admin-btn').addEventListener('click', async function(e) {
         e.preventDefault();
         if (!auth.currentUser) {
             const email = prompt("Digite o e-mail do administrador:");
-            const senha = prompt("Digite a senha:");
-            signInWithEmailAndPassword(auth, email, senha)
-                .then(() => {
-                    document.getElementById('admin').style.display = 'block';
-                    document.getElementById('logout-admin').style.display = 'inline-block';
-                    carregarMensagens();
-                })
-                .catch(() => {
-                    alert("Acesso negado.");
-                });
+            if (!email) return;
+            // Verifica se o e-mail já está cadastrado
+            const methods = await fetchSignInMethodsForEmail(auth, email);
+            if (methods.length === 0) {
+                // Não cadastrado, exibe formulário de cadastro
+                document.getElementById('admin-register-form').style.display = 'block';
+                document.getElementById('admin-register-email').value = email;
+            } else {
+                // Já cadastrado, pede senha e faz login
+                const senha = prompt("Digite a senha:");
+                signInWithEmailAndPassword(auth, email, senha)
+                    .then(() => {
+                        document.getElementById('admin').style.display = 'block';
+                        document.getElementById('logout-admin').style.display = 'inline-block';
+                        document.getElementById('admin-register-form').style.display = 'none';
+                        carregarMensagens();
+                    })
+                    .catch(() => {
+                        alert("Acesso negado.");
+                    });
+            }
         } else {
             document.getElementById('admin').style.display = 'block';
             document.getElementById('logout-admin').style.display = 'inline-block';
+            document.getElementById('admin-register-form').style.display = 'none';
             carregarMensagens();
         }
+    });
+
+    // Cadastro de novo admin
+    document.getElementById('admin-register-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('admin-register-email').value;
+        const senha = document.getElementById('admin-register-senha').value;
+        createUserWithEmailAndPassword(auth, email, senha)
+            .then(() => {
+                alert('Administrador cadastrado com sucesso!');
+                document.getElementById('admin').style.display = 'block';
+                document.getElementById('logout-admin').style.display = 'inline-block';
+                document.getElementById('admin-register-form').style.display = 'none';
+                carregarMensagens();
+            })
+            .catch((error) => {
+                alert('Erro ao cadastrar administrador: ' + error.message);
+            });
     });
 
     // Logout admin
@@ -137,6 +173,7 @@
         signOut(auth).then(() => {
             document.getElementById('admin').style.display = 'none';
             document.getElementById('logout-admin').style.display = 'none';
+            document.getElementById('admin-register-form').style.display = 'none';
         });
     });
 
@@ -164,10 +201,12 @@
         if (user) {
             document.getElementById('admin').style.display = 'block';
             document.getElementById('logout-admin').style.display = 'inline-block';
+            document.getElementById('admin-register-form').style.display = 'none';
             carregarMensagens();
         } else {
             document.getElementById('admin').style.display = 'none';
             document.getElementById('logout-admin').style.display = 'none';
+            document.getElementById('admin-register-form').style.display = 'none';
         }
     });
     </script>
