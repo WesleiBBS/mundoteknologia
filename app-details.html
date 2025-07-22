@@ -2,31 +2,92 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Detalhes do App</title>
+    <title>Detalhes do App | WorldInova</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <style>
+        .app-detalhes-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin: 40px 0;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .app-card {
+            background: #23272f;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px #0002;
+            padding: 24px 18px;
+            width: 340px;
+            color: #fff;
+            text-align: center;
+        }
+        .app-card img {
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto 18px auto;
+            border-radius: 12px;
+            background: #181a20;
+        }
+        .app-card input, .app-card textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            padding: 8px;
+            background: #181a20;
+            color: #fff;
+        }
+        .app-card label {
+            display: block;
+            text-align: left;
+            margin-bottom: 4px;
+            font-size: 0.95em;
+            color: #00b4d8;
+        }
+        .app-card .btn-dark {
+            margin-top: 10px;
+            width: 100%;
+        }
+        .readonly input, .readonly textarea {
+            background: #181a20;
+            color: #bbb;
+            border: none;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-    <main style="max-width: 500px; margin: 40px auto; background: #23272f; padding: 2rem; border-radius: 16px;">
-        <h2 style="color:#00b4d8;">Adicionar Detalhes do App</h2>
-        <form id="app-form">
-            <label for="nome-app">Nome do App:</label>
-            <input type="text" id="nome-app" name="nome-app" required style="width:100%;margin-bottom:1rem;">
-            
-            <label for="funcao-app">Função do App:</label>
-            <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
-            
-            <label>Imagens do App (até 5):</label>
-            <div id="imagens-list"></div>
-            <button type="button" id="add-img-btn" class="btn-dark highlight" style="margin-bottom:1rem;">Adicionar Foto</button>
-            
-            <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;">Salvar</button>
-        </form>
+    <header class="header-dark">
+        <nav class="nav-dark">
+            <div class="logo-dark">WorldInova</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#portfolio">Portfólio</a></li>
+                <li><a href="index.html#about">Sobre</a></li>
+                <li><a href="index.html#contact">Contato</a></li>
+                <li><a href="index.html#admin" id="admin-btn">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="text-align:center;margin:32px 0 12px 0;">Detalhes do App</h2>
+        <div class="app-detalhes-container" id="detalhes-apps">
+            <!-- Cards dos apps serão inseridos via JS -->
+        </div>
     </main>
-    <script>
-    // Firebase config igual ao index.html
+
+    <footer class="footer-dark">
+        <p>&copy; 2025 WorldInova. Todos os direitos reservados.</p>
+    </footer>
+    <script type="module">
+    // Simulação de autenticação (substitua pelo seu controle real)
+    // Exemplo: let isAdmin = true; // ou false para testar como visitante
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
         authDomain: "site-mundoteknologia.firebaseapp.com",
@@ -37,133 +98,84 @@
         measurementId: "G-EJTL4ERWMP",
         databaseURL: "https://site-mundoteknologia-default-rtdb.firebaseio.com"
     };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
 
-    // Lógica para adicionar campos de imagem+descrição
-    const imagensList = document.getElementById('imagens-list');
-    const addImgBtn = document.getElementById('add-img-btn');
-    let imgCount = 0;
-    const maxImgs = 5;
+    // IDs de admin
+    const ADMINS = [
+        "wesleicostabbs@hotmail.com",
+        "mundoteknologia@gmail.com",
+        "alandigdez@gmail.com"
+    ];
 
-    function createImgField(idx) {
-        const container = document.createElement('div');
-        container.style.display = 'flex';
-        container.style.alignItems = 'center';
-        container.style.marginBottom = '12px';
-        container.style.gap = '8px';
+    // Dados exemplo (pode buscar do Firebase)
+    const apps = [
+        {
+            id: "app1",
+            nome: "Nome do APP",
+            descricao: "Descrição do APP",
+            img: "images/app1.png",
+            detalhes: "Detalhes App"
+        },
+        {
+            id: "app2",
+            nome: "Nome do APP",
+            descricao: "Descrição do APP",
+            img: "images/app2.png",
+            detalhes: "Detalhes App"
+        },
+        {
+            id: "app3",
+            nome: "Nome do APP",
+            descricao: "Descrição do APP",
+            img: "images/app3.png",
+            detalhes: "Detalhes App"
+        }
+    ];
 
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*';
-        fileInput.required = true;
-        fileInput.style.flex = '1';
-
-        const imgPreview = document.createElement('img');
-        imgPreview.style.maxWidth = '80px';
-        imgPreview.style.maxHeight = '80px';
-        imgPreview.style.borderRadius = '8px';
-        imgPreview.style.display = 'none';
-
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    imgPreview.src = ev.target.result;
-                    imgPreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
+    function renderCards(isAdmin) {
+        const container = document.getElementById('detalhes-apps');
+        container.innerHTML = "";
+        apps.forEach((app, idx) => {
+            container.innerHTML += `
+            <div class="app-card${!isAdmin ? ' readonly' : ''}" data-id="${app.id}">
+                <label>Nome do APP</label>
+                <input type="text" value="${app.nome}" ${!isAdmin ? 'readonly' : ''} />
+                <label>Descrição do APP</label>
+                <textarea rows="2" ${!isAdmin ? 'readonly' : ''}>${app.descricao}</textarea>
+                <label>Inserir foto</label>
+                <img src="${app.img}" alt="App" onerror="this.src='images/placeholder.png'">
+                ${isAdmin ? '<input type="file" accept="image/*" />' : ''}
+                <label>Detalhes App</label>
+                <textarea rows="3" ${!isAdmin ? 'readonly' : ''}>${app.detalhes}</textarea>
+                ${isAdmin ? '<button class="btn-dark save-btn">Salvar</button>' : ''}
+            </div>
+            `;
         });
-
-        const desc = document.createElement('input');
-        desc.type = 'text';
-        desc.name = `descricao-foto-${idx}`;
-        desc.placeholder = 'Descrição da imagem';
-        desc.style.flex = '2';
-        desc.style.padding = '6px';
-        desc.style.borderRadius = '6px';
-        desc.style.border = '1px solid #444';
-        desc.style.background = '#181b20';
-        desc.style.color = '#fff';
-
-        const removeBtn = document.createElement('button');
-        removeBtn.type = 'button';
-        removeBtn.textContent = 'Remover';
-        removeBtn.className = 'btn-dark small';
-        removeBtn.onclick = () => {
-            imagensList.removeChild(container);
-            imgCount--;
-            addImgBtn.disabled = false;
-        };
-
-        container.appendChild(fileInput);
-        container.appendChild(imgPreview);
-        container.appendChild(desc);
-        container.appendChild(removeBtn);
-
-        return container;
     }
 
-    addImgBtn.addEventListener('click', function() {
-        if (imgCount < maxImgs) {
-            imagensList.appendChild(createImgField(imgCount));
-            imgCount++;
-            if (imgCount >= maxImgs) addImgBtn.disabled = true;
+    // Detecta admin logado
+    onAuthStateChanged(auth, user => {
+        let isAdmin = false;
+        if (user && ADMINS.includes(user.email)) {
+            isAdmin = true;
         }
-    });
+        renderCards(isAdmin);
 
-    // Salvar no banco de dados (apenas texto e base64 das imagens)
-    document.getElementById('app-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nome = document.getElementById('nome-app').value;
-        const funcao = document.getElementById('funcao-app').value;
-        const imagens = [];
-        const containers = imagensList.querySelectorAll('div');
-
-        let pending = 0;
-        let erro = false;
-
-        containers.forEach((container, idx) => {
-            const fileInput = container.querySelector('input[type="file"]');
-            const descInput = container.querySelector('input[type="text"]');
-            const file = fileInput.files[0];
-            if (file) {
-                pending++;
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    imagens[idx] = {
-                        descricao: descInput.value,
-                        imagem: ev.target.result // base64
-                    };
-                    pending--;
-                    if (pending === 0 && !erro) {
-                        salvarNoBanco();
-                    }
+        // Salvar alterações (apenas admin)
+        if (isAdmin) {
+            document.querySelectorAll('.save-btn').forEach((btn, idx) => {
+                btn.onclick = function() {
+                    const card = btn.closest('.app-card');
+                    const nome = card.querySelector('input[type="text"]').value;
+                    const descricao = card.querySelectorAll('textarea')[0].value;
+                    const detalhes = card.querySelectorAll('textarea')[1].value;
+                    // Aqui você pode salvar no Firebase se desejar
+                    alert('Salvo! (simulação)');
+                    // Exemplo Firebase:
+                    // set(ref(db, 'apps/' + apps[idx].id), { nome, descricao, detalhes });
                 };
-                reader.onerror = function() {
-                    erro = true;
-                    alert('Erro ao ler uma das imagens.');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        if (containers.length === 0) {
-            salvarNoBanco();
-        }
-
-        function salvarNoBanco() {
-            db.ref('apps').push({
-                nome,
-                funcao,
-                imagens
-            }).then(() => {
-                alert('App salvo com sucesso!');
-                window.location.reload();
-            }).catch(() => {
-                alert('Erro ao salvar no banco de dados.');
             });
         }
     });
