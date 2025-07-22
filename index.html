@@ -256,6 +256,17 @@ loginForm.addEventListener('submit', async function(e) {
     const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
     const senha = document.getElementById('admin-login-senha').value;
 
+    const emailsPermitidos = [
+        "wesleicostabbs@hotmail.com",
+        "mundoteknologia@gmail.com",
+        "alandigdez@gmail.com"
+    ];
+    if (!emailsPermitidos.includes(email)) {
+        loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
+        loginErro.style.display = 'block';
+        return;
+    }
+
     try {
         await signInWithEmailAndPassword(auth, email, senha);
         adminModal.style.display = 'none';
@@ -263,32 +274,22 @@ loginForm.addEventListener('submit', async function(e) {
         document.getElementById('logout-admin').style.display = 'inline-block';
         carregarMensagens();
     } catch (error) {
-        const emailsPermitidos = [
-            "wesleicostabbs@hotmail.com",
-            "mundoteknologia@gmail.com",
-            "alandigdez@gmail.com"
-        ];
         if (error.code === "auth/user-not-found") {
-            if (emailsPermitidos.includes(email)) {
-                loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
-                loginErro.style.display = 'block';
-                setTimeout(() => {
-                    const showRegister = document.getElementById('show-register');
-                    if (showRegister) {
-                        showRegister.onclick = function(ev) {
-                            ev.preventDefault();
-                            loginForm.style.display = 'none';
-                            registerForm.style.display = 'block';
-                            registerErro.style.display = 'none';
-                            registerForm.reset();
-                            document.getElementById('admin-register-email').value = email;
-                        };
-                    }
-                }, 100);
-            } else {
-                loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
-                loginErro.style.display = 'block';
-            }
+            loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
+            loginErro.style.display = 'block';
+            setTimeout(() => {
+                const showRegister = document.getElementById('show-register');
+                if (showRegister) {
+                    showRegister.onclick = function(ev) {
+                        ev.preventDefault();
+                        loginForm.style.display = 'none';
+                        registerForm.style.display = 'block';
+                        registerErro.style.display = 'none';
+                        registerForm.reset();
+                        document.getElementById('admin-register-email').value = email;
+                    };
+                }
+            }, 100);
         } else if (error.code === "auth/wrong-password") {
             loginErro.textContent = "Senha incorreta.";
             loginErro.style.display = 'block';
