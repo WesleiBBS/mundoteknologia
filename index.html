@@ -29,7 +29,7 @@
     padding: 0.5rem 0.5rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-">☀️M</button>
+">☀️Mo</button>
     <!-- Efeito criativo de partículas no fundo -->
     <div class="particles-bg">
       <div class="particle" style="top:10%;left:15%;width:18px;height:18px;animation-delay:0s;"></div>
@@ -158,6 +158,9 @@
                     <input type="password" id="admin-login-senha" placeholder="Senha" required style="margin-bottom:8px;width:100%;">
                     <button type="submit" class="btn-dark small" style="width:100%;">Entrar</button>
                     <p id="admin-login-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
+                    <p style="text-align:center;margin-top:10px;">
+                        <a href="#" id="show-register-link" style="color:#00b4d8;text-decoration:underline;font-size:0.95em;">Não tem cadastro? Clique aqui</a>
+                    </p>
                 </form>
                 <form id="admin-register-form" style="display:none;">
                     <h4 style="color:#00b4d8;">Cadastrar Administrador</h4>
@@ -165,6 +168,9 @@
                     <input type="password" id="admin-register-senha" placeholder="Senha" required style="margin-bottom:8px;width:100%;">
                     <button type="submit" class="btn-dark small" style="width:100%;">Cadastrar</button>
                     <p id="admin-register-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
+                    <p style="text-align:center;margin-top:10px;">
+                        <a href="#" id="show-login-link" style="color:#00b4d8;text-decoration:underline;font-size:0.95em;">Já tem cadastro? Fazer login</a>
+                    </p>
                 </form>
             </div>
         </div>
@@ -232,6 +238,8 @@
     const registerForm = document.getElementById('admin-register-form');
     const loginErro = document.getElementById('admin-login-erro');
     const registerErro = document.getElementById('admin-register-erro');
+    const showRegisterLink = document.getElementById('show-register-link');
+    const showLoginLink = document.getElementById('show-login-link');
 
     document.getElementById('admin-btn').addEventListener('click', function(e) {
         e.preventDefault();
@@ -247,6 +255,30 @@
     closeAdminModal.addEventListener('click', function() {
         adminModal.style.display = 'none';
     });
+
+    // Alternar para tela de cadastro
+    if (showRegisterLink) {
+        showRegisterLink.onclick = function(ev) {
+            ev.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            registerErro.style.display = 'none';
+            registerForm.reset();
+            document.getElementById('admin-register-email').value = document.getElementById('admin-login-email').value;
+        };
+    }
+
+    // Alternar para tela de login
+    if (showLoginLink) {
+        showLoginLink.onclick = function(ev) {
+            ev.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            loginErro.style.display = 'none';
+            loginForm.reset();
+            document.getElementById('admin-login-email').value = document.getElementById('admin-register-email').value;
+        };
+    }
 
     // Login admin (ajustado: mostra opção de cadastro se usuário não existe)
     loginForm.addEventListener('submit', async function(e) {
