@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Adicionar Detalhes do App</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
 </head>
 <body>
     <main style="max-width: 500px; margin: 40px auto; background: #23272f; padding: 2rem; border-radius: 16px;">
@@ -15,53 +18,153 @@
             <label for="funcao-app">Função do App:</label>
             <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
             
-            <label for="imagens-app">Imagens do App (até 5):</label>
-            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;" max="5">
-            
-            <div id="preview" style="margin-top:1.5rem;"></div>
+            <label>Imagens do App (até 5):</label>
+            <div id="imagens-list"></div>
+            <button type="button" id="add-img-btn" class="btn-dark highlight" style="margin-bottom:1rem;">Adicionar Foto</button>
             
             <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;">Salvar</button>
         </form>
     </main>
     <script>
-    // Preview das imagens selecionadas com campo de descrição para cada uma
-    document.getElementById('imagens-app').addEventListener('change', function(e) {
-        const preview = document.getElementById('preview');
-        preview.innerHTML = '';
-        let files = Array.from(e.target.files).slice(0, 5); // Limita a 5 arquivos
-        files.forEach((file, idx) => {
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const container = document.createElement('div');
-                container.style.display = 'flex';
-                container.style.alignItems = 'center';
-                container.style.marginBottom = '12px';
+    // Firebase config igual ao index.html
+    const firebaseConfig = {
+        apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
+        authDomain: "site-mundoteknologia.firebaseapp.com",
+        projectId: "site-mundoteknologia",
+        storageBucket: "site-mundoteknologia.appspot.com",
+        messagingSenderId: "171461943616",
+        appId: "1:171461943616:web:07cb0ada17038be0641aa5",
+        measurementId: "G-EJTL4ERWMP",
+        databaseURL: "https://site-mundoteknologia-default-rtdb.firebaseio.com"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-                const img = document.createElement('img');
-                img.src = ev.target.result;
-                img.style.maxWidth = '120px';
-                img.style.marginRight = '12px';
-                img.style.borderRadius = '8px';
+    // Lógica para adicionar campos de imagem+descrição
+    const imagensList = document.getElementById('imagens-list');
+    const addImgBtn = document.getElementById('add-img-btn');
+    let imgCount = 0;
+    const maxImgs = 5;
 
-                const desc = document.createElement('input');
-                desc.type = 'text';
-                desc.name = `descricao-foto-${idx}`;
-                desc.placeholder = 'Descrição da imagem';
-                desc.style.flex = '1';
-                desc.style.padding = '6px';
-                desc.style.borderRadius = '6px';
-                desc.style.border = '1px solid #444';
-                desc.style.background = '#181b20';
-                desc.style.color = '#fff';
+    function createImgField(idx) {
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.alignItems = 'center';
+        container.style.marginBottom = '12px';
+        container.style.gap = '8px';
 
-                container.appendChild(img);
-                container.appendChild(desc);
-                preview.appendChild(container);
-            };
-            reader.readAsDataURL(file);
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.required = true;
+        fileInput.style.flex = '1';
+
+        const imgPreview = document.createElement('img');
+        imgPreview.style.maxWidth = '80px';
+        imgPreview.style.maxHeight = '80px';
+        imgPreview.style.borderRadius = '8px';
+        imgPreview.style.display = 'none';
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    imgPreview.src = ev.target.result;
+                    imgPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
         });
-        if (e.target.files.length > 5) {
-            alert('Você pode selecionar no máximo 5 imagens.');
+
+        const desc = document.createElement('input');
+        desc.type = 'text';
+        desc.name = `descricao-foto-${idx}`;
+        desc.placeholder = 'Descrição da imagem';
+        desc.style.flex = '2';
+        desc.style.padding = '6px';
+        desc.style.borderRadius = '6px';
+        desc.style.border = '1px solid #444';
+        desc.style.background = '#181b20';
+        desc.style.color = '#fff';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.textContent = 'Remover';
+        removeBtn.className = 'btn-dark small';
+        removeBtn.onclick = () => {
+            imagensList.removeChild(container);
+            imgCount--;
+            addImgBtn.disabled = false;
+        };
+
+        container.appendChild(fileInput);
+        container.appendChild(imgPreview);
+        container.appendChild(desc);
+        container.appendChild(removeBtn);
+
+        return container;
+    }
+
+    addImgBtn.addEventListener('click', function() {
+        if (imgCount < maxImgs) {
+            imagensList.appendChild(createImgField(imgCount));
+            imgCount++;
+            if (imgCount >= maxImgs) addImgBtn.disabled = true;
+        }
+    });
+
+    // Salvar no banco de dados (apenas texto e base64 das imagens)
+    document.getElementById('app-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome-app').value;
+        const funcao = document.getElementById('funcao-app').value;
+        const imagens = [];
+        const containers = imagensList.querySelectorAll('div');
+
+        let pending = 0;
+        let erro = false;
+
+        containers.forEach((container, idx) => {
+            const fileInput = container.querySelector('input[type="file"]');
+            const descInput = container.querySelector('input[type="text"]');
+            const file = fileInput.files[0];
+            if (file) {
+                pending++;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    imagens[idx] = {
+                        descricao: descInput.value,
+                        imagem: ev.target.result // base64
+                    };
+                    pending--;
+                    if (pending === 0 && !erro) {
+                        salvarNoBanco();
+                    }
+                };
+                reader.onerror = function() {
+                    erro = true;
+                    alert('Erro ao ler uma das imagens.');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        if (containers.length === 0) {
+            salvarNoBanco();
+        }
+
+        function salvarNoBanco() {
+            db.ref('apps').push({
+                nome,
+                funcao,
+                imagens
+            }).then(() => {
+                alert('App salvo com sucesso!');
+                window.location.reload();
+            }).catch(() => {
+                alert('Erro ao salvar no banco de dados.');
+            });
         }
     });
     </script>
