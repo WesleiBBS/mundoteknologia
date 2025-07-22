@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Detalhes do App</title>
+    <title>Adicionar Detalhes do App</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,30 +15,54 @@
             <label for="funcao-app">Função do App:</label>
             <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
             
-            <label for="imagens-app">Imagens do App:</label>
-            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;">
+            <label for="imagens-app">Imagens do App (até 5):</label>
+            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;" max="5">
             
-            <button type="submit" class="btn-dark highlight">Salvar</button>
+            <div id="preview" style="margin-top:1.5rem;"></div>
+            
+            <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;">Salvar</button>
         </form>
-        <div id="preview" style="margin-top:1.5rem;"></div>
     </main>
     <script>
-    // Preview das imagens selecionadas
+    // Preview das imagens selecionadas com campo de descrição para cada uma
     document.getElementById('imagens-app').addEventListener('change', function(e) {
         const preview = document.getElementById('preview');
         preview.innerHTML = '';
-        Array.from(e.target.files).forEach(file => {
+        let files = Array.from(e.target.files).slice(0, 5); // Limita a 5 arquivos
+        files.forEach((file, idx) => {
             const reader = new FileReader();
             reader.onload = function(ev) {
+                const container = document.createElement('div');
+                container.style.display = 'flex';
+                container.style.alignItems = 'center';
+                container.style.marginBottom = '12px';
+
                 const img = document.createElement('img');
                 img.src = ev.target.result;
                 img.style.maxWidth = '120px';
-                img.style.margin = '8px';
+                img.style.marginRight = '12px';
                 img.style.borderRadius = '8px';
-                preview.appendChild(img);
+
+                const desc = document.createElement('input');
+                desc.type = 'text';
+                desc.name = `descricao-foto-${idx}`;
+                desc.placeholder = 'Descrição da imagem';
+                desc.style.flex = '1';
+                desc.style.padding = '6px';
+                desc.style.borderRadius = '6px';
+                desc.style.border = '1px solid #444';
+                desc.style.background = '#181b20';
+                desc.style.color = '#fff';
+
+                container.appendChild(img);
+                container.appendChild(desc);
+                preview.appendChild(container);
             };
             reader.readAsDataURL(file);
         });
+        if (e.target.files.length > 5) {
+            alert('Você pode selecionar no máximo 5 imagens.');
+        }
     });
     </script>
 </body>
