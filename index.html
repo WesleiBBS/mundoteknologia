@@ -249,31 +249,27 @@
     });
 
     // Login admin (ajustado: mostra opção de cadastro se usuário não existe)
-    loginForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        loginErro.style.display = 'none';
-        const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
-        const senha = document.getElementById('admin-login-senha').value;
+    // ...código anterior...
+loginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    loginErro.style.display = 'none';
+    const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
+    const senha = document.getElementById('admin-login-senha').value;
 
+    try {
+        await signInWithEmailAndPassword(auth, email, senha);
+        adminModal.style.display = 'none';
+        document.getElementById('admin').style.display = 'block';
+        document.getElementById('logout-admin').style.display = 'inline-block';
+        carregarMensagens();
+    } catch (error) {
         const emailsPermitidos = [
             "wesleicostabbs@hotmail.com",
             "mundoteknologia@gmail.com",
             "alandigdez@gmail.com"
         ];
-        if (!emailsPermitidos.includes(email)) {
-            loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
-            loginErro.style.display = 'block';
-            return;
-        }
-
-        try {
-            await signInWithEmailAndPassword(auth, email, senha);
-            adminModal.style.display = 'none';
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('logout-admin').style.display = 'inline-block';
-            carregarMensagens();
-        } catch (error) {
-            if (error.code === "auth/user-not-found") {
+        if (error.code === "auth/user-not-found") {
+            if (emailsPermitidos.includes(email)) {
                 loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
                 loginErro.style.display = 'block';
                 setTimeout(() => {
@@ -289,15 +285,19 @@
                         };
                     }
                 }, 100);
-            } else if (error.code === "auth/wrong-password") {
-                loginErro.textContent = "Senha incorreta.";
-                loginErro.style.display = 'block';
             } else {
-                loginErro.textContent = "E-mail ou senha inválidos.";
+                loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
                 loginErro.style.display = 'block';
             }
+        } else if (error.code === "auth/wrong-password") {
+            loginErro.textContent = "Senha incorreta.";
+            loginErro.style.display = 'block';
+        } else {
+            loginErro.textContent = "E-mail ou senha inválidos.";
+            loginErro.style.display = 'block';
         }
-    });
+    }
+});
 
     // Cadastro admin com restrição de e-mails permitidos
     registerForm.addEventListener('submit', function(e) {
