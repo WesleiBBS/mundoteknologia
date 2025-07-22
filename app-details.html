@@ -45,10 +45,6 @@
             font-size: 0.95em;
             color: #00b4d8;
         }
-        .app-card .btn-dark {
-            margin-top: 10px;
-            width: 100%;
-        }
         .readonly input, .readonly textarea {
             background: #181a20;
             color: #bbb;
@@ -82,11 +78,9 @@
         <p>&copy; 2025 WorldInova. Todos os direitos reservados.</p>
     </footer>
     <script type="module">
-    // Simulação de autenticação (substitua pelo seu controle real)
-    // Exemplo: let isAdmin = true; // ou false para testar como visitante
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
@@ -102,82 +96,126 @@
     const db = getDatabase(app);
     const auth = getAuth(app);
 
-    // IDs de admin
     const ADMINS = [
         "wesleicostabbs@hotmail.com",
         "mundoteknologia@gmail.com",
         "alandigdez@gmail.com"
     ];
 
-    // Dados exemplo (pode buscar do Firebase)
-    const apps = [
-        {
-            id: "app1",
-            nome: "Nome do APP",
-            descricao: "Descrição do APP",
-            img: "images/app1.png",
-            detalhes: "Detalhes App"
-        },
-        {
-            id: "app2",
-            nome: "Nome do APP",
-            descricao: "Descrição do APP",
-            img: "images/app2.png",
-            detalhes: "Detalhes App"
-        },
-        {
-            id: "app3",
-            nome: "Nome do APP",
-            descricao: "Descrição do APP",
-            img: "images/app3.png",
-            detalhes: "Detalhes App"
-        }
-    ];
+    // Carrega apps do banco de dados
+    function loadApps(callback) {
+        onValue(ref(db, 'apps'), (snapshot) => {
+            const data = snapshot.val();
+            let apps = [];
+            if (data) {
+                apps = Object.keys(data).map(id => ({
+                    id,
+                    ...data[id]
+                }));
+            }
+            callback(apps);
+        });
+    }
 
-    function renderCards(isAdmin) {
+    // Salva app no banco de dados
+    function saveApp(app) {
+        return set(ref(db, 'apps/' + app.id), app);
+    }
+
+    // Salva imagem no banco de dados (base64)
+    function handleImageUpload(file, cb) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            cb(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function renderCards(apps, isAdmin) {
         const container = document.getElementById('detalhes-apps');
         container.innerHTML = "";
         apps.forEach((app, idx) => {
             container.innerHTML += `
             <div class="app-card${!isAdmin ? ' readonly' : ''}" data-id="${app.id}">
                 <label>Nome do APP</label>
-                <input type="text" value="${app.nome}" ${!isAdmin ? 'readonly' : ''} />
+                <input type="text" value="${app.nome || ''}" ${!isAdmin ? 'readonly' : ''} />
                 <label>Descrição do APP</label>
-                <textarea rows="2" ${!isAdmin ? 'readonly' : ''}>${app.descricao}</textarea>
+                <textarea rows="2" ${!isAdmin ? 'readonly' : ''}>${app.descricao || ''}</textarea>
                 <label>Inserir foto</label>
-                <img src="${app.img}" alt="App" onerror="this.src='images/placeholder.png'">
+                <img src="${app.img || 'images/placeholder.png'}" alt="App" onerror="this.src='images/placeholder.png'">
                 ${isAdmin ? '<input type="file" accept="image/*" />' : ''}
                 <label>Detalhes App</label>
-                <textarea rows="3" ${!isAdmin ? 'readonly' : ''}>${app.detalhes}</textarea>
-                ${isAdmin ? '<button class="btn-dark save-btn">Salvar</button>' : ''}
+                <textarea rows="3" ${!isAdmin ? 'readonly' : ''}>${app.detalhes || ''}</textarea>
             </div>
             `;
         });
+
+        // Eventos de edição e upload (apenas admin)
+        if (isAdmin) {
+            document.querySelectorAll('.app-card').forEach((card, idx) => {
+                const id = card.getAttribute('data-id');
+                const nomeInput = card.querySelector('input[type="text"]');
+                const descTextarea = card.querySelectorAll('textarea')[0];
+                const detalhesTextarea = card.querySelectorAll('textarea')[1];
+                const imgTag = card.querySelector('img');
+                const fileInput = card.querySelector('input[type="file"]');
+
+                // Salva ao editar nome, descrição ou detalhes
+                [nomeInput, descTextarea, detalhesTextarea].forEach((el, i) => {
+                    el.addEventListener('input', () => {
+                        const updated = {
+                            id,
+                            nome: nomeInput.value,
+                            descricao: descTextarea.value,
+                            detalhes: detalhesTextarea.value,
+                            img: imgTag.src
+                        };
+                        saveApp(updated);
+                    });
+                });
+
+                // Salva ao trocar imagem
+                if (fileInput) {
+                    fileInput.addEventListener('change', function() {
+                        if (fileInput.files && fileInput.files[0]) {
+                            handleImageUpload(fileInput.files[0], (base64) => {
+                                imgTag.src = base64;
+                                const updated = {
+                                    id,
+                                    nome: nomeInput.value,
+                                    descricao: descTextarea.value,
+                                    detalhes: detalhesTextarea.value,
+                                    img: base64
+                                };
+                                saveApp(updated);
+                            });
+                        }
+                    });
+                }
+            });
+        }
     }
 
-    // Detecta admin logado
+    // Detecta admin logado e carrega apps
     onAuthStateChanged(auth, user => {
         let isAdmin = false;
         if (user && ADMINS.includes(user.email)) {
             isAdmin = true;
         }
-        renderCards(isAdmin);
-
-        // Salvar alterações (apenas admin)
-        if (isAdmin) {
-            document.querySelectorAll('.save-btn').forEach((btn, idx) => {
-                btn.onclick = function() {
-                    const card = btn.closest('.app-card');
-                    const nome = card.querySelector('input[type="text"]').value;
-                    const descricao = card.querySelectorAll('textarea')[0].value;
-                    const detalhes = card.querySelectorAll('textarea')[1].value;
-                    // Aqui você pode salvar no Firebase se desejar
-                    alert('Salvo! (simulação)');
-                    // Exemplo Firebase:
-                    // set(ref(db, 'apps/' + apps[idx].id), { nome, descricao, detalhes });
-                };
-            });
-        }
+        loadApps(apps => {
+            // Se não houver apps, cria 3 exemplos
+            if (apps.length === 0 && isAdmin) {
+                const exemplos = [
+                    { id: "app1", nome: "Nome do APP", descricao: "Descrição do APP", img: "", detalhes: "Detalhes App" },
+                    { id: "app2", nome: "Nome do APP", descricao: "Descrição do APP", img: "", detalhes: "Detalhes App" },
+                    { id: "app3", nome: "Nome do APP", descricao: "Descrição do APP", img: "", detalhes: "Detalhes App" }
+                ];
+                exemplos.forEach(saveApp);
+                renderCards(exemplos, isAdmin);
+            } else {
+                renderCards(apps, isAdmin);
+            }
+        });
     });
     </script>
 </body>
