@@ -111,7 +111,6 @@
                             <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
                         </div>
                     </div>
-                    <!-- Adicione mais cards conforme necessário -->
                 </div>
                 <button class="carousel-btn right">&#10095;</button>
             </div>
@@ -249,14 +248,13 @@
         adminModal.style.display = 'none';
     });
 
-    // Login admin (corrigido: só permite login de e-mails autorizados)
+    // Login admin (ajustado: mostra opção de cadastro se usuário não existe)
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         loginErro.style.display = 'none';
         const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
         const senha = document.getElementById('admin-login-senha').value;
 
-        // Permitir login apenas para estes e-mails:
         const emailsPermitidos = [
             "wesleicostabbs@hotmail.com",
             "mundoteknologia@gmail.com",
@@ -276,13 +274,28 @@
             carregarMensagens();
         } catch (error) {
             if (error.code === "auth/user-not-found") {
-                loginErro.textContent = "Usuário não encontrado. Verifique o e-mail digitado.";
+                loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
+                loginErro.style.display = 'block';
+                setTimeout(() => {
+                    const showRegister = document.getElementById('show-register');
+                    if (showRegister) {
+                        showRegister.onclick = function(ev) {
+                            ev.preventDefault();
+                            loginForm.style.display = 'none';
+                            registerForm.style.display = 'block';
+                            registerErro.style.display = 'none';
+                            registerForm.reset();
+                            document.getElementById('admin-register-email').value = email;
+                        };
+                    }
+                }, 100);
             } else if (error.code === "auth/wrong-password") {
                 loginErro.textContent = "Senha incorreta.";
+                loginErro.style.display = 'block';
             } else {
                 loginErro.textContent = "E-mail ou senha inválidos.";
+                loginErro.style.display = 'block';
             }
-            loginErro.style.display = 'block';
         }
     });
 
@@ -293,7 +306,6 @@
         const email = document.getElementById('admin-register-email').value.trim().toLowerCase();
         const senha = document.getElementById('admin-register-senha').value;
 
-        // Permitir cadastro apenas para estes e-mails:
         const emailsPermitidos = [
             "wesleicostabbs@hotmail.com",
             "mundoteknologia@gmail.com",
@@ -307,7 +319,6 @@
 
         createUserWithEmailAndPassword(auth, email, senha)
             .then((userCredential) => {
-                // Envia o e-mail de verificação
                 sendEmailVerification(userCredential.user)
                     .then(() => {
                         alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
