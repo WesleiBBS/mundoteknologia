@@ -2,28 +2,172 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Detalhes do App</title>
+    <title>Admin - Detalhes do App</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <style>
+        body {
+            background: #181b20;
+            font-family: 'Inter', 'Poppins', 'Roboto', Arial, sans-serif;
+        }
+        main {
+            max-width: 650px;
+            margin: 40px auto;
+            background: #23272f;
+            padding: 2.5rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #00000033;
+        }
+        h2 {
+            color: #00b4d8;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+        label {
+            color: #00b4d8;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: block;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            margin-bottom: 1.2rem;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #181b20;
+            color: #fff;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+        #imagens-list > .img-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+            background: #20232a;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        #imagens-list img {
+            max-width: 90px;
+            max-height: 90px;
+            border-radius: 8px;
+            background: #23272f;
+            border: 1px solid #333;
+        }
+        #imagens-list input[type="text"] {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .btn-dark {
+            background: #00b4d8;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 8px;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+        .btn-dark.small {
+            padding: 6px 14px;
+            font-size: 0.95em;
+            margin-top: 0;
+        }
+        .btn-dark:disabled {
+            background: #444;
+            cursor: not-allowed;
+        }
+        .tools-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            justify-content: flex-end;
+        }
+        .section-title {
+            color: #00b4d8;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .preview-title {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .preview-area {
+            background: #20232a;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: 1.2rem;
+        }
+        .preview-area h3 {
+            color: #00b4d8;
+            margin-bottom: 0.5rem;
+        }
+        .preview-gallery {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .preview-gallery .img-preview {
+            text-align: center;
+        }
+        .preview-gallery img {
+            max-width: 120px;
+            border-radius: 8px;
+            margin-bottom: 0.3rem;
+        }
+        .preview-gallery .desc {
+            color: #bdbdbd;
+            font-size: 0.97em;
+        }
+    </style>
 </head>
 <body>
-    <main style="max-width: 500px; margin: 40px auto; background: #23272f; padding: 2rem; border-radius: 16px;">
-        <h2 style="color:#00b4d8;">Adicionar Detalhes do App</h2>
-        <form id="app-form">
+    <main>
+        <h2>Adicionar Detalhes do App</h2>
+        <form id="app-form" autocomplete="off">
             <label for="nome-app">Nome do App:</label>
-            <input type="text" id="nome-app" name="nome-app" required style="width:100%;margin-bottom:1rem;">
-            
-            <label for="funcao-app">Função do App:</label>
-            <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
-            
-            <label>Imagens do App (até 5):</label>
+            <input type="text" id="nome-app" name="nome-app" required placeholder="Ex: Meu Aplicativo">
+
+            <label for="funcao-app">Função/Descrição do App:</label>
+            <textarea id="funcao-app" name="funcao-app" required placeholder="Descreva o objetivo e as principais funções do app"></textarea>
+
+            <div class="section-title">Imagens do App (até 5):</div>
             <div id="imagens-list"></div>
-            <button type="button" id="add-img-btn" class="btn-dark highlight" style="margin-bottom:1rem;">Adicionar Foto</button>
-            
-            <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;">Salvar</button>
+            <div class="tools-row">
+                <button type="button" id="add-img-btn" class="btn-dark small">Adicionar Foto</button>
+            </div>
+
+            <div class="section-title">Destaques/Recursos do App:</div>
+            <textarea id="destaques-app" name="destaques-app" placeholder="Ex: Login social, notificações, integração com pagamentos, etc."></textarea>
+
+            <div class="section-title">Link para Download/Demo:</div>
+            <input type="text" id="link-app" name="link-app" placeholder="https://...">
+
+            <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;width:100%;">Salvar</button>
         </form>
+
+        <div class="preview-title">Pré-visualização</div>
+        <div class="preview-area" id="preview-area" style="display:none;">
+            <h3 id="preview-nome"></h3>
+            <div id="preview-funcao"></div>
+            <div class="preview-gallery" id="preview-gallery"></div>
+            <div id="preview-destaques" style="margin-top:1rem;"></div>
+            <div id="preview-link" style="margin-top:0.5rem;"></div>
+        </div>
     </main>
     <script>
     // Firebase config igual ao index.html
@@ -40,7 +184,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Lógica para adicionar campos de imagem+descrição
+    // Imagens
     const imagensList = document.getElementById('imagens-list');
     const addImgBtn = document.getElementById('add-img-btn');
     let imgCount = 0;
@@ -48,21 +192,14 @@
 
     function createImgField(idx) {
         const container = document.createElement('div');
-        container.style.display = 'flex';
-        container.style.alignItems = 'center';
-        container.style.marginBottom = '12px';
-        container.style.gap = '8px';
+        container.className = 'img-row';
 
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.accept = 'image/*';
         fileInput.required = true;
-        fileInput.style.flex = '1';
 
         const imgPreview = document.createElement('img');
-        imgPreview.style.maxWidth = '80px';
-        imgPreview.style.maxHeight = '80px';
-        imgPreview.style.borderRadius = '8px';
         imgPreview.style.display = 'none';
 
         fileInput.addEventListener('change', function(e) {
@@ -72,6 +209,7 @@
                 reader.onload = function(ev) {
                     imgPreview.src = ev.target.result;
                     imgPreview.style.display = 'block';
+                    updatePreview();
                 };
                 reader.readAsDataURL(file);
             }
@@ -81,12 +219,7 @@
         desc.type = 'text';
         desc.name = `descricao-foto-${idx}`;
         desc.placeholder = 'Descrição da imagem';
-        desc.style.flex = '2';
-        desc.style.padding = '6px';
-        desc.style.borderRadius = '6px';
-        desc.style.border = '1px solid #444';
-        desc.style.background = '#181b20';
-        desc.style.color = '#fff';
+        desc.oninput = updatePreview;
 
         const removeBtn = document.createElement('button');
         removeBtn.type = 'button';
@@ -96,6 +229,7 @@
             imagensList.removeChild(container);
             imgCount--;
             addImgBtn.disabled = false;
+            updatePreview();
         };
 
         container.appendChild(fileInput);
@@ -114,13 +248,47 @@
         }
     });
 
+    // Preview dinâmico
+    function updatePreview() {
+        const nome = document.getElementById('nome-app').value;
+        const funcao = document.getElementById('funcao-app').value;
+        const destaques = document.getElementById('destaques-app').value;
+        const link = document.getElementById('link-app').value;
+        const containers = imagensList.querySelectorAll('.img-row');
+        const gallery = document.getElementById('preview-gallery');
+        gallery.innerHTML = '';
+        containers.forEach(container => {
+            const img = container.querySelector('img');
+            const desc = container.querySelector('input[type="text"]');
+            if (img && img.src && img.style.display !== 'none') {
+                const div = document.createElement('div');
+                div.className = 'img-preview';
+                div.appendChild(img.cloneNode());
+                const d = document.createElement('div');
+                d.className = 'desc';
+                d.textContent = desc.value;
+                div.appendChild(d);
+                gallery.appendChild(div);
+            }
+        });
+        document.getElementById('preview-nome').textContent = nome;
+        document.getElementById('preview-funcao').textContent = funcao;
+        document.getElementById('preview-destaques').textContent = destaques ? 'Destaques: ' + destaques : '';
+        document.getElementById('preview-link').innerHTML = link ? `<a href="${link}" target="_blank" style="color:#00b4d8;">${link}</a>` : '';
+        document.getElementById('preview-area').style.display = nome || funcao || gallery.children.length > 0 || destaques || link ? 'block' : 'none';
+    }
+
+    document.getElementById('app-form').addEventListener('input', updatePreview);
+
     // Salvar no banco de dados (apenas texto e base64 das imagens)
     document.getElementById('app-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const nome = document.getElementById('nome-app').value;
         const funcao = document.getElementById('funcao-app').value;
+        const destaques = document.getElementById('destaques-app').value;
+        const link = document.getElementById('link-app').value;
         const imagens = [];
-        const containers = imagensList.querySelectorAll('div');
+        const containers = imagensList.querySelectorAll('.img-row');
 
         let pending = 0;
         let erro = false;
@@ -158,6 +326,8 @@
             db.ref('apps').push({
                 nome,
                 funcao,
+                destaques,
+                link,
                 imagens
             }).then(() => {
                 alert('App salvo com sucesso!');
