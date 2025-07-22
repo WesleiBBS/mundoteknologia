@@ -4,41 +4,153 @@
     <meta charset="UTF-8">
     <title>Detalhes do App</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .app-gallery { display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;}
+        .app-gallery-item { text-align: center; }
+        .app-gallery-item img { max-width: 260px; border-radius: 12px; background: #181b20; }
+        .app-title { color: #00b4d8; margin-bottom: 0.5rem; }
+        .app-desc { color: #fff; margin-bottom: 2rem; }
+        .admin-edit { background: #23272f; padding: 2rem; border-radius: 16px; max-width: 600px; margin: 40px auto; }
+        .admin-edit label { color: #00b4d8; font-weight: 600; }
+        .admin-edit input, .admin-edit textarea { width: 100%; margin-bottom: 1rem; border-radius: 6px; border: 1px solid #444; background: #181b20; color: #fff; padding: 8px; }
+        .admin-edit .img-desc-row { display: flex; align-items: center; margin-bottom: 1rem; }
+        .admin-edit .img-desc-row img { max-width: 120px; margin-right: 12px; border-radius: 8px; }
+        .admin-edit .img-desc-row input[type="text"] { flex: 1; }
+        .btn-dark { background: #00b4d8; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-weight: bold; cursor: pointer; }
+    </style>
 </head>
-<body>
-    <main style="max-width: 500px; margin: 40px auto; background: #23272f; padding: 2rem; border-radius: 16px;">
-        <h2 style="color:#00b4d8;">Adicionar Detalhes do App</h2>
+<body style="background:#23272f;">
+    <div id="presentation" style="max-width:900px;margin:40px auto 0 auto;padding:2rem 1rem;">
+        <h1 class="app-title" id="app-title">Nome do APP</h1>
+        <div class="app-desc" id="app-desc">Descrição do APP</div>
+        <div class="app-gallery" id="app-gallery">
+            <div class="app-gallery-item">
+                <img src="images/app1.png" alt="Inserir foto">
+                <div>Detalhes App</div>
+            </div>
+            <div class="app-gallery-item">
+                <img src="images/app2.png" alt="Inserir foto">
+                <div>Detalhes App</div>
+            </div>
+            <div class="app-gallery-item">
+                <img src="images/app3.png" alt="Inserir foto">
+                <div>Detalhes App</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-edit" class="admin-edit" style="display:none;">
+        <h2 style="color:#00b4d8;">Editar Detalhes do App</h2>
         <form id="app-form">
             <label for="nome-app">Nome do App:</label>
-            <input type="text" id="nome-app" name="nome-app" required style="width:100%;margin-bottom:1rem;">
-            
-            <label for="funcao-app">Função do App:</label>
-            <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
-            
-            <label for="imagens-app">Imagens do App:</label>
-            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;">
-            
-            <button type="submit" class="btn-dark highlight">Salvar</button>
+            <input type="text" id="nome-app" name="nome-app" required>
+
+            <label for="funcao-app">Descrição do App:</label>
+            <textarea id="funcao-app" name="funcao-app" required></textarea>
+
+            <label for="imagens-app">Imagens do App (até 5):</label>
+            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;" max="5">
+
+            <div id="preview"></div>
+
+            <button type="submit" class="btn-dark" style="margin-top:1.5rem;">Salvar</button>
         </form>
-        <div id="preview" style="margin-top:1.5rem;"></div>
-    </main>
-    <script>
-    // Preview das imagens selecionadas
+    </div>
+
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    // Se quiser salvar dados, importe também o database/storage
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
+        authDomain: "site-mundoteknologia.firebaseapp.com",
+        projectId: "site-mundoteknologia",
+        storageBucket: "site-mundoteknologia.appspot.com",
+        messagingSenderId: "171461943616",
+        appId: "1:171461943616:web:07cb0ada17038be0641aa5",
+        measurementId: "G-EJTL4ERWMP",
+        databaseURL: "https://site-mundoteknologia-default-rtdb.firebaseio.com"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Troca entre modo admin e apresentação
+    onAuthStateChanged(auth, (user) => {
+        // Só permite admin editar
+        const admins = [
+            "wesleicostabbs@hotmail.com",
+            "mundoteknologia@gmail.com",
+            "alandigdez@gmail.com"
+        ];
+        if (user && user.emailVerified && admins.includes(user.email)) {
+            document.getElementById('presentation').style.display = 'none';
+            document.getElementById('admin-edit').style.display = 'block';
+        } else {
+            document.getElementById('presentation').style.display = 'block';
+            document.getElementById('admin-edit').style.display = 'none';
+        }
+    });
+
+    // Preview das imagens selecionadas com campo de descrição para cada uma (até 5)
     document.getElementById('imagens-app').addEventListener('change', function(e) {
         const preview = document.getElementById('preview');
         preview.innerHTML = '';
-        Array.from(e.target.files).forEach(file => {
+        let files = Array.from(e.target.files).slice(0, 5); // Limita a 5 arquivos
+        files.forEach((file, idx) => {
             const reader = new FileReader();
             reader.onload = function(ev) {
+                const row = document.createElement('div');
+                row.className = 'img-desc-row';
+
                 const img = document.createElement('img');
                 img.src = ev.target.result;
-                img.style.maxWidth = '120px';
-                img.style.margin = '8px';
-                img.style.borderRadius = '8px';
-                preview.appendChild(img);
+
+                const desc = document.createElement('input');
+                desc.type = 'text';
+                desc.name = `descricao-foto-${idx}`;
+                desc.placeholder = 'Descrição da imagem';
+
+                row.appendChild(img);
+                row.appendChild(desc);
+                preview.appendChild(row);
             };
             reader.readAsDataURL(file);
         });
+        if (e.target.files.length > 5) {
+            alert('Você pode selecionar no máximo 5 imagens.');
+        }
+    });
+
+    // Exemplo: ao salvar, atualiza a apresentação (apenas local, não salva no banco)
+    document.getElementById('app-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Pega valores do formulário
+        const nome = document.getElementById('nome-app').value;
+        const desc = document.getElementById('funcao-app').value;
+        const preview = document.getElementById('preview');
+        const imgs = preview.querySelectorAll('img');
+        const descs = preview.querySelectorAll('input[type="text"]');
+
+        // Atualiza apresentação
+        document.getElementById('app-title').textContent = nome;
+        document.getElementById('app-desc').textContent = desc;
+
+        const gallery = document.getElementById('app-gallery');
+        gallery.innerHTML = '';
+        imgs.forEach((img, idx) => {
+            const item = document.createElement('div');
+            item.className = 'app-gallery-item';
+            item.appendChild(img.cloneNode());
+            const d = document.createElement('div');
+            d.textContent = descs[idx].value || 'Detalhes App';
+            item.appendChild(d);
+            gallery.appendChild(item);
+        });
+
+        // Troca para modo apresentação
+        document.getElementById('presentation').style.display = 'block';
+        document.getElementById('admin-edit').style.display = 'none';
     });
     </script>
 </body>
