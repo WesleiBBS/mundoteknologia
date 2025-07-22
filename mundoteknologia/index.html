@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundoteknologia - Portfólio de Desenvolvimento Web e Mobile</title>
+    <!-- Fontes modernas Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+</head>
+<body>
+    <!-- Botão para alternar tema -->
+    <button id="toggle-theme" style="
+    position: fixed;
+    top: 10px;
+    right: 14px;
+    z-index: 100;
+    background: var(--card-dark);
+    color: var(--accent);
+    border: none;
+    border-radius: 14px;
+    box-shadow: 4px 4px 12px #d7d7d9, -4px -4px 12px #23272f;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+">☀️Modo</button>
+    <!-- Efeito criativo de partículas no fundo -->
+    <div class="particles-bg">
+      <div class="particle" style="top:10%;left:15%;width:18px;height:18px;animation-delay:0s;"></div>
+      <div class="particle" style="top:40%;left:70%;width:24px;height:24px;animation-delay:2s;"></div>
+      <div class="particle" style="top:10%;left:30%;width:14px;height:14px;animation-delay:2s;"></div>
+      <div class="particle" style="top:60%;left:50%;width:22px;height:22px;animation-delay:2s;"></div>
+      <div class="particle" style="top:20%;left:80%;width:16px;height:16px;animation-delay:4s;"></div>
+    </div>
+
+    <header class="header-dark">
+        <nav class="nav-dark">
+            <div class="logo-dark">Mundoteknologia</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#admin" id="admin-btn">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-dark">
+            <div class="hero-content-dark">
+                <h2>Desenvolvimento Web e Mobile para escalar seu negócio</h2>
+                <p>Transforme ideias em soluções digitais modernas. Criação de sites, sistemas, aplicativos Android/iOS e plataformas personalizadas para empresas e profissionais.</p>
+                <a href="#portfolio" class="btn-dark highlight">Ver Portfólio</a>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio-section-dark">
+            <h3>Projetos</h3>
+            <div class="portfolio-carousel-wrapper">
+                <button class="carousel-btn left">&#10094;</button>
+                <div class="portfolio-carousel">
+                    <div class="portfolio-card-dark">
+                        <img src="images/dash.jpg" alt="Dashboard Web">
+                        <div class="card-info-dark">
+                            <h4>Dashboard Web</h4>
+                            <p>Painel administrativo responsivo para gestão de dados em tempo real.</p>
+                            <span class="card-price-dark">Projeto Web</span>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-dark">
+                        <img src="images/delivery.jpg" alt="App Delivery Mobile">
+                        <div class="card-info-dark">
+                            <h4>App Delivery Mobile</h4>
+                            <p>Aplicativo mobile para pedidos e entregas, disponível para Android e iOS.</p>
+                            <span class="card-price-dark">Projeto Mobile</span>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-dark">
+                        <img src="images/comercio.jpg" alt="E-commerce">
+                        <div class="card-info-dark">
+                            <h4>E-commerce</h4>
+                            <p>Loja virtual completa, com integração de pagamentos e painel do vendedor.</p>
+                            <span class="card-price-dark">Projeto Web/Mobile</span>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-dark">
+                        <img src="images/educa.jpg" alt="App Educação">
+                        <div class="card-info-dark">
+                            <h4>App Educação</h4>
+                            <p>Plataforma de cursos online, videoaulas, quizzes interativos e muito mais.</p>
+                            <span class="card-price-dark">Projeto Mobile</span>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-dark">
+                        <img src="images/reli.jpg" alt="Instituição Religiosa">
+                        <div class="card-info-dark">
+                            <h4>App Instituição Religiosa</h4>
+                            <p>Aplicativo para instituições religiosas: agendas, notícias e comunicação com membros.</p>
+                            <span class="card-price-dark">Projeto Web/Mobile</span>
+                            <a href="#" class="btn-dark small btn-detalhes">Ver detalhes</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn right">&#10095;</button>
+            </div>
+        </section>
+
+        <section id="about" class="about-section-dark">
+            <h3>Quem somos</h3>
+            <p>Somos desenvolvedores web e mobile, procurando criar soluções digitais que transformam negócios e experiências.</p>
+            <p>Experiência com desenvolvimento de sites, sistemas, aplicativos Android/iOS, APIs e integrações. Trabalho com as principais tecnologias do mercado, como HTML, CSS, JavaScript, React, Node.js, Java, Python, C# e muito mais.</p>
+            <p>Meu objetivo é entregar projetos modernos, responsivos e eficientes, sempre focando na melhor experiência para o usuário e nos resultados do cliente.</p>
+        </section>
+
+        <section id="contact" class="contact-section-dark">
+            <h3>Entre em Contato</h3>
+            <form id="contact-form">
+                <input type="text" id="nome" placeholder="Seu Nome" required>
+                <input type="email" id="email" placeholder="Seu Email" required>
+                <textarea id="mensagem" placeholder="Sua Mensagem" required></textarea>
+                <button type="submit" class="btn-dark highlight">Enviar Mensagem</button>
+            </form>
+            <p style="text-align:center; color:#bdbdbd; margin-top:1rem;">
+                Ou envie um e-mail para <b>mundoteknologia@gmail.com</b>
+            </p>
+            <div style="text-align:center; margin-top:1rem;">
+                <a id="btn-whatsapp" class="btn-dark small" style="margin-right:10px;" href="https://wa.me/seunumerowhatsapp" target="_blank">
+                    <img src="images/whats.png" alt="WhatsApp" style="height:24px;vertical-align:middle;margin-right:6px;">WhatsApp
+                </a>
+                <a id="btn-instagram" class="btn-dark small" href="https://instagram.com/seuusuario" target="_blank">
+                    <img src="images/insta.png" alt="Instagram" style="height:24px;vertical-align:middle;margin-right:6px;">Instagram
+                </a>
+            </div>
+        </section>
+        <section id="admin" class="about-section-dark" style="display:none;">
+            <h3>Mensagens Recebidas</h3>
+            <div id="mensagens-list"></div>
+            <button id="logout-admin" class="btn-dark small" style="margin-top:1rem;display:none;">Sair</button>
+        </section>
+        <!-- Modal de Login/Cadastro Admin -->
+        <div id="admin-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+            <div style="background:#23272f;padding:2rem 2rem 1.5rem 2rem;border-radius:16px;max-width:350px;width:90%;margin:auto;position:relative;">
+                <button id="close-admin-modal" style="position:absolute;top:10px;right:14px;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">&times;</button>
+                <form id="admin-login-form">
+                    <h4 style="color:#00b4d8;">Login Administrador</h4>
+                    <input type="email" id="admin-login-email" placeholder="E-mail" required style="margin-bottom:8px;width:100%;">
+                    <input type="password" id="admin-login-senha" placeholder="Senha" required style="margin-bottom:8px;width:100%;">
+                    <button type="submit" class="btn-dark small" style="width:100%;">Entrar</button>
+                    <p id="admin-login-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
+                </form>
+                <form id="admin-register-form" style="display:none;">
+                    <h4 style="color:#00b4d8;">Cadastrar Administrador</h4>
+                    <input type="email" id="admin-register-email" placeholder="E-mail do administrador" required style="margin-bottom:8px;width:100%;">
+                    <input type="password" id="admin-register-senha" placeholder="Senha" required style="margin-bottom:8px;width:100%;">
+                    <button type="submit" class="btn-dark small" style="width:100%;">Cadastrar</button>
+                    <p id="admin-register-erro" style="color:#ff5252;font-size:0.9em;margin-top:8px;display:none;"></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de detalhes do projeto -->
+        <div id="modal-detalhes" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+            <div id="modal-conteudo" style="background:#23272f;padding:2rem;border-radius:16px;max-width:400px;width:90%;margin:auto;position:relative;color:#fff;">
+                <button id="fechar-modal-detalhes" style="position:absolute;top:10px;right:14px;background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;">&times;</button>
+                <h4 id="modal-titulo"></h4>
+                <p id="modal-descricao"></p>
+                <span id="modal-tipo" style="color:#00b4d8;font-weight:bold;"></span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-dark">
+        <p>&copy; 2025 Mundoteknologia. Todos os direitos reservados.</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
+        authDomain: "site-mundoteknologia.firebaseapp.com",
+        projectId: "site-mundoteknologia",
+        storageBucket: "site-mundoteknologia.appspot.com",
+        messagingSenderId: "171461943616",
+        appId: "1:171461943616:web:07cb0ada17038be0641aa5",
+        measurementId: "G-EJTL4ERWMP",
+        databaseURL: "https://site-mundoteknologia-default-rtdb.firebaseio.com"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
+
+    // Envio do formulário para o Firebase
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const mensagem = document.getElementById('mensagem').value;
+        push(ref(db, 'mensagens'), {
+            nome,
+            email,
+            mensagem,
+            data: new Date().toISOString()
+        }).then(() => {
+            alert('Mensagem enviada com sucesso!');
+            document.getElementById('contact-form').reset();
+        }).catch(() => {
+            alert('Erro ao enviar mensagem.');
+        });
+    });
+
+    // Exibe botão admin
+    document.getElementById('admin-btn').style.display = 'inline-block';
+
+    // Modal login/cadastro admin
+    const adminModal = document.getElementById('admin-modal');
+    const closeAdminModal = document.getElementById('close-admin-modal');
+    const loginForm = document.getElementById('admin-login-form');
+    const registerForm = document.getElementById('admin-register-form');
+    const loginErro = document.getElementById('admin-login-erro');
+    const registerErro = document.getElementById('admin-register-erro');
+
+    document.getElementById('admin-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        adminModal.style.display = 'flex';
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        loginErro.style.display = 'none';
+        registerErro.style.display = 'none';
+        loginForm.reset();
+        registerForm.reset();
+    });
+
+    closeAdminModal.addEventListener('click', function() {
+        adminModal.style.display = 'none';
+    });
+
+    // Login admin (ajustado: mostra opção de cadastro se usuário não existe)
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        loginErro.style.display = 'none';
+        const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
+        const senha = document.getElementById('admin-login-senha').value;
+
+        const emailsPermitidos = [
+            "wesleicostabbs@hotmail.com",
+            "mundoteknologia@gmail.com",
+            "alandigdez@gmail.com"
+        ];
+        if (!emailsPermitidos.includes(email)) {
+            loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
+            loginErro.style.display = 'block';
+            return;
+        }
+
+        try {
+            await signInWithEmailAndPassword(auth, email, senha);
+            adminModal.style.display = 'none';
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            carregarMensagens();
+        } catch (error) {
+            if (error.code === "auth/user-not-found") {
+                loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
+                loginErro.style.display = 'block';
+                setTimeout(() => {
+                    const showRegister = document.getElementById('show-register');
+                    if (showRegister) {
+                        showRegister.onclick = function(ev) {
+                            ev.preventDefault();
+                            loginForm.style.display = 'none';
+                            registerForm.style.display = 'block';
+                            registerErro.style.display = 'none';
+                            registerForm.reset();
+                            document.getElementById('admin-register-email').value = email;
+                        };
+                    }
+                }, 100);
+            } else if (error.code === "auth/wrong-password") {
+                loginErro.textContent = "Senha incorreta.";
+                loginErro.style.display = 'block';
+            } else {
+                loginErro.textContent = "E-mail ou senha inválidos.";
+                loginErro.style.display = 'block';
+            }
+        }
+    });
+
+    // Cadastro admin com restrição de e-mails permitidos
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        registerErro.style.display = 'none';
+        const email = document.getElementById('admin-register-email').value.trim().toLowerCase();
+        const senha = document.getElementById('admin-register-senha').value;
+
+        const emailsPermitidos = [
+            "wesleicostabbs@hotmail.com",
+            "mundoteknologia@gmail.com",
+            "alandigdez@gmail.com"
+        ];
+        if (!emailsPermitidos.includes(email)) {
+            registerErro.textContent = "Cadastro permitido apenas para administradores autorizados.";
+            registerErro.style.display = 'block';
+            return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, senha)
+            .then((userCredential) => {
+                sendEmailVerification(userCredential.user)
+                    .then(() => {
+                        alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
+                    })
+                    .catch(() => {
+                        alert('Administrador cadastrado, mas não foi possível enviar o e-mail de verificação.');
+                    });
+                adminModal.style.display = 'none';
+                document.getElementById('admin').style.display = 'block';
+                document.getElementById('logout-admin').style.display = 'inline-block';
+                carregarMensagens();
+            })
+            .catch((error) => {
+                registerErro.textContent = error.message;
+                registerErro.style.display = 'block';
+            });
+    });
+
+    // Logout admin
+    document.getElementById('logout-admin').addEventListener('click', function() {
+        signOut(auth).then(() => {
+            document.getElementById('admin').style.display = 'none';
+            document.getElementById('logout-admin').style.display = 'none';
+        });
+    });
+
+    // Carregar mensagens do Firebase
+    function carregarMensagens() {
+        const lista = document.getElementById('mensagens-list');
+        lista.innerHTML = "<p>Carregando...</p>";
+        onValue(ref(db, 'mensagens'), (snapshot) => {
+            let html = "";
+            snapshot.forEach(function(child) {
+                const msg = child.val();
+                html += `<div style="border:1px solid #ccc;padding:8px;margin-bottom:8px;">
+                    <b>Nome:</b> ${msg.nome || ''}<br>
+                    <b>Email:</b> ${msg.email || ''}<br>
+                    <b>Mensagem:</b> ${msg.mensagem || ''}<br>
+                    <small>${msg.data || ''}</small>
+                </div>`;
+            });
+            lista.innerHTML = html || "<p>Nenhuma mensagem recebida.</p>";
+        });
+    }
+
+    // Exibe admin se já autenticado e autorizado
+    onAuthStateChanged(auth, (user) => {
+        if (
+            user &&
+            user.emailVerified &&
+            (
+                user.email === "wesleicostabbs@hotmail.com" ||
+                user.email === "alandigdez@gmail.com" ||
+                user.email === "mundoteknologia@gmail.com"
+            )
+        ) {
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            carregarMensagens();
+        } else {
+            document.getElementById('admin').style.display = 'none';
+            document.getElementById('logout-admin').style.display = 'none';
+            if (user && !user.emailVerified) {
+                alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
+            }
+        }
+    });
+
+    // Modal de detalhes dos projetos
+    document.addEventListener('DOMContentLoaded', function() {
+        const detalhesBtns = document.querySelectorAll('.btn-detalhes');
+        const modal = document.getElementById('modal-detalhes');
+        const fecharModal = document.getElementById('fechar-modal-detalhes');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const modalDescricao = document.getElementById('modal-descricao');
+        const modalTipo = document.getElementById('modal-tipo');
+
+        // Dados dos projetos
+        const projetos = [
+            {
+                titulo: "Dashboard Web",
+                descricao: "Painel administrativo responsivo para gestão de dados em tempo real.",
+                tipo: "Projeto Web"
+            },
+            {
+                titulo: "App Delivery Mobile",
+                descricao: "Aplicativo mobile para pedidos e entregas, disponível para Android e iOS.",
+                tipo: "Projeto Mobile"
+            },
+            {
+                titulo: "E-commerce",
+                descricao: "Loja virtual completa, com integração de pagamentos e painel do vendedor.",
+                tipo: "Projeto Web/Mobile"
+            },
+            {
+                titulo: "App Educação",
+                descricao: "Plataforma de cursos online, videoaulas, quizzes interativos e muito mais.",
+                tipo: "Projeto Mobile"
+            },
+            {
+                titulo: "App Instituição Religiosa",
+                descricao: "Aplicativo para instituições religiosas: agendas, notícias e comunicação com membros.",
+                tipo: "Projeto Web/Mobile"
+            }
+        ];
+
+        detalhesBtns.forEach((btn, idx) => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projeto = projetos[idx];
+                modalTitulo.textContent = projeto.titulo;
+                modalDescricao.textContent = projeto.descricao;
+                modalTipo.textContent = projeto.tipo;
+                modal.style.display = 'flex';
+            });
+        });
+
+        if (fecharModal) {
+            fecharModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+        }
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+    </script>
+</body>
+</html>
