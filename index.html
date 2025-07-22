@@ -256,17 +256,6 @@ loginForm.addEventListener('submit', async function(e) {
     const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
     const senha = document.getElementById('admin-login-senha').value;
 
-    const emailsPermitidos = [
-        "wesleicostabbs@hotmail.com",
-        "mundoteknologia@gmail.com",
-        "alandigdez@gmail.com"
-    ];
-    if (!emailsPermitidos.includes(email)) {
-        loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
-        loginErro.style.display = 'block';
-        return;
-    }
-
     try {
         await signInWithEmailAndPassword(auth, email, senha);
         adminModal.style.display = 'none';
@@ -299,6 +288,49 @@ loginForm.addEventListener('submit', async function(e) {
         }
     }
 });
+
+// Cadastro admin (agora permite qualquer e-mail)
+registerForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    registerErro.style.display = 'none';
+    const email = document.getElementById('admin-register-email').value.trim().toLowerCase();
+    const senha = document.getElementById('admin-register-senha').value;
+
+    createUserWithEmailAndPassword(auth, email, senha)
+        .then((userCredential) => {
+            sendEmailVerification(userCredential.user)
+                .then(() => {
+                    alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
+                })
+                .catch(() => {
+                    alert('Administrador cadastrado, mas não foi possível enviar o e-mail de verificação.');
+                });
+            adminModal.style.display = 'none';
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            carregarMensagens();
+        })
+        .catch((error) => {
+            registerErro.textContent = error.message;
+            registerErro.style.display = 'block';
+        });
+});
+
+// Exibe admin se já autenticado (remove restrição de e-mail)
+onAuthStateChanged(auth, (user) => {
+    if (user && user.emailVerified) {
+        document.getElementById('admin').style.display = 'block';
+        document.getElementById('logout-admin').style.display = 'inline-block';
+        carregarMensagens();
+    } else {
+        document.getElementById('admin').style.display = 'none';
+        document.getElementById('logout-admin').style.display = 'none';
+        if (user && !user.emailVerified) {
+            alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
+        }
+    }
+});
+// ...restante do código...
 
     // Cadastro admin com restrição de e-mails permitidos
     registerForm.addEventListener('submit', function(e) {
