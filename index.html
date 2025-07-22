@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundoteknologia - Portfólio de Desenvolvimento Web e Mobile</title>
-    <!-- Fontes modernas Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <!-- Firebase SDK -->
@@ -13,24 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
 </head>
 <body>
-    <!-- Botão para alternar tema -->
-    <button id="toggle-theme" style="
-    position: fixed;
-    top: 10px;
-    right: 14px;
-    z-index: 100;
-    background: var(--card-dark);
-    color: var(--accent);
-    border: none;
-    border-radius: 14px;
-    box-shadow: 4px 4px 12px #d7d7d9, -4px -4px 12px #23272f;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.5rem 0.5rem;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-">☀️Modo</button>
-    <!-- Efeito criativo de partículas no fundo -->
+    <button id="toggle-theme" style="position: fixed;top: 10px;right: 14px;z-index: 100;background: var(--card-dark);color: var(--accent);border: none;border-radius: 14px;box-shadow: 4px 4px 12px #d7d7d9, -4px -4px 12px #23272f;font-size: 0.7rem;font-weight: 700;padding: 0.5rem 0.5rem;cursor: pointer;transition: background 0.2s, color 0.2s, box-shadow 0.2s;">☀️Modo</button>
     <div class="particles-bg">
       <div class="particle" style="top:10%;left:15%;width:18px;height:18px;animation-delay:0s;"></div>
       <div class="particle" style="top:40%;left:70%;width:24px;height:24px;animation-delay:2s;"></div>
@@ -248,107 +230,52 @@
         adminModal.style.display = 'none';
     });
 
-    // Login admin (ajustado: mostra opção de cadastro se usuário não existe)
-    // ...código anterior...
-loginForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    loginErro.style.display = 'none';
-    const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
-    const senha = document.getElementById('admin-login-senha').value;
+    // Login admin (permite qualquer usuário autenticado)
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        loginErro.style.display = 'none';
+        const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
+        const senha = document.getElementById('admin-login-senha').value;
 
-    try {
-        await signInWithEmailAndPassword(auth, email, senha);
-        adminModal.style.display = 'none';
-        document.getElementById('admin').style.display = 'block';
-        document.getElementById('logout-admin').style.display = 'inline-block';
-        carregarMensagens();
-    } catch (error) {
-        if (error.code === "auth/user-not-found") {
-            loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
-            loginErro.style.display = 'block';
-            setTimeout(() => {
-                const showRegister = document.getElementById('show-register');
-                if (showRegister) {
-                    showRegister.onclick = function(ev) {
-                        ev.preventDefault();
-                        loginForm.style.display = 'none';
-                        registerForm.style.display = 'block';
-                        registerErro.style.display = 'none';
-                        registerForm.reset();
-                        document.getElementById('admin-register-email').value = email;
-                    };
-                }
-            }, 100);
-        } else if (error.code === "auth/wrong-password") {
-            loginErro.textContent = "Senha incorreta.";
-            loginErro.style.display = 'block';
-        } else {
-            loginErro.textContent = "E-mail ou senha inválidos.";
-            loginErro.style.display = 'block';
-        }
-    }
-});
-
-// Cadastro admin (agora permite qualquer e-mail)
-registerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    registerErro.style.display = 'none';
-    const email = document.getElementById('admin-register-email').value.trim().toLowerCase();
-    const senha = document.getElementById('admin-register-senha').value;
-
-    createUserWithEmailAndPassword(auth, email, senha)
-        .then((userCredential) => {
-            sendEmailVerification(userCredential.user)
-                .then(() => {
-                    alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
-                })
-                .catch(() => {
-                    alert('Administrador cadastrado, mas não foi possível enviar o e-mail de verificação.');
-                });
+        try {
+            await signInWithEmailAndPassword(auth, email, senha);
             adminModal.style.display = 'none';
             document.getElementById('admin').style.display = 'block';
             document.getElementById('logout-admin').style.display = 'inline-block';
             carregarMensagens();
-        })
-        .catch((error) => {
-            registerErro.textContent = error.message;
-            registerErro.style.display = 'block';
-        });
-});
-
-// Exibe admin se já autenticado (remove restrição de e-mail)
-onAuthStateChanged(auth, (user) => {
-    if (user && user.emailVerified) {
-        document.getElementById('admin').style.display = 'block';
-        document.getElementById('logout-admin').style.display = 'inline-block';
-        carregarMensagens();
-    } else {
-        document.getElementById('admin').style.display = 'none';
-        document.getElementById('logout-admin').style.display = 'none';
-        if (user && !user.emailVerified) {
-            alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
+        } catch (error) {
+            if (error.code === "auth/user-not-found") {
+                loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
+                loginErro.style.display = 'block';
+                setTimeout(() => {
+                    const showRegister = document.getElementById('show-register');
+                    if (showRegister) {
+                        showRegister.onclick = function(ev) {
+                            ev.preventDefault();
+                            loginForm.style.display = 'none';
+                            registerForm.style.display = 'block';
+                            registerErro.style.display = 'none';
+                            registerForm.reset();
+                            document.getElementById('admin-register-email').value = email;
+                        };
+                    }
+                }, 100);
+            } else if (error.code === "auth/wrong-password") {
+                loginErro.textContent = "Senha incorreta.";
+                loginErro.style.display = 'block';
+            } else {
+                loginErro.textContent = "E-mail ou senha inválidos.";
+                loginErro.style.display = 'block';
+            }
         }
-    }
-});
-// ...restante do código...
+    });
 
-    // Cadastro admin com restrição de e-mails permitidos
+    // Cadastro admin (permite qualquer e-mail)
     registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
         registerErro.style.display = 'none';
         const email = document.getElementById('admin-register-email').value.trim().toLowerCase();
         const senha = document.getElementById('admin-register-senha').value;
-
-        const emailsPermitidos = [
-            "wesleicostabbs@hotmail.com",
-            "mundoteknologia@gmail.com",
-            "alandigdez@gmail.com"
-        ];
-        if (!emailsPermitidos.includes(email)) {
-            registerErro.textContent = "Cadastro permitido apenas para administradores autorizados.";
-            registerErro.style.display = 'block';
-            return;
-        }
 
         createUserWithEmailAndPassword(auth, email, senha)
             .then((userCredential) => {
@@ -368,6 +295,21 @@ onAuthStateChanged(auth, (user) => {
                 registerErro.textContent = error.message;
                 registerErro.style.display = 'block';
             });
+    });
+
+    // Exibe admin se já autenticado (qualquer usuário autenticado e verificado)
+    onAuthStateChanged(auth, (user) => {
+        if (user && user.emailVerified) {
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            carregarMensagens();
+        } else {
+            document.getElementById('admin').style.display = 'none';
+            document.getElementById('logout-admin').style.display = 'none';
+            if (user && !user.emailVerified) {
+                alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
+            }
+        }
     });
 
     // Logout admin
@@ -397,29 +339,6 @@ onAuthStateChanged(auth, (user) => {
         });
     }
 
-    // Exibe admin se já autenticado e autorizado
-    onAuthStateChanged(auth, (user) => {
-        if (
-            user &&
-            user.emailVerified &&
-            (
-                user.email === "wesleicostabbs@hotmail.com" ||
-                user.email === "alandigdez@gmail.com" ||
-                user.email === "mundoteknologia@gmail.com"
-            )
-        ) {
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('logout-admin').style.display = 'inline-block';
-            carregarMensagens();
-        } else {
-            document.getElementById('admin').style.display = 'none';
-            document.getElementById('logout-admin').style.display = 'none';
-            if (user && !user.emailVerified) {
-                alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
-            }
-        }
-    });
-
     // Modal de detalhes dos projetos
     document.addEventListener('DOMContentLoaded', function() {
         const detalhesBtns = document.querySelectorAll('.btn-detalhes');
@@ -429,7 +348,6 @@ onAuthStateChanged(auth, (user) => {
         const modalDescricao = document.getElementById('modal-descricao');
         const modalTipo = document.getElementById('modal-tipo');
 
-        // Dados dos projetos
         const projetos = [
             {
                 titulo: "Dashboard Web",
