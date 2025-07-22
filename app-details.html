@@ -2,66 +2,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Detalhes do App</title>
+    <title>Adicionar Detalhes do App</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .app-gallery { display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;}
-        .app-gallery-item { text-align: center; }
-        .app-gallery-item img { max-width: 260px; border-radius: 12px; background: #181b20; }
-        .app-title { color: #00b4d8; margin-bottom: 0.5rem; }
-        .app-desc { color: #fff; margin-bottom: 2rem; }
-        .admin-edit { background: #23272f; padding: 2rem; border-radius: 16px; max-width: 600px; margin: 40px auto; }
-        .admin-edit label { color: #00b4d8; font-weight: 600; }
-        .admin-edit input, .admin-edit textarea { width: 100%; margin-bottom: 1rem; border-radius: 6px; border: 1px solid #444; background: #181b20; color: #fff; padding: 8px; }
-        .admin-edit .img-desc-row { display: flex; align-items: center; margin-bottom: 1rem; }
-        .admin-edit .img-desc-row img { max-width: 120px; margin-right: 12px; border-radius: 8px; }
-        .admin-edit .img-desc-row input[type="text"] { flex: 1; }
-        .btn-dark { background: #00b4d8; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-weight: bold; cursor: pointer; }
-    </style>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
 </head>
-<body style="background:#23272f;">
-    <div id="presentation" style="max-width:900px;margin:40px auto 0 auto;padding:2rem 1rem;">
-        <h1 class="app-title" id="app-title">Nome do APP</h1>
-        <div class="app-desc" id="app-desc">Descrição do APP</div>
-        <div class="app-gallery" id="app-gallery">
-            <div class="app-gallery-item">
-                <img src="images/app1.png" alt="Inserir foto">
-                <div>Detalhes App</div>
-            </div>
-            <div class="app-gallery-item">
-                <img src="images/app2.png" alt="Inserir foto">
-                <div>Detalhes App</div>
-            </div>
-            <div class="app-gallery-item">
-                <img src="images/app3.png" alt="Inserir foto">
-                <div>Detalhes App</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="admin-edit" class="admin-edit" style="display:none;">
-        <h2 style="color:#00b4d8;">Editar Detalhes do App</h2>
+<body>
+    <main style="max-width: 500px; margin: 40px auto; background: #23272f; padding: 2rem; border-radius: 16px;">
+        <h2 style="color:#00b4d8;">Adicionar Detalhes do App</h2>
         <form id="app-form">
             <label for="nome-app">Nome do App:</label>
-            <input type="text" id="nome-app" name="nome-app" required>
-
-            <label for="funcao-app">Descrição do App:</label>
-            <textarea id="funcao-app" name="funcao-app" required></textarea>
-
-            <label for="imagens-app">Imagens do App (até 5):</label>
-            <input type="file" id="imagens-app" name="imagens-app" accept="image/*" multiple style="margin-bottom:1rem;" max="5">
-
-            <div id="preview"></div>
-
-            <button type="submit" class="btn-dark" style="margin-top:1.5rem;">Salvar</button>
+            <input type="text" id="nome-app" name="nome-app" required style="width:100%;margin-bottom:1rem;">
+            
+            <label for="funcao-app">Função do App:</label>
+            <textarea id="funcao-app" name="funcao-app" required style="width:100%;margin-bottom:1rem;"></textarea>
+            
+            <label>Imagens do App (até 5):</label>
+            <div id="imagens-list"></div>
+            <button type="button" id="add-img-btn" class="btn-dark highlight" style="margin-bottom:1rem;">Adicionar Foto</button>
+            
+            <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;">Salvar</button>
         </form>
-    </div>
-
-    <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    // Se quiser salvar dados, importe também o database/storage
-
+    </main>
+    <script>
+    // Firebase config igual ao index.html
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
         authDomain: "site-mundoteknologia.firebaseapp.com",
@@ -72,85 +37,135 @@
         measurementId: "G-EJTL4ERWMP",
         databaseURL: "https://site-mundoteknologia-default-rtdb.firebaseio.com"
     };
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-    // Troca entre modo admin e apresentação
-    onAuthStateChanged(auth, (user) => {
-        // Só permite admin editar
-        const admins = [
-            "wesleicostabbs@hotmail.com",
-            "mundoteknologia@gmail.com",
-            "alandigdez@gmail.com"
-        ];
-        if (user && user.emailVerified && admins.includes(user.email)) {
-            document.getElementById('presentation').style.display = 'none';
-            document.getElementById('admin-edit').style.display = 'block';
-        } else {
-            document.getElementById('presentation').style.display = 'block';
-            document.getElementById('admin-edit').style.display = 'none';
-        }
-    });
+    // Lógica para adicionar campos de imagem+descrição
+    const imagensList = document.getElementById('imagens-list');
+    const addImgBtn = document.getElementById('add-img-btn');
+    let imgCount = 0;
+    const maxImgs = 5;
 
-    // Preview das imagens selecionadas com campo de descrição para cada uma (até 5)
-    document.getElementById('imagens-app').addEventListener('change', function(e) {
-        const preview = document.getElementById('preview');
-        preview.innerHTML = '';
-        let files = Array.from(e.target.files).slice(0, 5); // Limita a 5 arquivos
-        files.forEach((file, idx) => {
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const row = document.createElement('div');
-                row.className = 'img-desc-row';
+    function createImgField(idx) {
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.alignItems = 'center';
+        container.style.marginBottom = '12px';
+        container.style.gap = '8px';
 
-                const img = document.createElement('img');
-                img.src = ev.target.result;
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.required = true;
+        fileInput.style.flex = '1';
 
-                const desc = document.createElement('input');
-                desc.type = 'text';
-                desc.name = `descricao-foto-${idx}`;
-                desc.placeholder = 'Descrição da imagem';
+        const imgPreview = document.createElement('img');
+        imgPreview.style.maxWidth = '80px';
+        imgPreview.style.maxHeight = '80px';
+        imgPreview.style.borderRadius = '8px';
+        imgPreview.style.display = 'none';
 
-                row.appendChild(img);
-                row.appendChild(desc);
-                preview.appendChild(row);
-            };
-            reader.readAsDataURL(file);
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    imgPreview.src = ev.target.result;
+                    imgPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
         });
-        if (e.target.files.length > 5) {
-            alert('Você pode selecionar no máximo 5 imagens.');
+
+        const desc = document.createElement('input');
+        desc.type = 'text';
+        desc.name = `descricao-foto-${idx}`;
+        desc.placeholder = 'Descrição da imagem';
+        desc.style.flex = '2';
+        desc.style.padding = '6px';
+        desc.style.borderRadius = '6px';
+        desc.style.border = '1px solid #444';
+        desc.style.background = '#181b20';
+        desc.style.color = '#fff';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.textContent = 'Remover';
+        removeBtn.className = 'btn-dark small';
+        removeBtn.onclick = () => {
+            imagensList.removeChild(container);
+            imgCount--;
+            addImgBtn.disabled = false;
+        };
+
+        container.appendChild(fileInput);
+        container.appendChild(imgPreview);
+        container.appendChild(desc);
+        container.appendChild(removeBtn);
+
+        return container;
+    }
+
+    addImgBtn.addEventListener('click', function() {
+        if (imgCount < maxImgs) {
+            imagensList.appendChild(createImgField(imgCount));
+            imgCount++;
+            if (imgCount >= maxImgs) addImgBtn.disabled = true;
         }
     });
 
-    // Exemplo: ao salvar, atualiza a apresentação (apenas local, não salva no banco)
+    // Salvar no banco de dados (apenas texto e base64 das imagens)
     document.getElementById('app-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        // Pega valores do formulário
         const nome = document.getElementById('nome-app').value;
-        const desc = document.getElementById('funcao-app').value;
-        const preview = document.getElementById('preview');
-        const imgs = preview.querySelectorAll('img');
-        const descs = preview.querySelectorAll('input[type="text"]');
+        const funcao = document.getElementById('funcao-app').value;
+        const imagens = [];
+        const containers = imagensList.querySelectorAll('div');
 
-        // Atualiza apresentação
-        document.getElementById('app-title').textContent = nome;
-        document.getElementById('app-desc').textContent = desc;
+        let pending = 0;
+        let erro = false;
 
-        const gallery = document.getElementById('app-gallery');
-        gallery.innerHTML = '';
-        imgs.forEach((img, idx) => {
-            const item = document.createElement('div');
-            item.className = 'app-gallery-item';
-            item.appendChild(img.cloneNode());
-            const d = document.createElement('div');
-            d.textContent = descs[idx].value || 'Detalhes App';
-            item.appendChild(d);
-            gallery.appendChild(item);
+        containers.forEach((container, idx) => {
+            const fileInput = container.querySelector('input[type="file"]');
+            const descInput = container.querySelector('input[type="text"]');
+            const file = fileInput.files[0];
+            if (file) {
+                pending++;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    imagens[idx] = {
+                        descricao: descInput.value,
+                        imagem: ev.target.result // base64
+                    };
+                    pending--;
+                    if (pending === 0 && !erro) {
+                        salvarNoBanco();
+                    }
+                };
+                reader.onerror = function() {
+                    erro = true;
+                    alert('Erro ao ler uma das imagens.');
+                };
+                reader.readAsDataURL(file);
+            }
         });
 
-        // Troca para modo apresentação
-        document.getElementById('presentation').style.display = 'block';
-        document.getElementById('admin-edit').style.display = 'none';
+        if (containers.length === 0) {
+            salvarNoBanco();
+        }
+
+        function salvarNoBanco() {
+            db.ref('apps').push({
+                nome,
+                funcao,
+                imagens
+            }).then(() => {
+                alert('App salvo com sucesso!');
+                window.location.reload();
+            }).catch(() => {
+                alert('Erro ao salvar no banco de dados.');
+            });
+        }
     });
     </script>
 </body>
