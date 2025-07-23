@@ -897,36 +897,139 @@ html {
     box-shadow: 0 2px 8px #0003;
 }
 /* Adicione ao seu style.css */
+/* --- AJUSTE VISUAL DO MENU DE NAVEGAÇÃO --- */
+header {
+    background: linear-gradient(90deg, #0e0e0f 40%, #1f0f33 80%, #310d8d 100%);
+    box-shadow: var(--shadow);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+}
+
+.logo-dark {
+    font-family: 'Poppins', 'Inter', Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    letter-spacing: 2px;
+    filter: drop-shadow(0 2px 8px #23272f);
+    margin-right: 60px;
+    text-align: left;
+    line-height: 1.1;
+}
+.logo-dark div {
+    font-size: 1.1rem !important;
+    color: #ffc300 !important;
+    font-weight: 400 !important;
+    margin-top: 0.2em !important;
+    text-align: left !important;
+    width: 100% !important;
+    letter-spacing: 0.5px !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
 .nav-dark ul {
     display: flex;
-    gap: 32px;
+    gap: 2.5rem;
     align-items: center;
     margin: 0;
     padding: 0;
     list-style: none;
 }
+
+.nav-dark ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-dark ul li a,
 .nav-dark .nav-btn {
-    background: rgba(30,32,40,0.7);
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
     color: #fff;
-    padding: 0.5em 2em;
-    border-radius: 16px;
-    font-size: 1.25em;
     font-weight: 500;
     text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    font-size: 1.25rem;
+    padding: 0.7rem 2.5rem;
+    border-radius: 18px;
+    background: rgba(30,32,40,0.7);
     box-shadow: 0 2px 8px #0002;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     display: inline-block;
+    letter-spacing: 0.01em;
 }
+
+.nav-dark ul li a:hover,
+.nav-dark ul li.active a,
 .nav-dark .nav-btn:hover,
 .nav-dark .nav-btn:focus {
     background: #23272f;
     color: #ffc300;
+    box-shadow: 0 0 0 2px #ffc300;
 }
-.logo-dark {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 2.2em;
-    color: #ffc300;
-    letter-spacing: 1px;
-    margin-right: 48px;
+
+/* Remove estilos antigos duplicados */
+.nav-dark .nav-btn {
+    /* removido para evitar conflito */
+}
+
+/* Responsividade aprimorada para o menu */
+@media (max-width: 900px) {
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 1rem;
+    }
+    .logo-dark {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        margin-right: 0;
+        text-align: center;
+    }
+    .nav-dark ul {
+        gap: 1rem;
+        justify-content: center;
+        width: 100%;
+    }
+    .nav-dark ul li a,
+    .nav-dark .nav-btn {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 14px;
+    }
+}
+@media (max-width: 600px) {
+    nav {
+        padding: 0 0.5rem;
+    }
+    .logo-dark {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+    .nav-dark ul {
+        gap: 0.3rem;
+    }
+    .nav-dark ul li a,
+    .nav-dark .nav-btn {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.7rem;
+        border-radius: 10px;
+    }
 }
