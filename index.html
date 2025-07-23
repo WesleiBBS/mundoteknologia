@@ -52,7 +52,13 @@
             <li><a href="#portfolio">Portfólio</a></li>
             <li><a href="#about">Sobre</a></li>
             <li><a href="#contact">Contato</a></li>
-            <li><a href="#admin" id="admin-btn">Admin</a></li>
+            <li style="position:relative;">
+                <a href="#admin" id="admin-btn">Admin</a>
+                <a href="#admin" id="msg-link" style="display:none;position:relative;margin-left:8px;">
+                    <span style="font-size:1.3em;">&#128233;</span>
+                    <span id="msg-count" style="position:absolute;top:-8px;right:-10px;background:#ff5252;color:#fff;font-size:0.85em;padding:2px 7px;border-radius:12px;font-weight:700;min-width:22px;text-align:center;box-shadow:0 2px 8px #0003;">0</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -214,13 +220,44 @@
     const db = getDatabase(app);
     const auth = getAuth(app);
 
+    // Cartinha de mensagens recebidas para admin
+    const msgLink = document.getElementById('msg-link');
+    const msgCount = document.getElementById('msg-count');
+    const ADMINS = [
+        "wesleicostabbs@hotmail.com",
+        "mundoteknologia@gmail.com",
+        "alandigdez@gmail.com"
+    ];
+
+    function updateMsgCount() {
+        if (!msgCount) return;
+        onValue(ref(db, 'mensagens'), (snapshot) => {
+            const data = snapshot.val();
+            let count = 0;
+            if (data) count = Object.keys(data).length;
+            msgCount.textContent = count;
+        });
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (
+            user &&
+            user.emailVerified &&
+            ADMINS.includes(user.email)
+        ) {
+            if (msgLink) msgLink.style.display = 'inline-block';
+            updateMsgCount();
+        } else {
+            if (msgLink) msgLink.style.display = 'none';
+        }
+    });
+
     // Envio do formulário para o Firebase
     document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const mensagem = document.getElementById('mensagem').value;
-    // Remove autenticação, qualquer usuário pode enviar mensagem
     push(ref(db, 'mensagens'), {
         nome,
         email,
