@@ -5,45 +5,55 @@
     <title>Detalhes do App | WorldInova</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        body {
+            background: #181a20;
+            font-family: 'Poppins', 'Inter', Arial, sans-serif;
+        }
         .app-detalhes-container {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: flex-start;
             margin: 40px 0;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
         }
         .app-card {
             background: #23272f;
             border-radius: 18px;
-            box-shadow: 0 2px 16px #0002;
-            padding: 24px 18px;
-            width: 340px;
+            box-shadow: 0 2px 24px #0004;
+            padding: 32px 24px 24px 24px;
+            width: 370px;
             color: #fff;
             text-align: center;
+            transition: box-shadow 0.2s;
+            position: relative;
         }
-        .app-card img {
-            width: 100%;
-            max-width: 220px;
-            margin: 0 auto 18px auto;
-            border-radius: 12px;
-            background: #181a20;
-        }
-        .app-card input, .app-card textarea {
-            width: 100%;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            padding: 8px;
-            background: #181a20;
-            color: #fff;
+        .app-card:hover {
+            box-shadow: 0 4px 32px #00b4d855;
         }
         .app-card label {
             display: block;
             text-align: left;
             margin-bottom: 4px;
-            font-size: 0.95em;
+            font-size: 1em;
             color: #00b4d8;
+            font-weight: 600;
+        }
+        .app-card input, .app-card textarea {
+            width: 100%;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            padding: 10px;
+            background: #181a20;
+            color: #fff;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+        .app-card input:focus, .app-card textarea:focus {
+            border: 1.5px solid #00b4d8;
+            outline: none;
         }
         .readonly input, .readonly textarea {
             background: #181a20;
@@ -51,15 +61,48 @@
             border: none;
             pointer-events: none;
         }
+        .app-card .images-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .app-card .images-preview img {
+            width: 110px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #181a20;
+            border: 2px solid #222;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .app-card .remove-img-btn {
+            display: inline-block;
+            background: #ff5252;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 1em;
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            cursor: pointer;
+            z-index: 2;
+        }
         .btn-dark {
             background: #00b4d8;
             color: #fff;
             border: none;
             border-radius: 8px;
-            padding: 8px 18px;
-            font-weight: 600;
+            padding: 10px 0;
+            font-weight: 700;
+            font-size: 1.1em;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
+            width: 100%;
             transition: background 0.2s;
         }
         .btn-dark:active {
@@ -70,6 +113,20 @@
             background: none;
             color: #fff;
             border: none;
+        }
+        .app-card .img-upload-label {
+            color: #00b4d8;
+            font-size: 0.98em;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: block;
+            text-align: left;
+        }
+        @media (max-width: 1100px) {
+            .app-detalhes-container {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -88,7 +145,7 @@
     </header>
 
     <main>
-        <h2 style="text-align:center;margin:32px 0 12px 0;">Detalhes do App</h2>
+        <h2 style="text-align:center;margin:32px 0 24px 0;font-size:2.1em;">Detalhes do App</h2>
         <div class="app-detalhes-container" id="detalhes-apps">
             <!-- Cards dos apps serão inseridos via JS -->
         </div>
@@ -142,28 +199,46 @@
         return set(ref(db, 'apps/' + app.id), app);
     }
 
-    // Salva imagem no banco de dados (base64)
-    function handleImageUpload(file, cb) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            cb(e.target.result);
-        };
-        reader.readAsDataURL(file);
+    // Salva imagens no banco de dados (base64)
+    function handleImageUpload(files, cb) {
+        const images = [];
+        let loaded = 0;
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                images[i] = e.target.result;
+                loaded++;
+                if (loaded === files.length) cb(images);
+            };
+            reader.readAsDataURL(files[i]);
+        }
     }
 
     function renderCards(apps, isAdmin) {
         const container = document.getElementById('detalhes-apps');
         container.innerHTML = "";
         apps.forEach((app, idx) => {
+            // Garante array de imagens
+            let imagens = Array.isArray(app.imagens) ? app.imagens : (app.img ? [app.img] : []);
+            while (imagens.length < 1) imagens.push('images/placeholder.png');
             container.innerHTML += `
             <div class="app-card${!isAdmin ? ' readonly' : ''}" data-id="${app.id}">
                 <label>Nome do APP</label>
                 <input type="text" value="${app.nome || ''}" ${!isAdmin ? 'readonly' : ''} />
                 <label>Descrição do APP</label>
                 <textarea rows="2" ${!isAdmin ? 'readonly' : ''}>${app.descricao || ''}</textarea>
-                <label>Inserir foto</label>
-                <img src="${app.img || 'images/placeholder.png'}" alt="App" onerror="this.src='images/placeholder.png'">
-                ${isAdmin ? '<input type="file" accept="image/*" />' : ''}
+                <div class="images-preview">
+                    ${imagens.map((img, i) => `
+                        <div style="position:relative;display:inline-block;">
+                            <img src="${img || 'images/placeholder.png'}" alt="App" onerror="this.src='images/placeholder.png'">
+                            ${isAdmin && imagens.length > 1 ? `<button class="remove-img-btn" data-imgidx="${i}" title="Remover imagem">&times;</button>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+                ${isAdmin ? `
+                    <label class="img-upload-label">Adicionar até 6 imagens</label>
+                    <input type="file" accept="image/*" multiple ${imagens.length >= 6 ? 'disabled' : ''}/>
+                ` : ''}
                 <label>Detalhes App</label>
                 <textarea rows="3" ${!isAdmin ? 'readonly' : ''}>${app.detalhes || ''}</textarea>
                 ${isAdmin ? '<button class="btn-dark save-btn">Salvar</button>' : ''}
@@ -178,11 +253,35 @@
                 const nomeInput = card.querySelector('input[type="text"]');
                 const descTextarea = card.querySelectorAll('textarea')[0];
                 const detalhesTextarea = card.querySelectorAll('textarea')[1];
-                const imgTag = card.querySelector('img');
                 const fileInput = card.querySelector('input[type="file"]');
                 const saveBtn = card.querySelector('.save-btn');
+                let imagens = [];
+                card.querySelectorAll('.images-preview img').forEach(img => imagens.push(img.src));
 
-                // Salva ao clicar no botão
+                // Remover imagem
+                card.querySelectorAll('.remove-img-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const imgIdx = parseInt(btn.getAttribute('data-imgidx'));
+                        imagens.splice(imgIdx, 1);
+                        renderCards(apps, isAdmin); // re-render cards
+                    });
+                });
+
+                // Upload de imagens
+                if (fileInput) {
+                    fileInput.addEventListener('change', function() {
+                        if (fileInput.files && fileInput.files.length > 0) {
+                            handleImageUpload(fileInput.files, (base64Imgs) => {
+                                imagens = imagens.concat(base64Imgs).slice(0, 6);
+                                // Atualiza visualização imediatamente
+                                apps[idx].imagens = imagens;
+                                renderCards(apps, isAdmin);
+                            });
+                        }
+                    });
+                }
+
+                // Salvar alterações
                 if (saveBtn) {
                     saveBtn.addEventListener('click', () => {
                         const updated = {
@@ -190,23 +289,12 @@
                             nome: nomeInput.value,
                             descricao: descTextarea.value,
                             detalhes: detalhesTextarea.value,
-                            img: imgTag.src
+                            imagens: imagens.slice(0, 6)
                         };
                         saveApp(updated).then(() => {
                             saveBtn.textContent = "Salvo!";
                             setTimeout(() => saveBtn.textContent = "Salvar", 1200);
                         });
-                    });
-                }
-
-                // Salva ao trocar imagem (imagem só é salva ao clicar em salvar)
-                if (fileInput) {
-                    fileInput.addEventListener('change', function() {
-                        if (fileInput.files && fileInput.files[0]) {
-                            handleImageUpload(fileInput.files[0], (base64) => {
-                                imgTag.src = base64;
-                            });
-                        }
                     });
                 }
             });
@@ -223,9 +311,9 @@
             // Se não houver apps, cria 3 exemplos
             if (apps.length === 0 && isAdmin) {
                 const exemplos = [
-                    { id: "app1", nome: "Nome do APP", descricao: "Descrição do APP", img: "", detalhes: "Detalhes App" },
-                    { id: "app2", nome: "Nome do APP", descricao: "Descrição do APP", img: "", detalhes: "Detalhes App" },
-                    { id: "app3", nome: "Nome do APP", descricao: "Descrição do APP", img: "", detalhes: "Detalhes App" }
+                    { id: "app1", nome: "Nome do APP", descricao: "Descrição do APP", imagens: [], detalhes: "Detalhes App" },
+                    { id: "app2", nome: "Nome do APP", descricao: "Descrição do APP", imagens: [], detalhes: "Detalhes App" },
+                    { id: "app3", nome: "Nome do APP", descricao: "Descrição do APP", imagens: [], detalhes: "Detalhes App" }
                 ];
                 exemplos.forEach(saveApp);
                 renderCards(exemplos, isAdmin);
