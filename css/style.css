@@ -896,3 +896,37 @@ html {
     text-align: center;
     box-shadow: 0 2px 8px #0003;
 }
+/* Adicione ao seu style.css */
+.nav-dark ul {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.nav-dark .nav-btn {
+    background: rgba(30,32,40,0.7);
+    color: #fff;
+    padding: 0.5em 2em;
+    border-radius: 16px;
+    font-size: 1.25em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px #0002;
+    display: inline-block;
+}
+.nav-dark .nav-btn:hover,
+.nav-dark .nav-btn:focus {
+    background: #23272f;
+    color: #ffc300;
+}
+.logo-dark {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 2.2em;
+    color: #ffc300;
+    letter-spacing: 1px;
+    margin-right: 48px;
+}
