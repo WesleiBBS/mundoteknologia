@@ -877,24 +877,19 @@ html {
     z-index: 20;
     box-shadow: 0 8px 32px #00b4d8aa, 0 2px 8px #0004;
 }
-#msg-link {
-    display: none;
-    position: relative;
-    margin-left: 8px;
+#msg-link span {
+    font-size: 1em !important; /* diminui o ícone da cartinha */
+    vertical-align: middle;
 }
 #msg-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background: #ff5252;
-    color: #fff;
-    font-size: 0.85em;
-    padding: 2px 7px;
-    border-radius: 12px;
-    font-weight: 700;
-    min-width: 22px;
-    text-align: center;
-    box-shadow: 0 2px 8px #0003;
+    font-size: 0.70em !important; /* diminui o número */
+    padding: 1px 5px !important;
+    min-width: 16px !important;
+    top: -6px !important;
+    right: -8px !important;
+}
+#msg-link {
+    margin-left: 4px !important;
 }
 /* Adicione ao seu style.css */
 
