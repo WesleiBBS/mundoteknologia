@@ -897,53 +897,7 @@ html {
     box-shadow: 0 2px 8px #0003;
 }
 /* Adicione ao seu style.css */
-/* --- AJUSTE VISUAL DO MENU DE NAVEGAÇÃO --- */
-header {
-    background: linear-gradient(90deg, #0e0e0f 40%, #1f0f33 80%, #310d8d 100%);
-    box-shadow: var(--shadow);
-    border-bottom-left-radius: var(--border-radius);
-    border-bottom-right-radius: var(--border-radius);
-    margin-bottom: 2rem;
-    width: 100%;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-}
 
-nav {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 3rem;
-}
-
-.logo-dark {
-    font-family: 'Poppins', 'Inter', Arial, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    letter-spacing: 2px;
-    filter: drop-shadow(0 2px 8px #23272f);
-    margin-right: 60px;
-    text-align: left;
-    line-height: 1.1;
-}
-.logo-dark div {
-    font-size: 1.1rem !important;
-    color: #ffc300 !important;
-    font-weight: 400 !important;
-    margin-top: 0.2em !important;
-    text-align: left !important;
-    width: 100% !important;
-    letter-spacing: 0.5px !important;
-    background: none !important;
-    -webkit-text-fill-color: initial !important;
-}
 
 .nav-dark ul {
     display: flex;
