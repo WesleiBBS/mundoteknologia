@@ -92,6 +92,8 @@ nav {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
+    align-items: center; /* Alinha tudo ao centro */
+    text-align: center; /* Garante centralização do texto */
     background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
