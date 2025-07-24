@@ -636,15 +636,19 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     #msg-link {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    max-width: 44px !important;
-    max-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 64px !important;
+    min-height: 64px !important;
+    max-width: 64px !important;
+    max-height: 64px !important;
     padding: 0 !important;
-    border-radius: 16px !important;
-    font-size: 1.5rem !important;
+    border-radius: 18px !important;
+    font-size: 2rem !important;
     position: relative !important;
-    right: 18px !important;
+    background: rgba(30,32,40,0.7);
+    box-shadow: 0 2px 8px #0002;
     }
     .toggle-darkmode-btn {
         position: absolute !important;
@@ -913,31 +917,41 @@ html {
 
 /* Cartinha de mensagens */
 #msg-link {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 64px !important;
+    min-height: 64px !important;
+    max-width: 64px !important;
+    max-height: 64px !important;
     padding: 0 !important;
-    border-radius: 16px !important;
-    font-size: 1em !important;
+    border-radius: 18px !important;
+    font-size: 2rem !important;
     position: relative !important;
+    background: rgba(30,32,40,0.7);
+    box-shadow: 0 2px 8px #0002;
 }
 #msg-link:hover {
     background: #23272f;
 }
 #msg-link span:first-child {
-    font-size: 1.3em !important;
+    font-size: 1.5em !important;
+    margin-right: 12px !important;
 }
 #msg-count {
-    top: 8px !important;
-    right: 5px !important;
-    font-size: 1.1em !important;
-    padding: 2px 8px !important;
-    min-width: 12px !important;
+     position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #ff5252;
+    color: #fff;
+    font-size: 1.2em !important;
+    font-weight: 700;
+    min-width: 36px !important;
+    min-height: 36px !important;
     border-radius: 50% !important;
-    position: absolute !important;
-    z-index: 2 !important;
     box-shadow: 0 2px 8px #0003 !important;
+    margin: 0 !important;
 }
 
 /* Nav dark para compatibilidade */
