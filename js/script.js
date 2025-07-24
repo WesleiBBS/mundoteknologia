@@ -119,18 +119,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cartinha de mensagens recebidas (apenas se existir no HTML)
     const msgLink = document.getElementById('msg-link');
-const msgCount = document.getElementById('msg-count');
-if (msgLink && msgCount && window.firebase && window.firebase.database) {
-    const db = window.firebase.database();
-    const msgRef = db.ref('mensagens');
-    msgRef.on('value', snapshot => {
-        const data = snapshot.val();
-        let count = 0;
-        if (data) count = Object.keys(data).length;
-        msgCount.textContent = count;
-    });
-    msgLink.style.display = 'inline-block';
-
+    const msgCount = document.getElementById('msg-count');
+    if (msgLink && msgCount && window.firebase && window.firebase.database) {
+        // Exemplo: usando Firebase já inicializado no projeto
+        const db = window.firebase.database();
+        const msgRef = db.ref('mensagens');
+        msgRef.on('value', snapshot => {
+            const data = snapshot.val();
+            let count = 0;
+            if (data) count = Object.keys(data).length;
+            msgCount.textContent = count;
+        });
+        // Exibe a cartinha (pode ser controlado por permissão/admin no backend)
+        msgLink.style.display = 'inline-block';
     }
 
     // Redireciona "Ver detalhes" para página de cadastro de app
