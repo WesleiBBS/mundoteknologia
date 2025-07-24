@@ -929,11 +929,11 @@ html {
 }
 #msg-count {
     top: 8px !important;
-        right: 4px !important;
+        right: 7px !important;
         font-size: 0.85em !important;
         padding: 1px 5px !important;
         min-width: 16px !important;
-        border-radius: 50% !important;
+        border-radius: 30% !important;
         position: absolute !important;
         z-index: 2 !important;
         box-shadow: 0 2px 8px #0003 !important;
