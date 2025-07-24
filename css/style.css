@@ -105,6 +105,7 @@ nav {
 .logo-dark > div {
     text-align: center !important; /* Centraliza o slogan */
     width: 100%;
+    white-space: nowrap;         /* Não deixa quebrar linha */
 }
 
 nav ul {
