@@ -144,63 +144,122 @@
             background: #0090a8;
         }
 
-        /* RESPONSIVIDADE MELHORADA */
+        /* RESPONSIVIDADE MELHORADA ATIVADA POR CLASSE */
         @media (max-width: 900px) {
-            .app-detalhes-container {
+            body.app-details-responsive .app-detalhes-container {
                 flex-direction: column;
                 align-items: center;
                 gap: 18px;
                 margin: 18px 0;
             }
-            .app-card {
+            body.app-details-responsive .app-card {
                 width: 95vw;
                 max-width: 99vw;
                 padding: 18px 2vw 12px 2vw;
                 border-radius: 14px;
             }
-            .app-card .image-preview img {
+            body.app-details-responsive .app-card .image-preview img {
                 width: 90px;
                 height: 130px;
                 border-radius: 8px;
             }
+            body.app-details-responsive nav ul {
+                flex-wrap: wrap !important;
+                gap: 0.5rem !important;
+                justify-content: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100vw !important;
+                box-sizing: border-box !important;
+            }
+            body.app-details-responsive nav ul li {
+                flex: 1 1 120px !important;
+                min-width: 100px !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
+            }
+            body.app-details-responsive nav ul li a {
+                width: 100% !important;
+                text-align: center !important;
+                font-size: 1rem !important;
+                padding: 0.6rem 0.2rem !important;
+                border-radius: 12px !important;
+                margin: 0 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                box-sizing: border-box !important;
+            }
         }
         @media (max-width: 600px) {
-            .app-detalhes-container {
+            body.app-details-responsive .app-detalhes-container {
                 gap: 10px;
                 margin: 10px 0;
             }
-            .app-card {
+            body.app-details-responsive .app-card {
                 width: 99vw;
                 max-width: 99vw;
                 padding: 10px 1vw 8px 1vw;
                 border-radius: 10px;
                 box-shadow: 0 1px 8px #0003;
             }
-            .app-card label {
+            body.app-details-responsive .app-card label {
                 font-size: 0.97em;
             }
-            .app-card input, .app-card textarea {
+            body.app-details-responsive .app-card input, 
+            body.app-details-responsive .app-card textarea {
                 font-size: 0.96em;
                 padding: 7px;
                 border-radius: 6px;
             }
-            .app-card .image-preview img {
+            body.app-details-responsive .app-card .image-preview img {
                 width: 60px;
                 height: 90px;
                 border-radius: 6px;
             }
-            .btn-dark, .add-app-btn {
+            body.app-details-responsive .btn-dark, 
+            body.app-details-responsive .add-app-btn {
                 font-size: 0.97em;
                 padding: 7px 0;
                 border-radius: 7px;
             }
+            body.app-details-responsive nav {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding: 0.5rem 0.2rem 0.2rem 0.2rem !important;
+            }
+            body.app-details-responsive nav ul {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 0.2rem !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                width: 100vw !important;
+                box-sizing: border-box !important;
+                scrollbar-width: thin;
+                -webkit-overflow-scrolling: touch;
+            }
+            body.app-details-responsive nav ul li {
+                flex: 0 0 auto !important;
+                min-width: 90px !important;
+                max-width: 70vw !important;
+            }
+            body.app-details-responsive nav ul::-webkit-scrollbar {
+                height: 6px;
+                background: transparent;
+            }
+            body.app-details-responsive nav ul::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 3px;
+            }
         }
         @media (max-width: 400px) {
-            .app-card {
+            body.app-details-responsive .app-card {
                 padding: 6px 0.5vw 4px 0.5vw;
                 border-radius: 7px;
             }
-            .app-card .image-preview img {
+            body.app-details-responsive .app-card .image-preview img {
                 width: 44px;
                 height: 66px;
                 border-radius: 5px;
@@ -422,6 +481,9 @@
             });
         });
     });
+
+    // ATIVA RESPONSIVIDADE AO ENTRAR NA PÁGINA DE DETALHES
+    document.body.classList.add('app-details-responsive');
     </script>
 </body>
 </html>
