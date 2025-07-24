@@ -639,10 +639,10 @@ body.light-mode .btn-dark.highlight:hover {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
     padding: 0 !important;
     border-radius: 18px !important;
     font-size: 1rem !important;
