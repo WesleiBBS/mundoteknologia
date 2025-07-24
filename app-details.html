@@ -392,31 +392,16 @@
         }
     }
 
-    // Sempre mostra o envelope e atualiza o contador para todos
-if (msgLink) msgLink.style.display = 'inline-block';
-updateMsgCount();
+    // --- TODOS VEEM, SÓ ADMIN EDITA/EXCLUI ---
+    let isAdmin = false;
+    onAuthStateChanged(auth, (user) => {
+        isAdmin = !!(user && user.emailVerified && ADMINS.includes(user.email));
+        loadApps(apps => renderCards(apps, isAdmin));
+        document.getElementById('add-app-btn').style.display = isAdmin ? 'block' : 'none';
+    });
 
-onAuthStateChanged(auth, (user) => {
-    // Aqui só controla o painel admin, não o envelope
-    if (
-        user &&
-        user.emailVerified &&
-        ADMINS.includes(user.email)
-    ) {
-        document.getElementById('admin').style.display = 'block';
-        document.getElementById('logout-admin').style.display = 'inline-block';
-        carregarMensagens();
-    } else {
-        document.getElementById('admin').style.display = 'none';
-        document.getElementById('logout-admin').style.display = 'none';
-        if (user && !user.emailVerified) {
-            alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
-        }
-    }
-});
-
-    // Adicionar novo app (máximo 6)
     document.getElementById('add-app-btn').addEventListener('click', function() {
+        if (!isAdmin) return;
         loadApps(apps => {
             if (apps.length >= 6) {
                 alert('Limite de 6 cards atingido.');
