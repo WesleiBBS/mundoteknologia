@@ -912,8 +912,8 @@ html {
 
 /* Cartinha de mensagens */
 #msg-link {
-     min-width: 36px !important;
-        min-height: 36px !important;
+     min-width: 40px !important;
+        min-height: 40px !important;
         max-width: 44px !important;
         max-height: 44px !important;
         padding: 0 !important;
@@ -928,7 +928,7 @@ html {
     font-size: 1.1em !important;
 }
 #msg-count {
-    top: 2px !important;
+    top: 8px !important;
         right: 2px !important;
         font-size: 0.85em !important;
         padding: 1px 5px !important;
