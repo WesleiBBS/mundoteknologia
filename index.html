@@ -241,18 +241,28 @@
         });
     }
 
-    onAuthStateChanged(auth, (user) => {
-        if (
-            user &&
-            user.emailVerified &&
-            ADMINS.includes(user.email)
-        ) {
-            if (msgLink) msgLink.style.display = 'inline-block';
-            updateMsgCount();
-        } else {
-            if (msgLink) msgLink.style.display = 'none';
+    // Sempre mostra o envelope e atualiza o contador para todos
+if (msgLink) msgLink.style.display = 'inline-block';
+updateMsgCount();
+
+onAuthStateChanged(auth, (user) => {
+    // Aqui só controla o painel admin, não o envelope
+    if (
+        user &&
+        user.emailVerified &&
+        ADMINS.includes(user.email)
+    ) {
+        document.getElementById('admin').style.display = 'block';
+        document.getElementById('logout-admin').style.display = 'inline-block';
+        carregarMensagens();
+    } else {
+        document.getElementById('admin').style.display = 'none';
+        document.getElementById('logout-admin').style.display = 'none';
+        if (user && !user.emailVerified) {
+            alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
         }
-    });
+    }
+});
 
     // Envio do formulário para o Firebase
     document.getElementById('contact-form').addEventListener('submit', function(e) {

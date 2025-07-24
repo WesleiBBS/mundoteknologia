@@ -92,8 +92,8 @@ nav {
     font-family: 'Poppins', 'Inter', Arial, sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
-    align-items: center; /* Alinha tudo ao centro */
-    text-align: center; /* Garante centralização do texto */
+    align-items: center;
+    text-align: center;
     background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -103,9 +103,9 @@ nav {
     filter: drop-shadow(0 2px 8px #23272f);
 }
 .logo-dark > div {
-    text-align: center !important; /* Centraliza o slogan */
+    text-align: center !important;
     width: 100%;
-    white-space: nowrap;         /* Não deixa quebrar linha */
+    white-space: nowrap;
 }
 
 nav ul {
@@ -574,11 +574,23 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 0.5rem 0.2rem 0.2rem 0.2rem !important;
     }
     .logo-dark {
-        font-size: 2.0rem !important;
+        font-size: 1.5rem !important;
         letter-spacing: 1px !important;
-        margin-top: 1.6rem !important;    /* Adiciona espaço do topo */
+        margin-top: 1.2rem !important;
         margin-bottom: 0.5rem !important;
         text-align: center !important;
+        min-width: unset !important;
+        padding-left: 0 !important;
+        align-items: center !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    .logo-dark > div {
+        font-size: 0.8rem !important;
+        white-space: normal !important;
+        padding: 0 8px !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
     }
     nav ul {
         display: flex !important;
@@ -597,7 +609,7 @@ body.light-mode .btn-dark.highlight:hover {
     }
     nav ul li {
         flex: 0 0 auto !important;
-        min-width: 120px !important;
+        min-width: 110px !important;
         max-width: 70vw !important;
         margin: 0 !important;
         box-sizing: border-box !important;
@@ -623,6 +635,13 @@ body.light-mode .btn-dark.highlight:hover {
         text-overflow: ellipsis !important;
         box-sizing: border-box !important;
     }
+    #msg-link {
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 0 0.7rem !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
     .toggle-darkmode-btn {
         position: absolute !important;
         top: 8px !important;
@@ -639,6 +658,8 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 1.2rem 0.5rem !important;
         margin: 0 0.2rem !important;
         border-radius: 18px !important;
+        max-width: 98vw !important;
+        box-sizing: border-box !important;
     }
     .hero-content-dark h2 {
         font-size: 1.2rem !important;
@@ -665,6 +686,7 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 0 !important;
         margin: 0 auto 1rem auto !important;
         max-width: 100vw !important;
+        box-sizing: border-box !important;
     }
     .portfolio-carousel {
         gap: 0.7rem !important;
@@ -880,11 +902,12 @@ html {
     cursor: pointer;
 }
 .app-card .image-preview img:hover {
-    transform: scale(1.5); /* 50% maior */
+    transform: scale(1.5);
     z-index: 20;
     box-shadow: 0 8px 32px #00b4d8aa, 0 2px 8px #0004;
 }
-/* ...existing code... */
+
+/* Cartinha de mensagens */
 #msg-link {
     display: flex !important;
     align-items: center;
@@ -925,10 +948,8 @@ html {
     line-height: 1.2;
     z-index: 2;
 }
-/* ...existing code... */
-/* Adicione ao seu style.css */
 
-
+/* Nav dark para compatibilidade */
 .nav-dark ul {
     display: flex;
     gap: 2.5rem;
