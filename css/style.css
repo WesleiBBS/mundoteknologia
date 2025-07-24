@@ -940,7 +940,7 @@ html {
     right: -6px;
     background: #ff5252;
     color: #fff;
-    font-size: 1em;
+    font-size: 0.85em !important;
     padding: 1px 5px !important;
     border-radius: 50%;
     font-weight: 700;
