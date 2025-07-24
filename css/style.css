@@ -102,6 +102,10 @@ nav {
     letter-spacing: 2px;
     filter: drop-shadow(0 2px 8px #23272f);
 }
+.logo-dark > div {
+    text-align: center !important; /* Centraliza o slogan */
+    width: 100%;
+}
 
 nav ul {
     display: flex;
