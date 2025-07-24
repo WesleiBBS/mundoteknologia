@@ -222,16 +222,16 @@
     const db = getDatabase(app);
     const auth = getAuth(app);
 
-    // Cartinha de mensagens recebidas para admin
-    const msgLink = document.getElementById('msg-link');
-    const msgCount = document.getElementById('msg-count');
-    // Substitua pelos UIDs dos administradores
+    // UIDs dos administradores (NÃO há mais lista de e-mails)
     const ADMINS = [
         "Frty58XjXdfYNxh0gquwjgBMEv12",
         "q8CyMhIWREMI6QrZVlUQvFeMQTC2",
         "T55pLeevGCeCwNFf39qrprAWF2s2"
     ];
 
+    // Cartinha de mensagens recebidas para admin
+    const msgLink = document.getElementById('msg-link');
+    const msgCount = document.getElementById('msg-count');
     function updateMsgCount() {
         if (!msgCount) return;
         onValue(ref(db, 'mensagens'), (snapshot) => {
@@ -241,13 +241,10 @@
             msgCount.textContent = count;
         });
     }
-
-    // Sempre mostra o envelope e atualiza o contador para todos
     if (msgLink) msgLink.style.display = 'inline-block';
     updateMsgCount();
 
     onAuthStateChanged(auth, (user) => {
-        // Aqui só controla o painel admin, não o envelope
         if (
             user &&
             user.emailVerified &&
@@ -337,28 +334,22 @@
         };
     }
 
-    // Login admin (mantém restrição por email para cadastro, mas painel só libera por UID)
+    // Login admin: só libera painel se UID for permitido
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         loginErro.style.display = 'none';
         const email = document.getElementById('admin-login-email').value.trim().toLowerCase();
         const senha = document.getElementById('admin-login-senha').value;
 
-        const emailsPermitidos = [
-            "wesleicostabbs@hotmail.com",
-            "mundoteknologia@gmail.com",
-            "alandigdez@gmail.com"
-        ];
-        if (!emailsPermitidos.includes(email)) {
-            loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
-            loginErro.style.display = 'block';
-            return;
-        }
-
         try {
-            await signInWithEmailAndPassword(auth, email, senha);
+            const cred = await signInWithEmailAndPassword(auth, email, senha);
+            if (!ADMINS.includes(cred.user.uid)) {
+                await signOut(auth);
+                loginErro.textContent = "Acesso permitido apenas para administradores autorizados.";
+                loginErro.style.display = 'block';
+                return;
+            }
             adminModal.style.display = 'none';
-            // O painel só será liberado se o UID estiver em ADMINS (verificado no onAuthStateChanged)
         } catch (error) {
             if (error.code === "auth/user-not-found") {
                 loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
@@ -386,39 +377,28 @@
         }
     });
 
-    // Cadastro admin com restrição de e-mails permitidos
-    registerForm.addEventListener('submit', function(e) {
+    // Cadastro admin: só libera painel se UID for permitido
+    registerForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         registerErro.style.display = 'none';
         const email = document.getElementById('admin-register-email').value.trim().toLowerCase();
         const senha = document.getElementById('admin-register-senha').value;
 
-        const emailsPermitidos = [
-            "wesleicostabbs@hotmail.com",
-            "mundoteknologia@gmail.com",
-            "alandigdez@gmail.com"
-        ];
-        if (!emailsPermitidos.includes(email)) {
-            registerErro.textContent = "Cadastro permitido apenas para administradores autorizados.";
-            registerErro.style.display = 'block';
-            return;
-        }
-
-        createUserWithEmailAndPassword(auth, email, senha)
-            .then((userCredential) => {
-                sendEmailVerification(userCredential.user)
-                    .then(() => {
-                        alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
-                    })
-                    .catch(() => {
-                        alert('Administrador cadastrado, mas não foi possível enviar o e-mail de verificação.');
-                    });
-                adminModal.style.display = 'none';
-            })
-            .catch((error) => {
-                registerErro.textContent = error.message;
+        try {
+            const cred = await createUserWithEmailAndPassword(auth, email, senha);
+            if (!ADMINS.includes(cred.user.uid)) {
+                await cred.user.delete();
+                registerErro.textContent = "Cadastro não autorizado.";
                 registerErro.style.display = 'block';
-            });
+                return;
+            }
+            await sendEmailVerification(cred.user);
+            alert('Administrador cadastrado! Verifique seu e-mail antes de acessar o painel.');
+            adminModal.style.display = 'none';
+        } catch (error) {
+            registerErro.textContent = error.message;
+            registerErro.style.display = 'block';
+        }
     });
 
     // Logout admin

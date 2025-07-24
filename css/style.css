@@ -942,11 +942,11 @@ html {
 
 #msg-count {
     position: absolute !important;
-    top: -1px !important;
+    top: 1px !important;
     right: -10px !important;
     background: #ff5252 !important;
     color: #fff !important;
-    font-size: 1rem !important;
+    font-size: 0.80rem !important;
     font-weight: 400 !important;
     min-width: 20px !important;
     min-height: 20px !important;
