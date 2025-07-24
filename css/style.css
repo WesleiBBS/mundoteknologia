@@ -644,6 +644,7 @@ body.light-mode .btn-dark.highlight:hover {
     border-radius: 16px !important;
     font-size: 1.5rem !important;
     position: relative !important;
+    right: 18px !important;
     }
     .toggle-darkmode-btn {
         position: absolute !important;
@@ -929,7 +930,7 @@ html {
 }
 #msg-count {
     top: 8px !important;
-    right: 18px !important;
+    right: 5px !important;
     font-size: 1.1em !important;
     padding: 2px 8px !important;
     min-width: 12px !important;
