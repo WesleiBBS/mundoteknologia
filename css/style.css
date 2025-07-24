@@ -636,10 +636,10 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     #msg-link {
-    min-width: 56px !important;
-    min-height: 56px !important;
-    max-width: 64px !important;
-    max-height: 64px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
     padding: 0 !important;
     border-radius: 16px !important;
     font-size: 1.5rem !important;
@@ -912,13 +912,13 @@ html {
 
 /* Cartinha de mensagens */
 #msg-link {
-    min-width: 56px !important;
-    min-height: 56px !important;
-    max-width: 64px !important;
-    max-height: 64px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
     padding: 0 !important;
     border-radius: 16px !important;
-    font-size: 1.5rem !important;
+    font-size: 1em !important;
     position: relative !important;
 }
 #msg-link:hover {
@@ -928,11 +928,11 @@ html {
     font-size: 1.3em !important;
 }
 #msg-count {
-    top: 14px !important;
+    top: 8px !important;
     right: 18px !important;
     font-size: 1.1em !important;
     padding: 2px 8px !important;
-    min-width: 22px !important;
+    min-width: 12px !important;
     border-radius: 50% !important;
     position: absolute !important;
     z-index: 2 !important;
