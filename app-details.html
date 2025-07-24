@@ -392,19 +392,28 @@
         }
     }
 
-    // Detecta admin logado e carrega apps
-    let isAdminGlobal = false;
-    onAuthStateChanged(auth, user => {
-        let isAdmin = false;
-        if (user && ADMINS.includes(user.email)) {
-            isAdmin = true;
+    // Sempre mostra o envelope e atualiza o contador para todos
+if (msgLink) msgLink.style.display = 'inline-block';
+updateMsgCount();
+
+onAuthStateChanged(auth, (user) => {
+    // Aqui só controla o painel admin, não o envelope
+    if (
+        user &&
+        user.emailVerified &&
+        ADMINS.includes(user.email)
+    ) {
+        document.getElementById('admin').style.display = 'block';
+        document.getElementById('logout-admin').style.display = 'inline-block';
+        carregarMensagens();
+    } else {
+        document.getElementById('admin').style.display = 'none';
+        document.getElementById('logout-admin').style.display = 'none';
+        if (user && !user.emailVerified) {
+            alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
         }
-        isAdminGlobal = isAdmin;
-        document.getElementById('add-app-btn').style.display = isAdmin ? 'block' : 'none';
-        loadApps(apps => {
-            renderCards(apps, isAdmin);
-        });
-    });
+    }
+});
 
     // Adicionar novo app (máximo 6)
     document.getElementById('add-app-btn').addEventListener('click', function() {
