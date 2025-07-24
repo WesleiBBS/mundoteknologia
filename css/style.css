@@ -916,42 +916,50 @@ html {
 }
 
 /* Cartinha de mensagens */
+/* Cartinha de mensagens com badge no canto superior direito */
 #msg-link {
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
+    width: 110px !important;
+    height: 80px !important;
     padding: 0 !important;
-    border-radius: 10px !important;
-    font-size: 1rem !important;
+    border-radius: 16px !important;
+    font-size: 2.2rem !important;
     position: relative !important;
-    background: rgba(30,32,40,0.7);
+    background: #221a36 !important;
     box-shadow: 0 2px 8px #0002;
+    overflow: visible !important;
 }
-#msg-link:hover {
-    background: #23272f;
-}
+
 #msg-link span:first-child {
-    font-size: 0.8em !important;
-    margin-right: 5px !important;
+    font-size: 2.2rem !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 #msg-count {
-     position: static !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: #ff5252;
-    color: #fff;
-    font-size: 0.5em !important;
-    font-weight: 700;
-    min-width: 36px !important;
-    min-height: 36px !important;
+    position: absolute !important;
+    top: -10px !important;
+    right: -10px !important;
+    background: #ff5252 !important;
+    color: #fff !important;
+    font-size: 2.1rem !important;
+    font-weight: 700 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    height: 44px !important;
+    line-height: 44px !important;
     border-radius: 50% !important;
     box-shadow: 0 2px 8px #0003 !important;
-    margin: 0 !important;
+    text-align: center !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Nav dark para compatibilidade */
