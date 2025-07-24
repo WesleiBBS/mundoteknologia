@@ -920,13 +920,13 @@ html {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 64px !important;
-    min-height: 64px !important;
-    max-width: 64px !important;
-    max-height: 64px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
     padding: 0 !important;
-    border-radius: 18px !important;
-    font-size: 2rem !important;
+    border-radius: 10px !important;
+    font-size: 1rem !important;
     position: relative !important;
     background: rgba(30,32,40,0.7);
     box-shadow: 0 2px 8px #0002;
@@ -935,8 +935,8 @@ html {
     background: #23272f;
 }
 #msg-link span:first-child {
-    font-size: 1.5em !important;
-    margin-right: 12px !important;
+    font-size: 0.8em !important;
+    margin-right: 5px !important;
 }
 #msg-count {
      position: static !important;
@@ -945,7 +945,7 @@ html {
     justify-content: center !important;
     background: #ff5252;
     color: #fff;
-    font-size: 1.2em !important;
+    font-size: 0.5em !important;
     font-weight: 700;
     min-width: 36px !important;
     min-height: 36px !important;
