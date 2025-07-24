@@ -69,7 +69,7 @@
         <section id="home" class="hero-dark">
             <div class="hero-content-dark">
                 <h2>Desenvolvimento Web e Mobile para escalar seu negócio</h2>
-                <p>Transforme ideias em soluções digitais modernas. Criação de sites, sistemas, aplicativos Android/iOS e plataformas personalizadas para empresas e profissionais.</p>
+                <p>Transforme idéias em soluções digitais modernas. Criação de sites, sistemas, aplicativos Android/iOS e plataformas personalizadas para empresas e profissionais.</p>
                 <a href="#portfolio" class="btn-dark highlight">Ver Portfólio</a>
             </div>
         </section>
@@ -200,7 +200,7 @@
     </main>
 
     <footer class="footer-dark">
-        <p>&copy; 2025 WorldInova. Todos os direitos reservados.</p>
+        <p>&copy; 2025 World Inova. Todos os direitos reservados.</p>
     </footer>
     <script src="js/script.js"></script>
     <script type="module">
@@ -225,10 +225,11 @@
     // Cartinha de mensagens recebidas para admin
     const msgLink = document.getElementById('msg-link');
     const msgCount = document.getElementById('msg-count');
+    // Substitua pelos UIDs dos administradores
     const ADMINS = [
-        "wesleicostabbs@hotmail.com",
-        "mundoteknologia@gmail.com",
-        "alandigdez@gmail.com"
+        "Frty58XjXdfYNxh0gquwjgBMEv12",
+        "q8CyMhIWREMI6QrZVlUQvFeMQTC2",
+        "T55pLeevGCeCwNFf39qrprAWF2s2"
     ];
 
     function updateMsgCount() {
@@ -242,47 +243,47 @@
     }
 
     // Sempre mostra o envelope e atualiza o contador para todos
-if (msgLink) msgLink.style.display = 'inline-block';
-updateMsgCount();
+    if (msgLink) msgLink.style.display = 'inline-block';
+    updateMsgCount();
 
-onAuthStateChanged(auth, (user) => {
-    // Aqui só controla o painel admin, não o envelope
-    if (
-        user &&
-        user.emailVerified &&
-        ADMINS.includes(user.email)
-    ) {
-        document.getElementById('admin').style.display = 'block';
-        document.getElementById('logout-admin').style.display = 'inline-block';
-        carregarMensagens();
-    } else {
-        document.getElementById('admin').style.display = 'none';
-        document.getElementById('logout-admin').style.display = 'none';
-        if (user && !user.emailVerified) {
-            alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
+    onAuthStateChanged(auth, (user) => {
+        // Aqui só controla o painel admin, não o envelope
+        if (
+            user &&
+            user.emailVerified &&
+            ADMINS.includes(user.uid)
+        ) {
+            document.getElementById('admin').style.display = 'block';
+            document.getElementById('logout-admin').style.display = 'inline-block';
+            carregarMensagens();
+        } else {
+            document.getElementById('admin').style.display = 'none';
+            document.getElementById('logout-admin').style.display = 'none';
+            if (user && !user.emailVerified) {
+                alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
+            }
         }
-    }
-});
+    });
 
     // Envio do formulário para o Firebase
     document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const mensagem = document.getElementById('mensagem').value;
-    push(ref(db, 'mensagens'), {
-        nome,
-        email,
-        mensagem,
-        data: new Date().toISOString()
-    }).then(() => {
-        alert('Mensagem enviada com sucesso!');
-        document.getElementById('contact-form').reset();
-    }).catch((error) => {
-        alert('Erro ao enviar mensagem.');
-        console.error(error);
+        e.preventDefault();
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const mensagem = document.getElementById('mensagem').value;
+        push(ref(db, 'mensagens'), {
+            nome,
+            email,
+            mensagem,
+            data: new Date().toISOString()
+        }).then(() => {
+            alert('Mensagem enviada com sucesso!');
+            document.getElementById('contact-form').reset();
+        }).catch((error) => {
+            alert('Erro ao enviar mensagem.');
+            console.error(error);
+        });
     });
-});
 
     // Exibe botão admin
     document.getElementById('admin-btn').style.display = 'inline-block';
@@ -336,7 +337,7 @@ onAuthStateChanged(auth, (user) => {
         };
     }
 
-    // Login admin (ajustado: mostra opção de cadastro se usuário não existe)
+    // Login admin (mantém restrição por email para cadastro, mas painel só libera por UID)
     loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         loginErro.style.display = 'none';
@@ -357,9 +358,7 @@ onAuthStateChanged(auth, (user) => {
         try {
             await signInWithEmailAndPassword(auth, email, senha);
             adminModal.style.display = 'none';
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('logout-admin').style.display = 'inline-block';
-            carregarMensagens();
+            // O painel só será liberado se o UID estiver em ADMINS (verificado no onAuthStateChanged)
         } catch (error) {
             if (error.code === "auth/user-not-found") {
                 loginErro.innerHTML = `Usuário não encontrado. <a href="#" id="show-register" style="color:#00b4d8;text-decoration:underline;">Cadastrar?</a>`;
@@ -415,9 +414,6 @@ onAuthStateChanged(auth, (user) => {
                         alert('Administrador cadastrado, mas não foi possível enviar o e-mail de verificação.');
                     });
                 adminModal.style.display = 'none';
-                document.getElementById('admin').style.display = 'block';
-                document.getElementById('logout-admin').style.display = 'inline-block';
-                carregarMensagens();
             })
             .catch((error) => {
                 registerErro.textContent = error.message;
@@ -451,29 +447,6 @@ onAuthStateChanged(auth, (user) => {
             lista.innerHTML = html || "<p>Nenhuma mensagem recebida.</p>";
         });
     }
-
-    // Exibe admin se já autenticado e autorizado
-    onAuthStateChanged(auth, (user) => {
-        if (
-            user &&
-            user.emailVerified &&
-            (
-                user.email === "wesleicostabbs@hotmail.com" ||
-                user.email === "alandigdez@gmail.com" ||
-                user.email === "mundoteknologia@gmail.com"
-            )
-        ) {
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('logout-admin').style.display = 'inline-block';
-            carregarMensagens();
-        } else {
-            document.getElementById('admin').style.display = 'none';
-            document.getElementById('logout-admin').style.display = 'none';
-            if (user && !user.emailVerified) {
-                alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
-            }
-        }
-    });
 
     // Modal de detalhes dos projetos
     document.addEventListener('DOMContentLoaded', function() {

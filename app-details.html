@@ -257,9 +257,9 @@
     const auth = getAuth(app);
 
     const ADMINS = [
-        "wesleicostabbs@hotmail.com",
-        "mundoteknologia@gmail.com",
-        "alandigdez@gmail.com"
+        "Frty58XjXdfYNxh0gquwjgBMEv12",
+        "q8CyMhIWREMI6QrZVlUQvFeMQTC2",
+        "T55pLeevGCeCwNFf39qrprAWF2s2"
     ];
 
     // Carrega apps do banco de dados
@@ -395,7 +395,7 @@
     // --- TODOS VEEM, SÓ ADMIN EDITA/EXCLUI ---
     let isAdmin = false;
     onAuthStateChanged(auth, (user) => {
-        isAdmin = !!(user && user.emailVerified && ADMINS.includes(user.email));
+        isAdmin = !!(user && user.emailVerified && ADMINS.includes(user.uid));
         loadApps(apps => renderCards(apps, isAdmin));
         document.getElementById('add-app-btn').style.display = isAdmin ? 'block' : 'none';
     });
