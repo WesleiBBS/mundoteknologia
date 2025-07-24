@@ -639,13 +639,13 @@ body.light-mode .btn-dark.highlight:hover {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-width: 64px !important;
-    min-height: 64px !important;
-    max-width: 64px !important;
-    max-height: 64px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
     padding: 0 !important;
     border-radius: 18px !important;
-    font-size: 2rem !important;
+    font-size: 1rem !important;
     position: relative !important;
     background: rgba(30,32,40,0.7);
     box-shadow: 0 2px 8px #0002;
@@ -946,7 +946,7 @@ html {
     right: -10px !important;
     background: #ff5252 !important;
     color: #fff !important;
-    font-size: 2.1rem !important;
+    font-size: 1rem !important;
     font-weight: 700 !important;
     min-width: 44px !important;
     min-height: 44px !important;
