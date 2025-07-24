@@ -2,175 +2,361 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Admin - Detalhes do App</title>
+    <title>Detalhes do App | WorldInova</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
     <style>
         body {
-            background: #181b20;
-            font-family: 'Inter', 'Poppins', 'Roboto', Arial, sans-serif;
+            background: #181a20;
+            font-family: 'Poppins', 'Inter', Arial, sans-serif;
         }
-        main {
-            max-width: 650px;
-            margin: 40px auto;
+        .app-detalhes-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 40px 0;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .app-card {
             background: #23272f;
-            padding: 2.5rem 2rem;
             border-radius: 18px;
-            box-shadow: 0 8px 32px #00000033;
-        }
-        h2 {
-            color: #00b4d8;
-            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 24px #0004;
+            padding: 32px 24px 24px 24px;
+            width: 370px;
+            color: #fff;
             text-align: center;
-            font-size: 2rem;
+            transition: box-shadow 0.2s;
+            position: relative;
         }
-        label {
+        .app-card:hover {
+            box-shadow: 0 4px 32px #00b4d855;
+        }
+        .app-card label {
+            display: block;
+            text-align: left;
+            margin-bottom: 4px;
+            font-size: 1em;
             color: #00b4d8;
             font-weight: 600;
-            margin-top: 1rem;
-            display: block;
         }
-        input[type="text"], textarea {
+        .app-card input, .app-card textarea {
             width: 100%;
-            margin-bottom: 1.2rem;
+            margin-bottom: 14px;
             border-radius: 8px;
             border: 1px solid #444;
-            background: #181b20;
+            padding: 10px;
+            background: #181a20;
             color: #fff;
-            padding: 10px;
-            font-size: 1rem;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border 0.2s;
         }
-        textarea {
-            min-height: 70px;
-            resize: vertical;
+        .app-card input:focus, .app-card textarea:focus {
+            border: 1.5px solid #00b4d8;
+            outline: none;
         }
-        #imagens-list > .img-row {
+        .readonly input, .readonly textarea {
+            background: #181a20;
+            color: #bbb;
+            border: none;
+            pointer-events: none;
+        }
+        .app-card .image-preview {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 1.2rem;
-            background: #20232a;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .app-card .image-preview img {
+            width: 110px;
+            height: 170px;
+            object-fit: cover;
             border-radius: 10px;
-            padding: 10px;
+            background: #181a20;
+            border: 2px solid #222;
+            box-shadow: 0 2px 8px #0002;
+            transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+            cursor: pointer;
         }
-        #imagens-list img {
-            max-width: 90px;
-            max-height: 90px;
-            border-radius: 8px;
-            background: #23272f;
-            border: 1px solid #333;
+        .app-card .image-preview img:hover {
+            transform: scale(2.70);
+            z-index: 10;
+            box-shadow: 0 8px 12px #00b4d8aa, 0 2px 8px #0004;
         }
-        #imagens-list input[type="text"] {
-            flex: 1;
-            margin-bottom: 0;
+        .app-card .remove-img-btn {
+            display: inline-block;
+            background: #ff5252;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 1em;
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            cursor: pointer;
+            z-index: 2;
         }
         .btn-dark {
             background: #00b4d8;
             color: #fff;
             border: none;
             border-radius: 8px;
-            padding: 10px 24px;
-            font-weight: bold;
+            padding: 10px 0;
+            font-weight: 700;
+            font-size: 1.1em;
             cursor: pointer;
-            margin-right: 8px;
-            margin-top: 0.5rem;
+            margin-top: 12px;
+            width: 100%;
             transition: background 0.2s;
         }
-        .btn-dark.small {
-            padding: 6px 14px;
-            font-size: 0.95em;
-            margin-top: 0;
+        .btn-dark:active {
+            background: #0090a8;
         }
-        .btn-dark:disabled {
-            background: #444;
-            cursor: not-allowed;
-        }
-        .tools-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            justify-content: flex-end;
-        }
-        .section-title {
-            color: #00b4d8;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            margin-top: 1.5rem;
-        }
-        .preview-title {
+        .app-card input[type="file"] {
+            margin-bottom: 0;
+            background: none;
             color: #fff;
-            font-size: 1.1rem;
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
+            border: none;
         }
-        .preview-area {
-            background: #20232a;
-            border-radius: 12px;
-            padding: 1.2rem;
-            margin-top: 1.2rem;
-        }
-        .preview-area h3 {
+        .app-card .img-upload-label {
             color: #00b4d8;
-            margin-bottom: 0.5rem;
+            font-size: 0.98em;
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: block;
+            text-align: left;
         }
-        .preview-gallery {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        .preview-gallery .img-preview {
-            text-align: center;
-        }
-        .preview-gallery img {
-            max-width: 120px;
+        .add-app-btn {
+            background: #00b4d8;
+            color: #fff;
+            border: none;
             border-radius: 8px;
-            margin-bottom: 0.3rem;
+            padding: 12px 32px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 auto 32px auto;
+            display: block;
+            transition: background 0.2s;
         }
-        .preview-gallery .desc {
-            color: #bdbdbd;
-            font-size: 0.97em;
+        .add-app-btn:active {
+            background: #0090a8;
+        }
+
+        /* RESPONSIVIDADE IGUAL AO INDEX */
+        @media (max-width: 1200px) {
+            nav, .app-detalhes-container {
+                max-width: 98vw;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        @media (max-width: 900px) {
+            nav {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding: 0 1rem !important;
+            }
+            .logo-dark {
+                font-size: 2rem !important;
+                margin-bottom: 1rem !important;
+                margin-right: 0 !important;
+                text-align: center !important;
+            }
+            nav ul {
+                gap: 1rem !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
+            nav ul li a {
+                font-size: 1rem !important;
+                padding: 0.6rem 1.2rem !important;
+                border-radius: 14px !important;
+            }
+            .app-detalhes-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+                margin: 18px 0;
+            }
+            .app-card {
+                width: 95vw;
+                max-width: 99vw;
+                padding: 18px 2vw 12px 2vw;
+                border-radius: 14px;
+            }
+            .app-card .image-preview img {
+                width: 90px;
+                height: 130px;
+                border-radius: 8px;
+            }
+        }
+        @media (max-width: 600px) {
+            header,
+            nav,
+            .logo-dark,
+            .app-detalhes-container,
+            .footer-dark {
+                width: 100vw !important;
+                min-width: 100vw !important;
+                box-sizing: border-box;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                overflow-x: hidden !important;
+            }
+            nav {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                padding: 0.5rem 0.2rem 0.2rem 0.2rem !important;
+            }
+            .logo-dark {
+                font-size: 1.5rem !important;
+                letter-spacing: 1px !important;
+                margin-top: 1.2rem !important;
+                margin-bottom: 0.5rem !important;
+                text-align: center !important;
+                min-width: unset !important;
+                padding-left: 0 !important;
+                align-items: center !important;
+                width: 100vw !important;
+                box-sizing: border-box !important;
+            }
+            .logo-dark > div {
+                font-size: 0.8rem !important;
+                white-space: normal !important;
+                padding: 0 8px !important;
+                width: 100vw !important;
+                box-sizing: border-box !important;
+            }
+            nav ul {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                gap: 0.2rem !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+                width: 100vw !important;
+                box-sizing: border-box !important;
+                scrollbar-width: thin;
+                -webkit-overflow-scrolling: touch;
+            }
+            nav ul li {
+                flex: 0 0 auto !important;
+                min-width: 90px !important;
+                max-width: 70vw !important;
+            }
+            nav ul::-webkit-scrollbar {
+                height: 6px;
+                background: transparent;
+            }
+            nav ul::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 3px;
+            }
+            nav ul li a {
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                font-size: 1rem !important;
+                padding: 0.6rem 0.2rem !important;
+                border-radius: 12px !important;
+                margin: 0 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                box-sizing: border-box !important;
+            }
+            .app-detalhes-container {
+                gap: 10px;
+                margin: 10px 0;
+            }
+            .app-card {
+                width: 99vw;
+                max-width: 99vw;
+                padding: 10px 1vw 8px 1vw;
+                border-radius: 10px;
+                box-shadow: 0 1px 8px #0003;
+            }
+            .app-card label {
+                font-size: 0.97em;
+            }
+            .app-card input, .app-card textarea {
+                font-size: 0.96em;
+                padding: 7px;
+                border-radius: 6px;
+            }
+            .app-card .image-preview img {
+                width: 60px;
+                height: 90px;
+                border-radius: 6px;
+            }
+            .btn-dark, .add-app-btn {
+                font-size: 0.97em;
+                padding: 7px 0;
+                border-radius: 7px;
+            }
+            .footer-dark {
+                padding: 0.5rem 0 0.5rem 0 !important;
+                font-size: 0.80rem !important;
+                border-radius: 0 0 18px 18px !important;
+            }
+        }
+        @media (max-width: 400px) {
+            .app-card {
+                padding: 6px 0.5vw 4px 0.5vw;
+                border-radius: 7px;
+            }
+            .app-card .image-preview img {
+                width: 44px;
+                height: 66px;
+                border-radius: 5px;
+            }
         }
     </style>
 </head>
 <body>
-    <main>
-        <h2>Adicionar Detalhes do App</h2>
-        <form id="app-form" autocomplete="off">
-            <label for="nome-app">Nome do App:</label>
-            <input type="text" id="nome-app" name="nome-app" required placeholder="Ex: Meu Aplicativo">
-
-            <label for="funcao-app">Função/Descrição do App:</label>
-            <textarea id="funcao-app" name="funcao-app" required placeholder="Descreva o objetivo e as principais funções do app"></textarea>
-
-            <div class="section-title">Imagens do App (até 5):</div>
-            <div id="imagens-list"></div>
-            <div class="tools-row">
-                <button type="button" id="add-img-btn" class="btn-dark small">Adicionar Foto</button>
+    <header class="header-dark">
+    <nav class="nav-dark">
+        <div class="logo-dark">
+            World Inova
+            <div style="font-size:0.25em; color:#fff; font-weight:400; margin-top:2px; text-align:center; width:100%;">
+    Seu mundo mais inteligente
             </div>
+        </div>
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#portfolio">Portfólio</a></li>
+            <li><a href="index.html#about">Sobre</a></li>
+            <li><a href="index.html#contact">Contato</a></li>
+            <li style="position:relative;">
+                <a href="index.html#admin" id="admin-btn">Admin</a>
+                <a href="index.html#admin" id="msg-link" style="position:relative; display:inline-flex; align-items:center; justify-content:center; width:110px; height:80px; background:#221a36; border-radius:16px; box-shadow:0 2px 8px #0002; margin-left:4px; overflow:visible;">
+    <span style="font-size:2.2rem; display:flex; align-items:center; justify-content:center; margin:0;">&#128233;</span>
+    <span id="msg-count" style="position:absolute; top:-10px; right:-10px; background:#ff5252; color:#fff; font-size:2.1rem; font-weight:700; min-width:44px; min-height:44px; height:44px; line-height:44px; border-radius:50%; box-shadow:0 2px 8px #0003; text-align:center; padding:0; z-index:10; display:flex; align-items:center; justify-content:center;">0</span>
+</a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-            <div class="section-title">Destaques/Recursos do App:</div>
-            <textarea id="destaques-app" name="destaques-app" placeholder="Ex: Login social, notificações, integração com pagamentos, etc."></textarea>
-
-            <div class="section-title">Link para Download/Demo:</div>
-            <input type="text" id="link-app" name="link-app" placeholder="https://...">
-
-            <button type="submit" class="btn-dark highlight" style="margin-top:1.5rem;width:100%;">Salvar</button>
-        </form>
-
-        <div class="preview-title">Pré-visualização</div>
-        <div class="preview-area" id="preview-area" style="display:none;">
-            <h3 id="preview-nome"></h3>
-            <div id="preview-funcao"></div>
-            <div class="preview-gallery" id="preview-gallery"></div>
-            <div id="preview-destaques" style="margin-top:1rem;"></div>
-            <div id="preview-link" style="margin-top:0.5rem;"></div>
+    <main>
+        <h2 style="text-align:center;margin:32px 0 24px 0;font-size:2.1em;">Detalhes do App</h2>
+        <button id="add-app-btn" class="add-app-btn" style="display:none;">Adicionar Novo App</button>
+        <div class="app-detalhes-container" id="detalhes-apps">
+            <!-- Cards dos apps serão inseridos via JS -->
         </div>
     </main>
-    <script>
-    // Firebase config igual ao index.html
+
+    <footer class="footer-dark">
+        <p>&copy; 2025 World Inova. Todos os direitos reservados.</p>
+    </footer>
+    <script type="module">
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
         authDomain: "site-mundoteknologia.firebaseapp.com",
@@ -181,161 +367,168 @@
         measurementId: "G-EJTL4ERWMP",
         databaseURL: "https://site-mundoteknologia-default-rtdb.firebaseio.com"
     };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth(app);
 
-    // Imagens
-    const imagensList = document.getElementById('imagens-list');
-    const addImgBtn = document.getElementById('add-img-btn');
-    let imgCount = 0;
-    const maxImgs = 5;
+    const ADMINS = [
+        "Frty58XjXdfYNxh0gquwjgBMEv12",
+        "q8CyMhIWREMI6QrZVlUQvFeMQTC2",
+        "T55pLeevGCeCwNFf39qrprAWF2s2"
+    ];
 
-    function createImgField(idx) {
-        const container = document.createElement('div');
-        container.className = 'img-row';
-
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*';
-        fileInput.required = true;
-
-        const imgPreview = document.createElement('img');
-        imgPreview.style.display = 'none';
-
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    imgPreview.src = ev.target.result;
-                    imgPreview.style.display = 'block';
-                    updatePreview();
-                };
-                reader.readAsDataURL(file);
+    // Carrega apps do banco de dados
+    function loadApps(callback) {
+        onValue(ref(db, 'apps'), (snapshot) => {
+            const data = snapshot.val();
+            let apps = [];
+            if (data) {
+                apps = Object.keys(data).map(id => ({
+                    id,
+                    ...data[id]
+                }));
             }
+            callback(apps);
         });
+    }
 
-        const desc = document.createElement('input');
-        desc.type = 'text';
-        desc.name = `descricao-foto-${idx}`;
-        desc.placeholder = 'Descrição da imagem';
-        desc.oninput = updatePreview;
+    // Salva app no banco de dados
+    function saveApp(app) {
+        return set(ref(db, 'apps/' + app.id), app);
+    }
 
-        const removeBtn = document.createElement('button');
-        removeBtn.type = 'button';
-        removeBtn.textContent = 'Remover';
-        removeBtn.className = 'btn-dark small';
-        removeBtn.onclick = () => {
-            imagensList.removeChild(container);
-            imgCount--;
-            addImgBtn.disabled = false;
-            updatePreview();
+    // Cria novo app no banco de dados
+    function createApp(app, cb) {
+        const newRef = push(ref(db, 'apps'));
+        app.id = newRef.key;
+        set(newRef, app).then(() => cb && cb(app));
+    }
+
+    // Remove app do banco de dados
+    function deleteApp(appId) {
+        return remove(ref(db, 'apps/' + appId));
+    }
+
+    // Salva imagem no banco de dados (base64)
+    function handleImageUpload(file, cb) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            cb(e.target.result);
         };
-
-        container.appendChild(fileInput);
-        container.appendChild(imgPreview);
-        container.appendChild(desc);
-        container.appendChild(removeBtn);
-
-        return container;
+        reader.readAsDataURL(file);
     }
 
-    addImgBtn.addEventListener('click', function() {
-        if (imgCount < maxImgs) {
-            imagensList.appendChild(createImgField(imgCount));
-            imgCount++;
-            if (imgCount >= maxImgs) addImgBtn.disabled = true;
-        }
-    });
-
-    // Preview dinâmico
-    function updatePreview() {
-        const nome = document.getElementById('nome-app').value;
-        const funcao = document.getElementById('funcao-app').value;
-        const destaques = document.getElementById('destaques-app').value;
-        const link = document.getElementById('link-app').value;
-        const containers = imagensList.querySelectorAll('.img-row');
-        const gallery = document.getElementById('preview-gallery');
-        gallery.innerHTML = '';
-        containers.forEach(container => {
-            const img = container.querySelector('img');
-            const desc = container.querySelector('input[type="text"]');
-            if (img && img.src && img.style.display !== 'none') {
-                const div = document.createElement('div');
-                div.className = 'img-preview';
-                div.appendChild(img.cloneNode());
-                const d = document.createElement('div');
-                d.className = 'desc';
-                d.textContent = desc.value;
-                div.appendChild(d);
-                gallery.appendChild(div);
-            }
-        });
-        document.getElementById('preview-nome').textContent = nome;
-        document.getElementById('preview-funcao').textContent = funcao;
-        document.getElementById('preview-destaques').textContent = destaques ? 'Destaques: ' + destaques : '';
-        document.getElementById('preview-link').innerHTML = link ? `<a href="${link}" target="_blank" style="color:#00b4d8;">${link}</a>` : '';
-        document.getElementById('preview-area').style.display = nome || funcao || gallery.children.length > 0 || destaques || link ? 'block' : 'none';
-    }
-
-    document.getElementById('app-form').addEventListener('input', updatePreview);
-
-    // Salvar no banco de dados (apenas texto e base64 das imagens)
-    document.getElementById('app-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nome = document.getElementById('nome-app').value;
-        const funcao = document.getElementById('funcao-app').value;
-        const destaques = document.getElementById('destaques-app').value;
-        const link = document.getElementById('link-app').value;
-        const imagens = [];
-        const containers = imagensList.querySelectorAll('.img-row');
-
-        let pending = 0;
-        let erro = false;
-
-        containers.forEach((container, idx) => {
-            const fileInput = container.querySelector('input[type="file"]');
-            const descInput = container.querySelector('input[type="text"]');
-            const file = fileInput.files[0];
-            if (file) {
-                pending++;
-                const reader = new FileReader();
-                reader.onload = function(ev) {
-                    imagens[idx] = {
-                        descricao: descInput.value,
-                        imagem: ev.target.result // base64
-                    };
-                    pending--;
-                    if (pending === 0 && !erro) {
-                        salvarNoBanco();
-                    }
-                };
-                reader.onerror = function() {
-                    erro = true;
-                    alert('Erro ao ler uma das imagens.');
-                };
-                reader.readAsDataURL(file);
-            }
+    function renderCards(apps, isAdmin) {
+        const container = document.getElementById('detalhes-apps');
+        container.innerHTML = "";
+        apps.slice(0, 6).forEach((app, idx) => {
+            let img = app.img || 'images/placeholder.png';
+            container.innerHTML += `
+            <div class="app-card${!isAdmin ? ' readonly' : ''}" data-id="${app.id}">
+                <label>Nome do APP</label>
+                <input type="text" value="${app.nome || ''}" ${!isAdmin ? 'readonly' : ''} />
+                <label>Descrição do APP</label>
+                <textarea rows="2" ${!isAdmin ? 'readonly' : ''}>${app.descricao || ''}</textarea>
+                <div class="image-preview">
+                    <img src="${img}" alt="App" onerror="this.src='images/placeholder.png'">
+                    ${isAdmin && img !== 'images/placeholder.png' ? `<button class="remove-img-btn" title="Remover imagem">&times;</button>` : ''}
+                </div>
+                ${isAdmin ? `
+                    <label class="img-upload-label">Adicionar/Alterar imagem</label>
+                    <input type="file" accept="image/*" />
+                ` : ''}
+                <label>Detalhes App</label>
+                <textarea rows="3" ${!isAdmin ? 'readonly' : ''}>${app.detalhes || ''}</textarea>
+                ${isAdmin ? `
+                    <button class="btn-dark save-btn">Salvar</button>
+                    <button class="btn-dark delete-btn" style="background:#ff5252;margin-top:8px;">Excluir Card</button>
+                ` : ''}
+            </div>
+            `;
         });
 
-        if (containers.length === 0) {
-            salvarNoBanco();
-        }
+        // Eventos de edição e upload (apenas admin)
+        if (isAdmin) {
+            document.querySelectorAll('.app-card').forEach((card, idx) => {
+                const id = card.getAttribute('data-id');
+                const nomeInput = card.querySelector('input[type="text"]');
+                const descTextarea = card.querySelectorAll('textarea')[0];
+                const detalhesTextarea = card.querySelectorAll('textarea')[1];
+                const imgTag = card.querySelector('.image-preview img');
+                const fileInput = card.querySelector('input[type="file"]');
+                const saveBtn = card.querySelector('.save-btn');
+                const deleteBtn = card.querySelector('.delete-btn');
+                const removeImgBtn = card.querySelector('.remove-img-btn');
 
-        function salvarNoBanco() {
-            db.ref('apps').push({
-                nome,
-                funcao,
-                destaques,
-                link,
-                imagens
-            }).then(() => {
-                alert('App salvo com sucesso!');
-                window.location.reload();
-            }).catch(() => {
-                alert('Erro ao salvar no banco de dados.');
+                // Remover imagem
+                if (removeImgBtn) {
+                    removeImgBtn.addEventListener('click', function() {
+                        imgTag.src = 'images/placeholder.png';
+                    });
+                }
+
+                // Upload de imagem
+                if (fileInput) {
+                    fileInput.addEventListener('change', function() {
+                        if (fileInput.files && fileInput.files[0]) {
+                            handleImageUpload(fileInput.files[0], (base64) => {
+                                imgTag.src = base64;
+                            });
+                        }
+                    });
+                }
+
+                // Salvar alterações
+                if (saveBtn) {
+                    saveBtn.addEventListener('click', () => {
+                        const updated = {
+                            id,
+                            nome: nomeInput.value,
+                            descricao: descTextarea.value,
+                            detalhes: detalhesTextarea.value,
+                            img: imgTag.src
+                        };
+                        saveApp(updated).then(() => {
+                            saveBtn.textContent = "Salvo!";
+                            setTimeout(() => saveBtn.textContent = "Salvar", 1200);
+                        });
+                    });
+                }
+
+                // Excluir card/app
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', () => {
+                        if (confirm('Tem certeza que deseja excluir este card?')) {
+                            deleteApp(id);
+                        }
+                    });
+                }
             });
         }
+    }
+
+    // --- TODOS VEEM, SÓ ADMIN EDITA/EXCLUI ---
+    let isAdmin = false;
+    onAuthStateChanged(auth, (user) => {
+        isAdmin = !!(user && user.emailVerified && ADMINS.includes(user.uid));
+        loadApps(apps => renderCards(apps, isAdmin));
+        document.getElementById('add-app-btn').style.display = isAdmin ? 'block' : 'none';
+    });
+
+    document.getElementById('add-app-btn').addEventListener('click', function() {
+        if (!isAdmin) return;
+        loadApps(apps => {
+            if (apps.length >= 6) {
+                alert('Limite de 6 cards atingido.');
+                return;
+            }
+            createApp({
+                nome: "Nome do APP",
+                descricao: "Descrição do APP",
+                img: "",
+                detalhes: "Detalhes App"
+            });
+        });
     });
     </script>
 </body>
