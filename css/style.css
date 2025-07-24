@@ -928,15 +928,15 @@ html {
     font-size: 1.3em !important;
 }
 #msg-count {
-    top: 6px !important;
-        right: 10px !important;
-        font-size: 0.85em !important;
-        padding: 1px 5px !important;
-        min-width: 16px !important;
-        border-radius: 30% !important;
-        position: absolute !important;
-        z-index: 2 !important;
-        box-shadow: 0 2px 8px #0003 !important;
+    top: 14px !important;
+    right: 18px !important;
+    font-size: 1.1em !important;
+    padding: 2px 8px !important;
+    min-width: 22px !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    z-index: 2 !important;
+    box-shadow: 0 2px 8px #0003 !important;
 }
 
 /* Nav dark para compatibilidade */
