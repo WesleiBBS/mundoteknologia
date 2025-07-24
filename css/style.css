@@ -929,7 +929,7 @@ html {
 }
 #msg-count {
     top: 8px !important;
-        right: 2px !important;
+        right: 4px !important;
         font-size: 0.85em !important;
         padding: 1px 5px !important;
         min-width: 16px !important;
