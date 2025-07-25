@@ -1292,9 +1292,9 @@ html {
         margin-bottom: 18px;
     }
     .app-card .image-preview img {
-        width: 180px;   /* Imagem maior */
-        height: 400px;  /* Imagem maior */
-        border-radius: 14px;
+        width: 220px;   /* Novo valor maior */
+        height: 480px;  /* Novo valor maior */
+        border-radius: 16px;
     }
     .app-card label {
         font-size: 1em;
@@ -1339,9 +1339,9 @@ html {
         margin-bottom: 18px;
     }
     .app-card .image-preview img {
-        width: 180px;   /* Imagem maior */
-        height: 400px;  /* Imagem maior */
-        border-radius: 14px;
+        width: 220px;   /* Novo valor maior */
+        height: 480px;  /* Novo valor maior */
+        border-radius: 16px;
     }
     .app-card label {
         font-size: 1em;
@@ -1369,8 +1369,7 @@ html {
         border-radius: 6px;
     }
 }
-/* ...existing code... */
-/* ...existing code... */
+
 /* Campos do modal de login admin */
 /* Centraliza o texto do título do modal */
 #admin-modal h4,
