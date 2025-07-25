@@ -962,7 +962,7 @@ html {
     cursor: pointer;
 }
 .app-card .image-preview img:hover {
-    transform: scale(1.5);
+    transform: scale(1.0);
     z-index: 20;
     box-shadow: 0 8px 32px #00b4d8aa, 0 2px 8px #0004;
 }
@@ -1509,11 +1509,11 @@ html {
     }
     .app-card .image-preview img {
         width: 150px;
-        height: 250px; /* Card mais alto para acomodar imagem */
+        height: 290px; /* Card mais alto para acomodar imagem */
         border-radius: 16px;
     }
     .app-card .image-preview img:hover {
-    transform: scale(1.5);
+    transform: scale(1.0);
     z-index: 10;
     box-shadow: 0 8px 12px #00b4d8aa, 0 2px 8px #0004;
 }
