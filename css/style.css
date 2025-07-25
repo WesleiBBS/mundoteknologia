@@ -1128,6 +1128,9 @@ html {
     text-align: center;
     transition: box-shadow 0.2s;
     position: relative;
+    max-width: 370px;
+    min-height: 320px; /* Altura mínima maior para o card */
+    
 }
 
 .app-card:hover {
@@ -1177,7 +1180,7 @@ html {
 
 .app-card .image-preview img {
     width: 110px;
-    height: 170px;
+    height: 190px;
     object-fit: cover;
     border-radius: 10px;
     background: #181a20;
