@@ -1437,7 +1437,7 @@ html {
 #msg-count {
     position: absolute !important;
     top: 1px !important;
-    right: -10px !important;
+    right: -1px !important;
     background: #ff5252 !important;
     color: #fff !important;
     font-size: 0.80rem !important;
