@@ -1106,9 +1106,11 @@ html {
 /* Responsividade aprimorada para app-details.html */
 
 
+/* ...existing code... */
+
 /* Personalizações para app-details.html */
 .app-detalhes-container {
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: flex-start;
     margin: 40px 0;
@@ -1273,8 +1275,8 @@ html {
         border-radius: 14px;
     }
     .app-card .image-preview img {
-        width: 110px;
-        height: 190px;
+        width: 90px;
+        height: 130px;
         border-radius: 8px;
     }
 }
@@ -1322,6 +1324,7 @@ html {
         border-radius: 5px;
     }
 }
+/* ...existing code... */
 /* ...existing code... */
 /* Campos do modal de login admin */
 /* Centraliza o texto do título do modal */
