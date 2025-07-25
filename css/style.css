@@ -1292,7 +1292,7 @@ html {
     .app-card {
         width: 99vw;
         max-width: 99vw;
-        min-height: 320px; /* Altura mínima maior para o card */
+        max-height: 320px; /* Altura mínima maior para o card */
         padding: 28px 2vw 28px 2vw; /* Mais espaço interno */
         border-radius: 14px;
         box-shadow: 0 1px 8px #0003;
