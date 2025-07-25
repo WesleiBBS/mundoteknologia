@@ -39,7 +39,7 @@ body {
 }
 /* Campos do modal de login admin - modo desktop */
 /* Centraliza o texto do título do modal */
-#admin-modal h2,
+#admin-modal h4,
 #admin-modal .modal-title {
     text-align: center;
     display: block;
@@ -1255,7 +1255,7 @@ html {
 }
 /* Campos do modal de login admin */
 /* Centraliza o texto do título do modal */
-#admin-modal h2,
+#admin-modal h4,
 #admin-modal .modal-title {
     text-align: center;
     display: block;
