@@ -1201,3 +1201,12 @@ html {
         border-radius: 3px;
     }
 }
+/* Campos do modal de login admin */
+#admin-modal input[type="email"],
+#admin-modal input[type="password"] {
+    height: 48px;              /* aumenta a altura */
+    border-radius: 22px;       /* bordas arredondadas */
+    font-size: 1.08rem;
+    padding: 0 14px;
+    box-sizing: border-box;
+}
