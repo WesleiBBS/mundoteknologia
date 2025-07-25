@@ -1410,6 +1410,51 @@ html {
     z-index: 10;
     box-shadow: 0 8px 12px #00b4d8aa, 0 2px 8px #0004;
 }
+/* Cartinha de mensagens com badge no canto superior direito */
+#msg-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border-radius: 16px !important;
+    font-size: 1.2rem !important;
+    position: relative !important;
+    background: #221a36 !important;
+    box-shadow: 0 2px 8px #0002;
+    overflow: visible !important;
+}
+
+#msg-link span:first-child {
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#msg-count {
+    position: absolute !important;
+    top: 1px !important;
+    right: -10px !important;
+    background: #ff5252 !important;
+    color: #fff !important;
+    font-size: 0.80rem !important;
+    font-weight: 400 !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    height: 20px !important;
+    line-height: 20px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px #0003 !important;
+    text-align: center !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
 }
 
 @media (max-width: 400px) {
