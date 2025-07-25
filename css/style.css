@@ -1180,7 +1180,7 @@ html {
 
 .app-card .image-preview img {
     width: 110px;
-    height: 190px;
+    height: 390px;
     object-fit: cover;
     border-radius: 10px;
     background: #181a20;
