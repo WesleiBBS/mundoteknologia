@@ -1290,7 +1290,7 @@ html {
     }
     .app-card .image-preview img {
         width: 180px;   /* Imagem maior */
-        height: 240px;  /* Imagem maior */
+        height: 400px;  /* Imagem maior */
         border-radius: 14px;
     }
     .app-card label {
@@ -1329,7 +1329,7 @@ html {
         justify-content: flex-start;
     }
     .app-card .image-preview {
-        min-height: 240px; /* Espaço maior para imagem */
+        min-height: 340px; /* Espaço maior para imagem */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1337,7 +1337,7 @@ html {
     }
     .app-card .image-preview img {
         width: 180px;   /* Imagem maior */
-        height: 240px;  /* Imagem maior */
+        height: 400px;  /* Imagem maior */
         border-radius: 14px;
     }
     .app-card label {
