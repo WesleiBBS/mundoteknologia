@@ -134,12 +134,16 @@ document.addEventListener('DOMContentLoaded', function() {
         msgLink.style.display = 'inline-block';
     }
 
-    // Redireciona "Ver detalhes" para página de cadastro de app
-    const detalhesBtns = document.querySelectorAll('.btn-detalhes');
-    detalhesBtns.forEach(btn => {
+    // Abre detalhes do card correto ao clicar em "Ver detalhes"
+    document.querySelectorAll('.btn-detalhes').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.location.href = 'app-details.html';
+            const card = btn.closest('.portfolio-card-dark');
+            if (card) {
+                const appId = card.getAttribute('data-id');
+                // Redireciona para página de detalhes passando o id do app (via query string)
+                window.location.href = `app-details.html?id=${appId}`;
+            }
         });
     });
 });
