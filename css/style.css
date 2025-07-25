@@ -1283,8 +1283,8 @@ html {
 
 @media (max-width: 600px) {
     .app-detalhes-container {
-        gap: 32px; /* Controle o espaçamento entre os cards aqui */
-        margin: 18px 0;
+        gap: 32px; /* Espaço maior entre os cards */
+        margin: 24px 0;
         flex-direction: column;
         align-items: center;
         padding: 0;
@@ -1292,39 +1292,40 @@ html {
     .app-card {
         width: 99vw;
         max-width: 99vw;
-        padding: 10px 1vw 8px 1vw;
-        border-radius: 10px;
+        padding: 16px 2vw 16px 2vw;
+        border-radius: 12px;
         box-shadow: 0 1px 8px #0003;
+        margin-bottom: 0; /* Remove margin-bottom para usar gap */
     }
     .app-card label {
-        font-size: 0.97em;
+        font-size: 1em;
     }
     .app-card input, .app-card textarea {
-        font-size: 0.96em;
-        padding: 7px;
-        border-radius: 6px;
+        font-size: 1em;
+        padding: 10px;
+        border-radius: 8px;
     }
     .app-card .image-preview img {
-        width: 60px;
-        height: 90px;
-        border-radius: 6px;
+        width: 80px;
+        height: 120px;
+        border-radius: 8px;
     }
     .btn-dark, .add-app-btn {
-        font-size: 0.97em;
-        padding: 7px 0;
-        border-radius: 7px;
+        font-size: 1em;
+        padding: 10px 0;
+        border-radius: 8px;
     }
 }
 
 @media (max-width: 400px) {
     .app-card {
-        padding: 6px 0.5vw 4px 0.5vw;
-        border-radius: 7px;
+        padding: 8px 1vw 8px 1vw;
+        border-radius: 8px;
     }
     .app-card .image-preview img {
-        width: 44px;
-        height: 66px;
-        border-radius: 5px;
+        width: 56px;
+        height: 84px;
+        border-radius: 6px;
     }
 }
 /* ...existing code... */
