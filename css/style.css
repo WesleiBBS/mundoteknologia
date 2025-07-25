@@ -1291,15 +1291,27 @@ html {
     }
     .app-card {
         width: 99vw;
-        max-width: 200vw;
-        max-height: 320px; /* Altura mínima maior para o card */
-        padding: 28px 2vw 28px 2vw; /* Mais espaço interno */
-        border-radius: 14px;
+        max-width: 99vw;
+        min-height: 400px; /* Card mais alto para acomodar imagem */
+        padding: 36px 2vw 36px 2vw; /* Mais espaço interno */
+        border-radius: 16px;
         box-shadow: 0 1px 8px #0003;
         margin-bottom: 0;
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+    }
+    .app-card .image-preview {
+        min-height: 240px; /* Espaço maior para imagem */
+        display: flex;
+        align-items: center;
         justify-content: center;
+        margin-bottom: 18px;
+    }
+    .app-card .image-preview img {
+        width: 180px;   /* Imagem maior */
+        height: 240px;  /* Imagem maior */
+        border-radius: 14px;
     }
     .app-card label {
         font-size: 1em;
@@ -1308,11 +1320,6 @@ html {
         font-size: 1em;
         padding: 10px;
         border-radius: 8px;
-    }
-    .app-card .image-preview img {
-         width: 140px;   /* Imagem maior */
-        height: 220px;  /* Imagem maior */
-        border-radius: 10px;
     }
     .btn-dark, .add-app-btn {
         font-size: 1em;
