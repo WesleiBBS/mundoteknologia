@@ -1485,11 +1485,11 @@ html {
     color: #fff !important;
      top: -6px !important;      /* Ajusta a posição vertical */
         right: -6px !important;    /* Ajusta a posição horizontal */
-        min-width: 22px !important;
-        min-height: 22px !important;
-        height: 22px !important;
+        min-width: 20px !important;
+        min-height: 20px !important;
+        height: 20px !important;
         line-height: 22px !important;
-        font-size: 0.95rem !important; /* Número maior */
+        font-size: 0.75rem !important; /* Número maior */
         border-radius: 50% !important;
         box-shadow: 0 2px 8px #0003 !important;
         padding: 0 !important;
