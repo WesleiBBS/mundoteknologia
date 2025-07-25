@@ -260,7 +260,6 @@ nav ul li.active a {
     cursor: pointer;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     letter-spacing: 0.02em;
-    color: #fff !important; 
 }
 .btn-dark.highlight a {
     text-decoration: none;
@@ -455,12 +454,6 @@ body.light-mode .btn-dark.highlight {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-}
-.btn-dark,
-.btn-dark.highlight {
-    color: #fff !important; /* Garante texto branco sempre visível */
-    background: #00b4d8;
-    /* ...outros estilos... */
 }
 .btn-dark.small:hover,
 .btn-dark.highlight:hover,
@@ -1110,15 +1103,17 @@ html {
         border-radius: 10px;
     }
 }
+/* Responsividade aprimorada para app-details.html */
 /* ...existing code... */
 
 /* Personalizações para app-details.html */
 .app-detalhes-container {
-       gap: 32px; /* Espaçamento maior entre os cards */
-        margin: 18px 0;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 40px 0;
+    gap: 80px;
+    flex-wrap: wrap;
 }
 
 .app-card {
@@ -1179,8 +1174,8 @@ html {
 }
 
 .app-card .image-preview img {
-    width: 120px;   /* Imagem maior */
-    height: 180px;  /* Imagem maior */
+    width: 110px;
+    height: 170px;
     object-fit: cover;
     border-radius: 10px;
     background: #181a20;
@@ -1279,8 +1274,8 @@ html {
         border-radius: 14px;
     }
     .app-card .image-preview img {
-        width: 90px;
-        height: 130px;
+        width: 110px;
+        height: 190px;
         border-radius: 8px;
     }
 }
@@ -1314,9 +1309,6 @@ html {
         font-size: 0.97em;
         padding: 7px 0;
         border-radius: 7px;
-        color: #fff !important; /* Garante texto branco sempre visível */
-        background: #00b4d8;
-        
     }
 }
 
@@ -1331,7 +1323,7 @@ html {
         border-radius: 5px;
     }
 }
-
+/* ...existing code... */
 /* Campos do modal de login admin */
 /* Centraliza o texto do título do modal */
 #admin-modal h4,
