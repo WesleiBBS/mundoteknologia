@@ -37,6 +37,18 @@ body {
     font-size: 1.08rem;
     letter-spacing: 0.01em;
 }
+/* Campos do modal de login admin - modo desktop */
+#admin-modal input[type="email"],
+#admin-modal input[type="password"] {
+    height: 48px;              /* aumenta a altura */
+    border-radius: 22px;       /* bordas arredondadas */
+    font-size: 1.08rem;
+    padding: 0 14px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 12px;
+}
 
 /* Partículas animadas no fundo */
 body .particles-bg {
@@ -356,15 +368,7 @@ body.light-mode .toggle-darkmode-btn {
     align-items: center;
     gap: 0.45rem;
 }
-/* Campos do modal de login admin */
-#admin-modal input[type="email"],
-#admin-modal input[type="password"] {
-    height: 48px;              /* aumenta a altura */
-    border-radius: 22px;       /* bordas arredondadas */
-    font-size: 1.08rem;
-    padding: 0 14px;
-    box-sizing: border-box;
-}
+
 
 /* Botões pequenos e destaque */
 .btn-dark.small,
