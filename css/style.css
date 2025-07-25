@@ -1293,7 +1293,7 @@ html {
     }
     .app-card .image-preview img {
         width: 220px;   /* Novo valor maior */
-        height: 480px;  /* Novo valor maior */
+        min-height: 400px; /* Card mais alto para acomodar imagem */
         border-radius: 16px;
     }
     .app-card label {
@@ -1340,7 +1340,7 @@ html {
     }
     .app-card .image-preview img {
         width: 220px;   /* Novo valor maior */
-        height: 480px;  /* Novo valor maior */
+        min-height: 400px; /* Card mais alto para acomodar imagem */
         border-radius: 16px;
     }
     .app-card label {
