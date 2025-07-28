@@ -41,16 +41,7 @@
 
     <header class="header-dark">
     <nav class="nav-dark" style="display:flex; align-items:center; flex-wrap:nowrap; padding-top:24px;">
-        <!-- Controle de posição da imagem -->
-        <div style="position:absolute; top:10px; left:10px; z-index:200;">
-            <label for="logo-pos" style="color:#e9d460; font-size:0.95rem;">Posição da logo:</label>
-            <select id="logo-pos" style="padding:2px 8px; border-radius:6px;">
-                <option value="start">Início</option>
-                <option value="center">Centro</option>
-                <option value="end">Final</option>
-            </select>
-        </div>
-        <div class="logo-dark" id="logo-bar" style="display:flex; flex-direction:row; align-items:center; gap:32px; min-width:340px; justify-content:flex-start;">
+        <div class="logo-dark" id="logo-bar" style="display:flex; flex-direction:row; align-items:center; gap:32px; min-width:340px; justify-content:flex-end;">
             <img src="images/wi.png" alt="Logo World Inova" style="height:120px; width:auto; margin-left:0; margin-right:0;">
             <div style="display:flex; flex-direction:column; align-items:flex-start;">
                 <span style="font-family:'Poppins','Inter',Arial,sans-serif; font-size:3.2rem; font-weight:700; color:#e9d460; letter-spacing:2px; line-height:1.0;">World<br>Inova</span>
@@ -76,19 +67,6 @@
         </ul>
     </nav>
 </header>
-<script>
-    // Controle para configurar a posição da logo na barra de navegação
-    document.getElementById('logo-pos').addEventListener('change', function() {
-        const logoBar = document.getElementById('logo-bar');
-        if (this.value === 'start') {
-            logoBar.style.justifyContent = 'flex-start';
-        } else if (this.value === 'center') {
-            logoBar.style.justifyContent = 'center';
-        } else if (this.value === 'end') {
-            logoBar.style.justifyContent = 'flex-end';
-        }
-    });
-</script>
 
     <main>
         <section id="home" class="hero-dark">
