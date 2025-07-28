@@ -1387,7 +1387,7 @@ html {
 #msg-count {
     position: absolute !important;
     top: 1px !important;
-    right: 2px !important;
+    right: 4px !important;
     background: #ff5252 !important;
     color: #fff !important;
     font-size: 0.80rem !important;
@@ -1483,22 +1483,25 @@ html {
 
 #msg-count {
     
+    position: absolute !important;
+    top: 1px !important;
+    right: 4px !important;
     background: #ff5252 !important;
     color: #fff !important;
-     top: 0px !important;      /* Ajusta a posição vertical */
-        right: 2px !important;    /* Ajusta a posição horizontal */
-        min-width: 20px !important;
-        min-height: 20px !important;
-        height: 20px !important;
-        line-height: 22px !important;
-        font-size: 0.75rem !important; /* Número maior */
-        border-radius: 50% !important;
-        box-shadow: 0 2px 8px #0003 !important;
-        padding: 0 !important;
-        z-index: 10 !important;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
+    font-size: 0.80rem !important;
+    font-weight: 400 !important;
+    min-width: 15px !important;
+    min-height: 15px !important;
+    height: 15px !important;
+    line-height: 15px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px #0003 !important;
+    text-align: center !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 }
 
