@@ -553,7 +553,7 @@ body.light-mode .btn-dark.highlight:hover {
 .contact-section-dark textarea:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--accent), var(--shadow-inset);
-    height: 80px; /* exemplo: aumenta a altura */
+    
 }
 
 /* Footer */
@@ -931,7 +931,7 @@ body.light-mode .contact-section-dark textarea {
 body.light-mode .contact-section-dark input:focus,
 body.light-mode .contact-section-dark textarea:focus {
     box-shadow: 0 0 0 2px rgb(21, 23, 23), 0 2px 8px #c7e9f7;
-    height: 80px; /* exemplo: aumenta a altura */
+
 }
 
 body.light-mode .footer-dark {
