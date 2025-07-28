@@ -813,12 +813,12 @@ body.light-mode .btn-dark.highlight:hover {
 
 /* Modo claro aprimorado */
 body.light-mode {
-    background: linear-gradient(120deg, #f8fafc 0%, #91969e 50%, #a7abad 100%);
+    background: linear-gradient(120deg, #767777 0%, #91969e 50%, #a7abad 100%);
     color: #23272f;
 }
 
 body.light-mode header {
-    background: linear-gradient(90deg, #e3e7ee 40%, #c7e9f7 80%, #0e0e0e 100%);
+    background: linear-gradient(90deg, #505051 40%, #c7e9f7 80%, #0e0e0e 100%);
     box-shadow: 0 4px 24px #c7e9f7;
 }
 
