@@ -160,6 +160,12 @@ filter: drop-shadow(0 2px 8px #23272f);
     width: 100%;
     white-space: nowrap;
 }
+.nav-dark {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* logo fica no início */
+    padding: 0 2rem;
+}
 
 nav ul {
     display: flex;
