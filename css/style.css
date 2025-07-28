@@ -139,6 +139,12 @@ nav {
     align-items: center;
     padding: 2rem 2rem 1rem 2rem;
 }
+.nav-dark {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* logo fica no início */
+    padding: 0 2rem;
+}
 
 .logo-dark {
 font-family: 'Poppins', 'Inter', Arial, sans-serif;
