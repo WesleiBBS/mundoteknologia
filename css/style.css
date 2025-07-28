@@ -534,7 +534,19 @@ body.light-mode .btn-dark.highlight:hover {
     gap: 1rem;
 }
 
-.contact-section-dark input,
+.contact-section-dark input {
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
+    padding: 0.8rem;
+    border-radius: 14px;
+    border: none;
+    background: var(--card-dark);
+    color: var(--text-light);
+    font-size: 1rem;
+    box-shadow: var(--shadow-inset);
+    transition: box-shadow 0.2s;
+    height: 48px; /* altura padrão para input */
+    resize: none;
+}
 .contact-section-dark textarea {
     font-family: 'Inter', 'Roboto', Arial, sans-serif;
     padding: 0.8rem;
@@ -543,10 +555,10 @@ body.light-mode .btn-dark.highlight:hover {
     background: var(--card-dark);
     color: var(--text-light);
     font-size: 1rem;
-    resize: none;
     box-shadow: var(--shadow-inset);
     transition: box-shadow 0.2s;
-    height: 80px; /* exemplo: aumenta a altura */
+    height: 100px; /* altura maior para textarea */
+    resize: vertical;
 }
 
 .contact-section-dark input:focus,
@@ -800,12 +812,31 @@ body.light-mode .btn-dark.highlight:hover {
         font-size: 0.97rem !important;
         padding: 0.2rem 0.5rem !important;
     }
-    .contact-section-dark input,
+    .contact-section-dark input {
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
+    padding: 0.8rem;
+    border-radius: 14px;
+    border: none;
+    background: var(--card-dark);
+    color: var(--text-light);
+    font-size: 1rem;
+    box-shadow: var(--shadow-inset);
+    transition: box-shadow 0.2s;
+    height: 48px; /* altura padrão para input */
+    resize: none;
+}
     .contact-section-dark textarea {
-        font-size: 0.97rem !important;
-        padding: 0.6rem !important;
-        height: 80px; /* exemplo: aumenta a altura */
-        border-radius: 10px !important;
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
+    padding: 0.8rem;
+    border-radius: 14px;
+    border: none;
+    background: var(--card-dark);
+    color: var(--text-light);
+    font-size: 1rem;
+    box-shadow: var(--shadow-inset);
+    transition: box-shadow 0.2s;
+    height: 100px; /* altura maior para textarea */
+    resize: vertical;
     }
     .footer-dark {
         padding: 0.5rem 0 0.5rem 0 !important;
@@ -920,12 +951,24 @@ body.light-mode .portfolio-card-dark img {
     box-shadow: 0 2px 12px #e3e7ee;
 }
 
-body.light-mode .contact-section-dark input,
+body.light-mode .contact-section-dark input {
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
+    padding: 0.8rem;
+    border-radius: 14px;
+    border: none;
+    background: var(--card-dark);
+    color: var(--text-light);
+    font-size: 1rem;
+    box-shadow: var(--shadow-inset);
+    transition: box-shadow 0.2s;
+    height: 48px; /* altura padrão para input */
+    resize: none;
+}
 body.light-mode .contact-section-dark textarea {
     background: #e3e7ee;
     color: #23272f;
     box-shadow: 0 2px 8px #c7e9f7;
-    height: 80px; /* exemplo: aumenta a altura */
+    height: 100px; /* exemplo: aumenta a altura */
 }
 
 body.light-mode .contact-section-dark input:focus,
