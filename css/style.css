@@ -142,18 +142,18 @@ nav {
 
 /* Estilo para o título igual ao da imagem */
 .logo-dark {
-    font-family: 'Poppins', 'Inter', Arial, sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: lowercase;
-    background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px #23272f);
-    text-align: center;
+font-family: 'Poppins', 'Inter', Arial, sans-serif;
+font-size: 2.2rem;
+font-weight: 700;
+align-items: center;
+text-align: center;
+background: linear-gradient(90deg, #e9d460 0%, #FFA500 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+letter-spacing: 2px;
+filter: drop-shadow(0 2px 8px #23272f);
 }
 
 .logo-dark > div {
