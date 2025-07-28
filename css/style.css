@@ -546,12 +546,14 @@ body.light-mode .btn-dark.highlight:hover {
     resize: none;
     box-shadow: var(--shadow-inset);
     transition: box-shadow 0.2s;
+    height: 80px; /* exemplo: aumenta a altura */
 }
 
 .contact-section-dark input:focus,
 .contact-section-dark textarea:focus {
     outline: none;
     box-shadow: 0 0 0 2px var(--accent), var(--shadow-inset);
+    height: 80px; /* exemplo: aumenta a altura */
 }
 
 /* Footer */
@@ -802,6 +804,7 @@ body.light-mode .btn-dark.highlight:hover {
     .contact-section-dark textarea {
         font-size: 0.97rem !important;
         padding: 0.6rem !important;
+        height: 80px; /* exemplo: aumenta a altura */
         border-radius: 10px !important;
     }
     .footer-dark {
@@ -922,11 +925,13 @@ body.light-mode .contact-section-dark textarea {
     background: #e3e7ee;
     color: #23272f;
     box-shadow: 0 2px 8px #c7e9f7;
+    height: 80px; /* exemplo: aumenta a altura */
 }
 
 body.light-mode .contact-section-dark input:focus,
 body.light-mode .contact-section-dark textarea:focus {
     box-shadow: 0 0 0 2px rgb(21, 23, 23), 0 2px 8px #c7e9f7;
+    height: 80px; /* exemplo: aumenta a altura */
 }
 
 body.light-mode .footer-dark {
