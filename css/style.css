@@ -1097,6 +1097,8 @@ html {
     }
     .nav-dark ul {
         gap: 0.3rem;
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
     }
     .nav-dark ul li a,
     .nav-dark .nav-btn {
@@ -1457,6 +1459,11 @@ html {
     z-index: 10;
     box-shadow: 0 8px 12px #00b4d8aa, 0 2px 8px #0004;
 }
+ nav ul {
+        gap: 1.2rem !important; /* Espaço maior entre itens no mobile */
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
+    }
 /* Cartinha de mensagens com badge no canto superior direito */
 #msg-link {
     display: inline-flex !important;
