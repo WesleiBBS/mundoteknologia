@@ -66,6 +66,19 @@
         "q8CyMhIWREMI6QrZVlUQvFeMQTC2",
         "T55pLeevGCeCwNFf39qrprAWF2s2"
     ];
+    // Função para atualizar o número de mensagens recebidas
+    function updateMsgCount() {
+        const msgCountSpan = document.getElementById('msg-count');
+        onValue(ref(db, 'mensagens'), (snapshot) => {
+            const data = snapshot.val();
+            let count = 0;
+            if (data) {
+                count = Object.keys(data).length;
+            }
+            msgCountSpan.textContent = count;
+        });
+    }
+    updateMsgCount();
 
     // Carrega apps do banco de dados
     function loadApps(callback) {
