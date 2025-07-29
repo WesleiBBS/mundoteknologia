@@ -664,7 +664,7 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     .logo-dark img {
-        height: 88px !important;
+        height: 100px !important;
     }
     
     .logo-dark > div {
@@ -1163,7 +1163,7 @@ html {
         margin-bottom: 0.5rem;
     }
     .logo-dark img {
-        height: 88px !important;
+        height: 100px !important;
     }
     .nav-dark ul {
         gap: 0.3rem;
