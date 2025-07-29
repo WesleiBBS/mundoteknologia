@@ -1164,6 +1164,9 @@ html {
         font-size: 1rem !important;
         margin-bottom: 0.5rem;
     }
+    .logo-dark span {
+        font-size: 1rem !important; /* Ajusta tamanho do nome do site */
+    }
     .logo-dark img {
         height: 100px !important;
     }
