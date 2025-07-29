@@ -145,7 +145,7 @@ nav {
     height: 200px;
     width: auto;
     margin-left: 0px;
-    margin-right: 10px;
+    margin-right: 2px;
     display: block;
 }
 
@@ -153,6 +153,7 @@ nav {
 font-family: 'Poppins', 'Inter', Arial, sans-serif;
 font-size: 2.2rem;
 justify-content: flex-start; /* Garante que a logo fique no início */
+gap: 10px; 
 font-weight: 700;
 align-items: center;
 text-align: center;
