@@ -664,11 +664,11 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     .logo-dark img {
-        height: 48px !important;
+        height: 88px !important;
     }
     
     .logo-dark > div {
-        font-size: 0.8rem !important;
+        font-size: 0.5rem !important;
         white-space: normal !important;
         padding: 0 8px !important;
         width: 100vw !important;
