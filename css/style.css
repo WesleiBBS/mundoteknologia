@@ -145,6 +145,8 @@ nav {
     margin-left: 0px;
     margin-right: 2px;
     display: block;
+    position: relative;      /* Permite ajustar a posição */
+    top: 10px; 
 }
 
 .logo-dark {
