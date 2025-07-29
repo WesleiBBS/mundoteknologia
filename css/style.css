@@ -664,7 +664,7 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     .logo-dark img {
-        height: 100px !important;
+        height: 150px !important;
     }
     .logo-dark span {
         font-size: 1rem !important;
@@ -1165,10 +1165,10 @@ html {
         margin-bottom: 0.5rem;
     }
     .logo-dark span {
-        font-size: 1rem !important; /* Ajusta tamanho do nome do site */
+        font-size: 0.85rem !important; /* Ajusta tamanho do nome do site */
     }
     .logo-dark img {
-        height: 100px !important;
+        height: 150px !important;
     }
     .nav-dark ul {
         gap: 0.3rem;
