@@ -863,7 +863,7 @@ body.light-mode .btn-dark.highlight:hover {
 
 /* Modo claro aprimorado */
 body.light-mode {
-    background: linear-gradient(120deg, #767777 0%, #91969e 50%, #a7abad 100%);
+    background: linear-gradient(120deg, #767777 0%, #91969e 50%, #3b5e6f 100%);
     color: #23272f;
 }
 
@@ -886,7 +886,7 @@ body.light-mode .logo-dark {
 
 body.light-mode nav ul li a {
     color: #23272f;
-    background: #d5d0d0;
+    background: #7f7d7d;
     box-shadow: 0 2px 8px #3e4d67;
     font-weight: 600;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
@@ -896,13 +896,13 @@ body.light-mode nav ul li a:hover,
 body.light-mode nav ul li.active a {
     color: #151616;
     background: #8d9bb5;
-    box-shadow: 0 0 0 2px #151617, 0 2px 8px #aeb4b7;
+    box-shadow: 0 0 0 2px #151617, 0 2px 8px #568095;
 }
 
 body.light-mode .hero-content-dark {
     background: linear-gradient(120deg, #19191a 0%, #909fa5 50%, #18191a 100%);
     color: #23272f;
-    box-shadow: 0 8px 32px #c7e9f7;
+    box-shadow: 0 8px 32px #49a0c5;
 }
 body.light-mode .hero-content-dark p {
     color: #23272f;
