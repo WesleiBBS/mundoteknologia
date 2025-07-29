@@ -135,6 +135,7 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    height: 200px;
     justify-content:center;
     align-items: center;
     padding: 2rem 2rem 1rem 2rem;
@@ -143,8 +144,8 @@ nav {
 .logo-dark img {
     height: 200px;
     width: auto;
-    margin-left: 5px;
-    margin-right: 0;
+    margin-left: 0px;
+    margin-right: 10px;
     display: block;
 }
 
