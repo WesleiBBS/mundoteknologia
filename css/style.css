@@ -652,25 +652,25 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 0.5rem 0.2rem 0.2rem 0.2rem !important;
     }
     .logo-dark {
-        font-size: 1.1rem !important;
-        margin-bottom: 0.3rem !important;
-        gap: 6px !important; /* Aproxima imagem do nome */
+        font-size: 1.5rem !important;
+        letter-spacing: 1px !important;
+        margin-top: 1.2rem !important;
+        margin-bottom: 0.5rem !important;
+        text-align: center !important;
+        min-width: unset !important;
+        padding-left: -10px !important;
         align-items: center !important;
-        flex-direction: row !important;
-        justify-content: flex-start !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
     }
-    .logo-dark img {
-        height: 54px !important;   /* Diminui a altura da imagem */
-        width: auto !important;
-        margin-right: 4px !important; /* Espaço pequeno entre imagem e nome */
-    }
+    
     .logo-dark > div {
-        font-size: 1rem !important;
-        padding: 0 !important;
-        width: auto !important;
-        text-align: left !important;
+        font-size: 0.8rem !important;
+        white-space: normal !important;
+        padding: 0 8px !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
     }
-}
     nav ul {
         display: flex !important;
         flex-direction: row !important;
