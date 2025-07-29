@@ -135,14 +135,12 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    height: 200px;
     justify-content:center;
     align-items: center;
     padding: 2rem 2rem 1rem 2rem;
 }
 /* Ajuste para a imagem da logo na barra de navegação */
 .logo-dark img {
-    height: 200px;
     width: auto;
     margin-left: 0px;
     margin-right: 2px;
@@ -153,7 +151,7 @@ nav {
 font-family: 'Poppins', 'Inter', Arial, sans-serif;
 font-size: 2.2rem;
 justify-content: flex-start; /* Garante que a logo fique no início */
-gap: 10px; 
+gap: 5px; 
 font-weight: 700;
 align-items: center;
 text-align: center;
