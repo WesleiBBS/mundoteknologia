@@ -658,11 +658,14 @@ body.light-mode .btn-dark.highlight:hover {
         margin-bottom: 0.5rem !important;
         text-align: center !important;
         min-width: unset !important;
-        padding-left: 0 !important;
+        padding-left: -10px !important;
         align-items: center !important;
         width: 100vw !important;
         box-sizing: border-box !important;
     }
+    .logo-dark img {
+    margin-right: 0px; /* Remova ou diminua a margem direita */
+}
     .logo-dark > div {
         font-size: 0.8rem !important;
         white-space: normal !important;
