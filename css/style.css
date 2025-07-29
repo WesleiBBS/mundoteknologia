@@ -1480,6 +1480,26 @@ html {
         align-items: center;
         padding: 0;
     }
+    .logo-dark {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.3rem !important;
+        gap: 6px !important; /* Aproxima imagem do nome */
+        align-items: center !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+    }
+    .logo-dark img {
+        height: 54px !important;   /* Diminui a altura da imagem */
+        width: auto !important;
+        margin-right: 4px !important; /* Espaço pequeno entre imagem e nome */
+    }
+    .logo-dark > div {
+        font-size: 1rem !important;
+        padding: 0 !important;
+        width: auto !important;
+        text-align: left !important;
+    }
+}
     .app-card {
         width: 99vw;
         max-width: 99vw;
