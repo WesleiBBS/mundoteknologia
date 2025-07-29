@@ -666,7 +666,9 @@ body.light-mode .btn-dark.highlight:hover {
     .logo-dark img {
         height: 100px !important;
     }
-    
+    .logo-dark span {
+        font-size: 1rem !important;
+    }
     .logo-dark > div {
         font-size: 0.5rem !important;
         white-space: normal !important;
