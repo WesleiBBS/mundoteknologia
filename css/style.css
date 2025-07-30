@@ -1163,14 +1163,14 @@ html {
     }
     
     .logo-dark {
-        font-size: 1rem !important;
+        font-size: 1.2rem !important;
         margin-bottom: 0.5rem;
     }
     .logo-dark span {
         font-size: 0.85rem !important; /* Ajusta tamanho do nome do site */
     }
     .logo-dark img {
-        height: 150px !important;
+        height: 90px !important;
     }
     .nav-dark ul {
         gap: 0.3rem;
