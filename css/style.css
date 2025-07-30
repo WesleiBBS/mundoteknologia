@@ -657,51 +657,46 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     .logo-dark {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(0.5vw, 2vw, 24px);
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 28vw;
-    min-width: 32px;
-    width: auto;
-    margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
-}
-
-.logo-dark > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    max-width: 60vw;
-}
-
-.logo-dark span {
-    font-size: clamp(1.1rem, 4vw, 2.5rem);
-    line-height: 1.1;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-align: left;
-    word-break: break-word;
-}
-
-.logo-dark > div > div {
-    font-size: clamp(0.7rem, 2vw, 1.1rem);
-    line-height: 1.2;
-    text-align: left;
-    word-break: break-word;
-    margin-top: 0.3em;
-    color: #e9d460;
-}
-
-
-
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        font-size: 2.5rem !important;
+        letter-spacing: 1px !important;
+        margin-top: 0.7rem !important;
+        margin-bottom: 0.3rem !important;
+        text-align: left !important;
+        min-width: unset !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+        gap: 8px !important;
+    }
+    .logo-dark img {
+        height: 40px !important;
+        margin-left: 8px !important;
+        margin-right: 6px !important;
+        top: 0 !important;
+    }
+    .logo-dark span {
+        font-size: 2.5rem !important;
+        line-height: 1.1 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px !important;
+        display: block !important;
+    }
+    .logo-dark > div {
+        font-size: 0.5rem !important; /* Slogan menor */
+        white-space: normal !important;
+        padding: 0 !important;
+        width: auto !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
     nav ul {
         display: flex !important;
         flex-direction: row !important;
@@ -885,7 +880,7 @@ body.light-mode .btn-dark.highlight:hover {
         font-size: 0.80rem !important;
         border-radius: 0 0 18px 18px !important;
     }
-
+}
 
 /* Modo claro aprimorado */
 body.light-mode {
@@ -1152,24 +1147,6 @@ html {
 /* Remove estilos antigos duplicados */
 .nav-dark .nav-btn {
     /* removido para evitar conflito */
-}
-}
-
-/* Ajuste extra para telas muito pequenas */
-@media (max-width: 400px) {
-    .logo-dark {
-        gap: 2vw;
-    }
-    .logo-dark img {
-        height: 32px;
-        max-width: 18vw;
-    }
-    .logo-dark span {
-        font-size: 1.1rem;
-    }
-    .logo-dark > div > div {
-        font-size: 0.7rem;
-    }
 }
 
 /* Responsividade aprimorada para o menu */
