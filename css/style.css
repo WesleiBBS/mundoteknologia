@@ -624,6 +624,7 @@ body.light-mode .btn-dark.highlight:hover {
 }
 
 /* RESPONSIVIDADE APRIMORADA PARA NAVEGAÇÃO MOBILE */
+/* RESPONSIVIDADE APRIMORADA PARA NAVEGAÇÃO MOBILE */
 @media (max-width: 600px) {
     header,
     nav,
@@ -636,7 +637,7 @@ body.light-mode .btn-dark.highlight:hover {
     .footer-dark {
         width: 100vw !important;
         min-width: 100vw !important;
-        box-sizing: border-box;
+        box-sizing: border-box !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
         padding-left: 0 !important;
@@ -652,31 +653,49 @@ body.light-mode .btn-dark.highlight:hover {
         flex-direction: column !important;
         align-items: stretch !important;
         padding: 0.5rem 0.2rem 0.2rem 0.2rem !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
     }
     .logo-dark {
-        font-size: 1.3rem !important;
-        letter-spacing: 1px !important;
-        margin-top: 1.2rem !important;
-        margin-bottom: 0.5rem !important;
-        text-align: center !important;
-        min-width: unset !important;
-        padding-left: -10px !important;
+        display: flex !important;
+        flex-direction: row !important;
         align-items: center !important;
+        justify-content: flex-start !important;
+        font-size: 1.1rem !important;
+        letter-spacing: 1px !important;
+        margin-top: 0.7rem !important;
+        margin-bottom: 0.3rem !important;
+        text-align: left !important;
+        min-width: unset !important;
         width: 100vw !important;
         box-sizing: border-box !important;
+        gap: 8px !important;
     }
     .logo-dark img {
-        height: 150px !important;
+        height: 60px !important;
+        margin-left: 8px !important;
+        margin-right: 6px !important;
+        top: 0 !important;
     }
     .logo-dark span {
-        font-size: 0.85rem !important;
+        font-size: 1rem !important;
+        line-height: 1.1 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px !important;
+        display: block !important;
     }
     .logo-dark > div {
-        font-size: 0.5rem !important;
+        font-size: 0.7rem !important; /* Slogan menor */
         white-space: normal !important;
-        padding: 0 8px !important;
-        width: 100vw !important;
+        padding: 0 !important;
+        width: auto !important;
         box-sizing: border-box !important;
+        text-align: left !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     nav ul {
         display: flex !important;
@@ -692,12 +711,12 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
         scrollbar-width: thin;
         -webkit-overflow-scrolling: touch;
-        padding-left: 1.7rem !important;   /* Espaço maior no início no mobile */
-        padding-right: 1.7rem !important;  
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
     }
     nav ul li {
         flex: 0 0 auto !important;
-        min-width: 110px !important;
+        min-width: 90px !important;
         max-width: 70vw !important;
         margin: 0 !important;
         box-sizing: border-box !important;
@@ -714,9 +733,9 @@ body.light-mode .btn-dark.highlight:hover {
         display: block !important;
         width: 100% !important;
         text-align: center !important;
-        font-size: 1rem !important;
-        padding: 0.6rem 0.2rem !important;
-        border-radius: 12px !important;
+        font-size: 0.95rem !important;
+        padding: 0.5rem 0.2rem !important;
+        border-radius: 10px !important;
         margin: 0 !important;
         white-space: nowrap !important;
         overflow: hidden !important;
@@ -724,19 +743,19 @@ body.light-mode .btn-dark.highlight:hover {
         box-sizing: border-box !important;
     }
     #msg-link {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 60px !important;
-    min-height: 40px !important;
-    max-width: 60px !important;
-    max-height: 40px !important;
-    padding: 0 !important;
-    border-radius: 18px !important;
-    font-size: 1rem !important;
-    position: relative !important;
-    background: rgba(30,32,40,0.7);
-    box-shadow: 0 2px 8px #0002;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        padding: 0 !important;
+        border-radius: 16px !important;
+        font-size: 1rem !important;
+        position: relative !important;
+        background: rgba(30,32,40,0.7);
+        box-shadow: 0 2px 8px #0002;
     }
     .toggle-darkmode-btn {
         position: absolute !important;
@@ -831,30 +850,30 @@ body.light-mode .btn-dark.highlight:hover {
         padding: 0.2rem 0.5rem !important;
     }
     .contact-section-dark input {
-    font-family: 'Inter', 'Roboto', Arial, sans-serif;
-    padding: 0.8rem;
-    border-radius: 14px;
-    border: none;
-    background: var(--card-dark);
-    color: var(--text-light);
-    font-size: 1rem;
-    box-shadow: var(--shadow-inset);
-    transition: box-shadow 0.2s;
-    height: 48px; /* altura padrão para input */
-    resize: none;
-}
+        font-family: 'Inter', 'Roboto', Arial, sans-serif;
+        padding: 0.8rem;
+        border-radius: 14px;
+        border: none;
+        background: var(--card-dark);
+        color: var(--text-light);
+        font-size: 1rem;
+        box-shadow: var(--shadow-inset);
+        transition: box-shadow 0.2s;
+        height: 48px;
+        resize: none;
+    }
     .contact-section-dark textarea {
-    font-family: 'Inter', 'Roboto', Arial, sans-serif;
-    padding: 0.8rem;
-    border-radius: 14px;
-    border: none;
-    background: var(--card-dark);
-    color: var(--text-light);
-    font-size: 1rem;
-    box-shadow: var(--shadow-inset);
-    transition: box-shadow 0.2s;
-    height: 100px; /* altura maior para textarea */
-    resize: vertical;
+        font-family: 'Inter', 'Roboto', Arial, sans-serif;
+        padding: 0.8rem;
+        border-radius: 14px;
+        border: none;
+        background: var(--card-dark);
+        color: var(--text-light);
+        font-size: 1rem;
+        box-shadow: var(--shadow-inset);
+        transition: box-shadow 0.2s;
+        height: 100px;
+        resize: vertical;
     }
     .footer-dark {
         padding: 0.5rem 0 0.5rem 0 !important;
