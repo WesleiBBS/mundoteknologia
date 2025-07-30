@@ -1679,6 +1679,7 @@ html {
 }
 
 /* Responsividade fluida para logo, nome e slogan */
+@media (max-width: 600px) {
 .logo-dark {
     display: flex;
     flex-direction: row;
@@ -1738,4 +1739,5 @@ html {
     .logo-dark > div > div {
         font-size: 0.7rem;
     }
+}
 }
