@@ -249,10 +249,9 @@
     if (msgLink) msgLink.style.display = 'inline-block';
     updateMsgCount();
 
-    onAuthStateChanged(auth, (user) => {
+     onAuthStateChanged(auth, (user) => {
         if (
             user &&
-            user.emailVerified &&
             ADMINS.includes(user.uid)
         ) {
             document.getElementById('admin').style.display = 'block';
@@ -261,9 +260,6 @@
         } else {
             document.getElementById('admin').style.display = 'none';
             document.getElementById('logout-admin').style.display = 'none';
-            if (user && !user.emailVerified) {
-                alert('Verifique seu e-mail antes de acessar o painel de mensagens.');
-            }
         }
     });
 
