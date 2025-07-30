@@ -142,11 +142,11 @@ nav {
 /* Ajuste para a imagem da logo na barra de navegação */
 .logo-dark img {
     width: auto;
-    margin-left: -5px;
+    margin-left: 10px;
     margin-right: 2px;
     display: block;
     position: relative;      /* Permite ajustar a posição */
-    top: -5px; 
+    top: 15px; 
 }
 
 .logo-dark {
