@@ -1621,7 +1621,7 @@ html {
 .logo-dark img {
     height: clamp(32px, 10vw, 120px);
     max-width: 28vw;
-    min-width: 28px;
+    min-width: 32px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
     flex-shrink: 0;
@@ -1632,12 +1632,11 @@ html {
     flex-direction: column;
     justify-content: center;
     min-width: 0;
-    font-size: 1.5rem;
     max-width: 60vw;
 }
 
 .logo-dark span {
-    font-size: clamp(0.85rem, 4vw, 2.5rem);
+    font-size: clamp(1.1rem, 4vw, 2.5rem);
     line-height: 1.1;
     font-weight: 700;
     letter-spacing: 1px;
@@ -1646,7 +1645,7 @@ html {
 }
 
 .logo-dark > div > div {
-    font-size: clamp(0.5rem, 2vw, 1.0rem);
+    font-size: clamp(0.7rem, 2vw, 1.1rem);
     line-height: 1.2;
     text-align: left;
     word-break: break-word;
