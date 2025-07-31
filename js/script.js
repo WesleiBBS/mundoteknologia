@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (instaBtn) {
         instaBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.open('https://www.instagram.com/mundoteknologia?igsh=MWRzdm9tZDJrM25mOQ==', '_blank');
+            window.open('', '_blank');
         });
     }
 
