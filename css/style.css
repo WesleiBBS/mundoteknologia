@@ -180,9 +180,6 @@ nav ul {
     display: flex;
     list-style: none;
     gap: 2.5rem;
-    justify-content: flex-end; /* Move o menu para a direita */
-    width: 100%;
-
 }
 
 nav ul li {
@@ -645,8 +642,8 @@ body.light-mode .btn-dark.highlight:hover {
     }
     .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 30vw;
-    min-width: 30px;
+    max-width: 70vw;
+    min-width: 70px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
     flex-shrink: 0;
@@ -723,14 +720,11 @@ body.light-mode .btn-dark.highlight:hover {
         gap: 8px !important;
     }
     .logo-dark img {
+        height: clamp(32px, 10vw, 120px);
+        max-width: 70vw;
+        min-width: 70px;
         
-        width: 100%;
-        max-width: 120px;
-        min-width: 40px;
-        height: auto;
-        margin-right: 10px;
-        object-fit: contain;
-        display: block;
+        margin-right: clamp(4px, 1vw, 16px);
         
 }
     .logo-dark span {
@@ -1221,8 +1215,8 @@ html {
 
     .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 30vw;
-    min-width: 30px;
+    max-width: 70vw;
+    min-width: 70px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
     flex-shrink: 0;
@@ -1257,8 +1251,8 @@ html {
 
 .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 30vw;
-    min-width: 30px;
+    max-width: 70vw;
+    min-width: 70px;
     
     margin-right: clamp(4px, 1vw, 16px);
     
@@ -1537,8 +1531,8 @@ html {
     }
     .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 30vw;
-    min-width: 30px;
+    max-width: 70vw;
+    min-width: 70px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
     flex-shrink: 0;
@@ -1747,8 +1741,8 @@ html {
 
 .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 30vw;
-    min-width: 30px;
+    max-width: 70vw;
+    min-width: 70px;
     
     margin-right: clamp(4px, 1vw, 16px);
     
