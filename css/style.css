@@ -724,7 +724,7 @@ body.light-mode .btn-dark.highlight:hover {
         min-width: 70px;
         
         margin-right: clamp(4px, 1vw, 16px);
-        flex-shrink: 0;
+        
 }
     .logo-dark span {
         font-size: 2.0rem !important;
@@ -1252,9 +1252,9 @@ html {
     height: clamp(32px, 10vw, 120px);
     max-width: 70vw;
     min-width: 70px;
-    width: auto;
+    
     margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
+    
 }
 
 .logo-dark > div {
@@ -1742,7 +1742,7 @@ html {
     height: clamp(32px, 10vw, 120px);
     max-width: 70vw;
     min-width: 70px;
-    width: auto;
+    
     margin-right: clamp(4px, 1vw, 16px);
     
 }
