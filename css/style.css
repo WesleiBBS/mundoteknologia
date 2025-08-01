@@ -720,7 +720,7 @@ body.light-mode .btn-dark.highlight:hover {
         gap: 8px !important;
     }
     .logo-dark img {
-        height: clamp(32px, 10vw, 120px);
+        
         max-width: 30vw;
         min-width: 30px;
         
