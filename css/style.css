@@ -142,6 +142,8 @@ nav {
     align-items: center;
     padding: 2rem 2rem 1rem 2rem;
 }
+
+@media (max-width: 600px) {
 /* Ajuste para a imagem da logo na barra de navegação */
 .logo-dark img {
     width: 100%;
@@ -175,7 +177,7 @@ filter: drop-shadow(0 2px 8px #23272f);
     width: 100%;
     white-space: nowrap;
 }
-@media (max-width: 600px) {
+
     .logo-dark span {
         font-size: clamp(1.1rem, 5vw, 1.6rem);
         line-height: 1.1;
