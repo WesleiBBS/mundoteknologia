@@ -1469,6 +1469,14 @@ html {
         align-items: center;
         padding: 0;
     }
+    .logo-dark img {
+    height: clamp(32px, 10vw, 120px);
+    max-width: 50vw;
+    min-width: 50px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
+}
     .app-card {
         width: 99vw;
         max-width: 99vw;
