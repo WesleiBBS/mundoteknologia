@@ -1744,7 +1744,7 @@ html {
     min-width: 70px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
+    
 }
 
 .logo-dark > div {
