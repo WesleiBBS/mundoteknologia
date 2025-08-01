@@ -1715,70 +1715,8 @@ html {
     justify-content: center;
 }
 
-/* Responsividade fluida para logo, nome e slogan */
-.logo-dark {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(0.5vw, 2vw, 24px);
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.logo-dark img {
-        max-width: 40vw;
-        min-width: 40px;
-        width: auto;
-        margin-right: clamp(4px, 1vw, 16px);
-        flex-shrink: 0;
-    
-}
-
-.logo-dark > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    max-width: 60vw;
-}
-
-.logo-dark span {
-    font-size: clamp(1.1rem, 4vw, 2.0rem);
-    line-height: 1.1;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-align: left;
-    word-break: break-word;
-}
-
-.logo-dark > div > div {
-    font-size: clamp(0.7rem, 2vw, 1.0rem);
-    line-height: 1.2;
-    text-align: left;
-    word-break: break-word;
-    margin-top: 0.3em;
-    color: #e9d460;
-}
 
 
-}
-
-@media (max-width: 400px) {
-    .app-card {
-        padding: 8px 1vw 8px 1vw;
-        border-radius: 8px;
-    }
-    .app-card .image-preview img {
-        width: 150px;
-        height: 290px; /* Card mais alto para acomodar imagem */
-        border-radius: 16px;
-    }
-    .app-card .image-preview img:hover {
-    transform: scale(1.5);
-    z-index: 10;
-    box-shadow: 0 8px 12px #00b4d8aa, 0 2px 8px #0004;
-}
-}
 
 /* Campos do modal de login admin */
 /* Centraliza o texto do título do modal */
@@ -1832,3 +1770,4 @@ html {
     color: #fff;
 }
 
+}
