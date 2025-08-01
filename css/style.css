@@ -720,8 +720,8 @@ body.light-mode .btn-dark.highlight:hover {
     }
     .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 100vw;
-    min-width: 100px;
+    max-width: 70vw;
+    min-width: 70px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
     flex-shrink: 0;
