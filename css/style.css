@@ -180,6 +180,9 @@ nav ul {
     display: flex;
     list-style: none;
     gap: 2.5rem;
+    justify-content: flex-end; /* Move o menu para a direita */
+    width: 100%;
+
 }
 
 nav ul li {
