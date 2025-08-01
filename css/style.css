@@ -675,11 +675,13 @@ body.light-mode .btn-dark.highlight:hover {
         gap: 8px !important;
     }
     .logo-dark img {
-        height: 40px !important;
-        margin-left: 8px !important;
-        margin-right: 6px !important;
-        top: 0 !important;
-    }
+    height: clamp(32px, 10vw, 120px);
+    max-width: 50vw;
+    min-width: 50px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
+}
     .logo-dark span {
         font-size: 2.5rem !important;
         line-height: 1.1 !important;
@@ -1165,6 +1167,15 @@ html {
         margin-right: 0;
         text-align: center;
     }
+
+    .logo-dark img {
+    height: clamp(32px, 10vw, 120px);
+    max-width: 50vw;
+    min-width: 50px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
+}
     .nav-dark ul {
         gap: 1rem;
         justify-content: center;
