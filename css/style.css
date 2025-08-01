@@ -1203,12 +1203,11 @@ html {
     }
 
     .logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 50vw;
-    min-width: 40px;
-    width: auto;
-    margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
+        max-width: 40vw;
+        min-width: 40px;
+        width: auto;
+        margin-right: clamp(4px, 1vw, 16px);
+        flex-shrink: 0;
 }
     .nav-dark ul {
         gap: 1rem;
@@ -1239,11 +1238,11 @@ html {
 }
 
 .logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 50vw;
-    min-width: 40px;
-
-    margin-right: clamp(4px, 1vw, 16px);
+        max-width: 40vw;
+        min-width: 40px;
+        width: auto;
+        margin-right: clamp(4px, 1vw, 16px);
+        flex-shrink: 0;
     
 }
 
@@ -1279,12 +1278,11 @@ html {
         gap: 2vw;
     }
     .logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 40vw;
-    min-width: 40px;
-    width: auto;
-    margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
+        max-width: 40vw;
+        min-width: 40px;
+        width: auto;
+        margin-right: clamp(4px, 1vw, 16px);
+        flex-shrink: 0;
 }
     .logo-dark span {
         font-size: 1.1rem;
@@ -1519,12 +1517,11 @@ html {
         padding: 0;
     }
     .logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 50vw;
-    min-width: 40px;
-    width: auto;
-    margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
+        max-width: 40vw;
+        min-width: 40px;
+        width: auto;
+        margin-right: clamp(4px, 1vw, 16px);
+        flex-shrink: 0;
 }
     .app-card {
         width: 99vw;
@@ -1729,11 +1726,11 @@ html {
 }
 
 .logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 50vw;
-    min-width: 40px;
-
-    margin-right: clamp(4px, 1vw, 16px);
+        max-width: 40vw;
+        min-width: 40px;
+        width: auto;
+        margin-right: clamp(4px, 1vw, 16px);
+        flex-shrink: 0;
     
 }
 
