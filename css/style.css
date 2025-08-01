@@ -642,8 +642,8 @@ body.light-mode .btn-dark.highlight:hover {
     }
     .logo-dark img {
     height: clamp(32px, 10vw, 120px);
-    max-width: 50vw;
-    min-width: 50px;
+    max-width: 70vw;
+    min-width: 70px;
     width: auto;
     margin-right: clamp(4px, 1vw, 16px);
     flex-shrink: 0;
@@ -704,12 +704,49 @@ body.light-mode .btn-dark.highlight:hover {
         max-width: 100vw !important;
         box-sizing: border-box !important;
     }
-     .logo-dark {
-        font-size: 2.0rem;
-        gap: 8px;
-        width: 100vw;
+    .logo-dark {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        font-size: 2.0rem !important;
+        letter-spacing: 1px !important;
+        margin-top: 0.7rem !important;
+        margin-bottom: 0.3rem !important;
+        text-align: left !important;
+        min-width: unset !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+        gap: 8px !important;
     }
-    
+    .logo-dark img {
+        height: clamp(32px, 10vw, 120px);
+        max-width: 70vw;
+        min-width: 70px;
+        
+        margin-right: clamp(4px, 1vw, 16px);
+        
+}
+    .logo-dark span {
+        font-size: 2.0rem !important;
+        line-height: 1.1 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px !important;
+        display: block !important;
+    }
+    .logo-dark > div {
+        font-size: 0.5rem !important; /* Slogan menor */
+        white-space: normal !important;
+        padding: 0 !important;
+        width: auto !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
     nav ul {
         display: flex !important;
         flex-direction: row !important;
@@ -1177,11 +1214,12 @@ html {
     }
 
     .logo-dark img {
-        max-width: 40vw;
-        min-width: 40px;
-        width: auto;
-        margin-right: clamp(4px, 1vw, 16px);
-        flex-shrink: 0;
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
 }
     .nav-dark ul {
         gap: 1rem;
@@ -1197,46 +1235,75 @@ html {
         border-radius: 14px;
     }
 }
-
-
-/* LOGO MOBILE */
 @media (max-width: 600px) {
-    .logo-dark {
-        padding: 0.3rem 0.2rem;
-        gap: 0.1rem;
+    nav {
+        padding: 0 0.5rem;
     }
-    .logo-dark-row {
-        gap: 0.5rem;
+    
+    .logo-dark {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(0.5vw, 2vw, 24px);
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.logo-dark img {
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    
+    margin-right: clamp(4px, 1vw, 16px);
+    
+}
+
+.logo-dark > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    max-width: 60vw;
+}
+
+.logo-dark span {
+    font-size: clamp(1.1rem, 4vw, 2.0rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: left;
+    word-break: break-word;
+}
+
+.logo-dark > div > div {
+    font-size: clamp(0.7rem, 2vw, 1.1rem);
+    line-height: 1.2;
+    text-align: left;
+    word-break: break-word;
+    margin-top: 0.3em;
+    color: #e9d460;
+}
+
+/* Ajuste extra para telas muito pequenas */
+@media (max-width: 400px) {
+    .logo-dark {
+        gap: 2vw;
     }
     .logo-dark img {
-        height: 36px;
-        max-width: 22vw;
-        min-width: 28px;
-    }
-    .logo-dark-title {
+    height: clamp(32px, 10vw, 120px);
+    max-width: 40vw;
+    min-width: 40px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
+}
+    .logo-dark span {
         font-size: 1.1rem;
-        max-width: 55vw;
-        letter-spacing: 0.5px;
     }
-    .logo-dark-slogan {
-        font-size: 0.75rem;
-        max-width: 90vw;
+    .logo-dark > div > div {
+        font-size: 0.7rem;
     }
 }
-
-/* Extra para telas muito pequenas */
-@media (max-width: 400px) {
-    .logo-dark-title {
-        font-size: 0.95rem;
-        max-width: 48vw;
-    }
-    .logo-dark-slogan {
-        font-size: 0.68rem;
-        max-width: 95vw;
-    }
-}
- 
-
     .nav-dark ul {
         gap: 0.3rem;
         padding-left: 1.7rem !important;   /* Espaço maior no início no mobile */
@@ -1463,11 +1530,12 @@ html {
         padding: 0;
     }
     .logo-dark img {
-        max-width: 40vw;
-        min-width: 40px;
-        width: auto;
-        margin-right: clamp(4px, 1vw, 16px);
-        flex-shrink: 0;
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
 }
     .app-card {
         width: 99vw;
@@ -1660,43 +1728,71 @@ html {
     align-items: center;
     justify-content: center;
 }
- .logo-dark {
-        padding: 0.3rem 0.2rem;
-        gap: 0.1rem;
-    }
-    .logo-dark-row {
-        gap: 0.5rem;
-    }
-    .logo-dark img {
-        height: 36px;
-        max-width: 22vw;
-        min-width: 28px;
-    }
-    .logo-dark-title {
-        font-size: 1.1rem;
-        max-width: 55vw;
-        letter-spacing: 0.5px;
-    }
-    .logo-dark-slogan {
-        font-size: 0.75rem;
-        max-width: 90vw;
-    }
+
+/* Responsividade fluida para logo, nome e slogan */
+.logo-dark {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(0.5vw, 2vw, 24px);
+    width: 100%;
+    flex-wrap: wrap;
 }
 
-/* Extra para telas muito pequenas */
+.logo-dark img {
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    
+    margin-right: clamp(4px, 1vw, 16px);
+    
+}
+
+.logo-dark > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    max-width: 60vw;
+}
+
+.logo-dark span {
+    font-size: clamp(1.1rem, 4vw, 2.0rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: left;
+    word-break: break-word;
+}
+
+.logo-dark > div > div {
+    font-size: clamp(0.7rem, 2vw, 1.0rem);
+    line-height: 1.2;
+    text-align: left;
+    word-break: break-word;
+    margin-top: 0.3em;
+    color: #e9d460;
+}
+
+
+}
+
 @media (max-width: 400px) {
-    .logo-dark-title {
-        font-size: 0.95rem;
-        max-width: 48vw;
+    .app-card {
+        padding: 8px 1vw 8px 1vw;
+        border-radius: 8px;
     }
-    .logo-dark-slogan {
-        font-size: 0.68rem;
-        max-width: 95vw;
+    .app-card .image-preview img {
+        width: 150px;
+        height: 290px; /* Card mais alto para acomodar imagem */
+        border-radius: 16px;
     }
+    .app-card .image-preview img:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    box-shadow: 0 8px 12px #00b4d8aa, 0 2px 8px #0004;
 }
-
-
-
+}
 
 /* Campos do modal de login admin */
 /* Centraliza o texto do título do modal */
@@ -1750,4 +1846,3 @@ html {
     color: #fff;
 }
 
-}
