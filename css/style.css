@@ -144,12 +144,13 @@ nav {
 }
 /* Ajuste para a imagem da logo na barra de navegação */
 .logo-dark img {
-    width: auto;
-    margin-left: 5px;
-    margin-right: 2px;
-    display: block;
-    position: relative;      /* Permite ajustar a posição */
-    top: -10px; 
+       width: 90vw;
+        max-width: 90vw;
+        min-width: 40px;
+        height: auto;
+        margin-right: 0;
+        object-fit: contain;
+        display: block;
 }
 
 .logo-dark {
