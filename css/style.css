@@ -175,6 +175,33 @@ filter: drop-shadow(0 2px 8px #23272f);
     width: 100%;
     white-space: nowrap;
 }
+@media (max-width: 600px) {
+    .logo-dark span {
+        font-size: clamp(1.1rem, 5vw, 1.6rem);
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-align: left;
+        word-break: break-word;
+        max-width: 55vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    .logo-dark > div > div {
+        font-size: clamp(0.7rem, 3vw, 1.0rem);
+        line-height: 1.2;
+        text-align: left;
+        word-break: break-word;
+        margin-top: 0.3em;
+        color: #e9d460;
+        max-width: 60vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+}
 
 
 nav ul {
