@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (instaBtn) {
         instaBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.open('', '_blank');
+            window.open('https://www.instagram.com/worldinova/?utm_source=qr&igsh=NXlhZGRldDZ1bHhx#', '_blank');
         });
     }
 
