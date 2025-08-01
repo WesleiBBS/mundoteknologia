@@ -153,31 +153,25 @@ nav {
         display: block; 
 }
 
-.logo-dark span {
-        font-size: clamp(1.1rem, 5vw, 1.6rem);
-        line-height: 1.1;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-align: left;
-        word-break: break-word;
-        max-width: 55vw;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-    }
+.logo-dark {
+width: 90vw;
+        max-width: 90vw;
+        min-width: 40px;
+        height: auto;
+        margin-right: 0;
+        object-fit: contain;
+        display: block;
+}
 
-    .logo-dark > div > div {
-        font-size: clamp(0.7rem, 3vw, 1.0rem);
-        line-height: 1.2;
-        text-align: left;
-        word-break: break-word;
-        margin-top: 0.3em;
-        color: #e9d460;
-        max-width: 60vw;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-    }
+.logo-dark > div {
+    width: 100%;
+        max-width: 120px;
+        min-width: 40px;
+        height: auto;
+        margin-right: 10px;
+        object-fit: contain;
+        display: block;
+}
 
 
 nav ul {
