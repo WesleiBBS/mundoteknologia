@@ -156,18 +156,7 @@ nav {
     display: block;
 }
 
-/* Tamanho da logo para CELULAR */
-@media (max-width: 600px) {
-    .logo-dark img {
-        width: 90vw;
-        max-width: 90vw;
-        min-width: 32px;
-        height: auto;
-        margin-right: 0;
-        object-fit: contain;
-        display: block;
-    }
-}
+
 
 .logo-dark {
 font-family: 'Poppins', 'Inter', Arial, sans-serif;
