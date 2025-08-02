@@ -143,8 +143,15 @@ nav {
     padding: 2rem 2rem 1rem 2rem;
 }
 /* Ajuste para a imagem da logo na barra de navegação */
-
-
+.logo-dark img {
+        width: 90vw;
+        max-width: 90vw;
+        min-width: 40px;
+        height: auto;
+        margin-right: 0;
+        object-fit: contain;
+        display: block;
+}
 
 .logo-dark {
 font-family: 'Poppins', 'Inter', Arial, sans-serif;
@@ -610,13 +617,7 @@ body.light-mode .btn-dark.highlight:hover {
         cursor: grab;
         scroll-behavior: smooth;
     }
-    .logo-dark img {
-    height: clamp(32px, 10vw, 120px);
-    max-width: 70vw;
-    min-width: 70px;
-    width: auto;
-    margin-right: clamp(4px, 1vw, 16px);
-    flex-shrink: 0;
+    
 }
 
 @media (max-width: 900px) {
