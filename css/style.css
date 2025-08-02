@@ -143,28 +143,14 @@ nav {
     padding: 2rem 2rem 1rem 2rem;
 }
 /* Ajuste para a imagem da logo na barra de navegação */
-/* Tamanho da logo para DESKTOP */
 .logo-dark img {
-    width: auto;
-    max-width: 220px;
-    min-width: 40px;
-    height: 90px;
-    margin-right: 18px;
-    object-fit: contain;
-    display: block;
-}
-
-/* Tamanho da logo para CELULAR */
-@media (max-width: 600px) {
-    .logo-dark img {
         width: 90vw;
         max-width: 90vw;
-        min-width: 32px;
+        min-width: 40px;
         height: auto;
         margin-right: 0;
         object-fit: contain;
         display: block;
-    }
 }
 
 .logo-dark {
