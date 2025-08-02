@@ -616,17 +616,8 @@ body.light-mode .btn-dark.highlight:hover {
         cursor: grab;
         scroll-behavior: smooth;
     }
-    .logo-dark img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-        max-width: 50px !important;
-        max-height: 50px !important;
-        margin-right: 8px !important;
-        object-fit: contain !important;
-    }
 }
+
 @media (max-width: 900px) {
     .portfolio-carousel-wrapper { padding: 0 10px; }
     .portfolio-card-dark { min-width: 260px; max-width: 260px; }
@@ -650,15 +641,12 @@ body.light-mode .btn-dark.highlight:hover {
         gap: 8px !important;
     }
     .logo-dark img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-        max-width: 50px !important;
-        max-height: 50px !important;
-        margin-right: 8px !important;
-        object-fit: contain !important;
-    }
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
 }
     .logo-dark span {
         font-size: 2.0rem !important;
@@ -680,7 +668,7 @@ body.light-mode .btn-dark.highlight:hover {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-
+}
 
 /* RESPONSIVIDADE APRIMORADA PARA NAVEGAÇÃO MOBILE */
 /* RESPONSIVIDADE APRIMORADA PARA NAVEGAÇÃO MOBILE */
@@ -732,15 +720,13 @@ body.light-mode .btn-dark.highlight:hover {
         gap: 8px !important;
     }
     .logo-dark img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-        max-width: 50px !important;
-        max-height: 50px !important;
-        margin-right: 8px !important;
-        object-fit: contain !important;
-    }
+        height: clamp(32px, 10vw, 120px);
+        max-width: 70vw;
+        min-width: 70px;
+        
+        margin-right: clamp(4px, 1vw, 16px);
+        
+}
     .logo-dark span {
         font-size: 2.0rem !important;
         line-height: 1.1 !important;
@@ -1264,15 +1250,13 @@ html {
 }
 
 .logo-dark img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-        max-width: 50px !important;
-        max-height: 50px !important;
-        margin-right: 8px !important;
-        object-fit: contain !important;
-    }
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    
+    margin-right: clamp(4px, 1vw, 16px);
+    
+}
 
 .logo-dark > div {
     display: flex;
@@ -1756,15 +1740,13 @@ html {
 }
 
 .logo-dark img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-        max-width: 50px !important;
-        max-height: 50px !important;
-        margin-right: 8px !important;
-        object-fit: contain !important;
-    }
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    
+    margin-right: clamp(4px, 1vw, 16px);
+    
+}
 
 .logo-dark > div {
     display: flex;
