@@ -610,6 +610,13 @@ body.light-mode .btn-dark.highlight:hover {
         cursor: grab;
         scroll-behavior: smooth;
     }
+    .logo-dark img {
+    height: clamp(32px, 10vw, 120px);
+    max-width: 70vw;
+    min-width: 70px;
+    width: auto;
+    margin-right: clamp(4px, 1vw, 16px);
+    flex-shrink: 0;
 }
 
 @media (max-width: 900px) {
