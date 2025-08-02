@@ -8,6 +8,8 @@
 :root {
     --bg-dark: #181a20;
     --card-dark: #23272f;
+    --logo-img-width: 150px;
+    --logo-img-height: 80px;
     --accent: #00b4d8;
     --accent-hover: #48cae4;
     --accent-gradient: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
