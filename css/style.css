@@ -132,15 +132,20 @@ header {
     border-bottom-right-radius: var(--border-radius);
     margin-bottom: 2rem;
     width: 100%;
+    padding: 0; /* Remove padding fixo, será controlado por media queries */
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 nav {
-    max-width: 1200px;
+   max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content:center;
+    justify-content: space-between;
     align-items: center;
     padding: 2rem 2rem 1rem 2rem;
+    box-sizing: border-box;
+    width: 100%;
 }
 /* Ajuste para a imagem da logo na barra de navegação */
 .logo-dark img {
