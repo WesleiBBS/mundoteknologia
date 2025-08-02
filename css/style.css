@@ -148,7 +148,7 @@ nav {
 /* Tamanho da logo para DESKTOP */
 .logo-dark img {
      width: var(--logo-img-width, auto);      /* Use variável CSS para largura, ou auto por padrão */
-    max-width: var(--logo-img-max-width, 220px); /* Use variável CSS para max-width, ou 220px por padrão */
+    max-width: var(--logo-img-max-width, 320px); /* Use variável CSS para max-width, ou 220px por padrão */
     min-width: var(--logo-img-min-width, 40px);  /* Use variável CSS para min-width, ou 40px por padrão */
     height: var(--logo-img-height, 90px);    /* Use variável CSS para altura, ou 90px por padrão */
     margin-right: 18px;
