@@ -616,60 +616,61 @@ body.light-mode .btn-dark.highlight:hover {
         cursor: grab;
         scroll-behavior: smooth;
     }
+    
     .logo-dark {
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 0.5rem !important;
-        width: 100vw !important;
-        text-align: center !important;
-        margin: 1.2rem 0 1rem 0 !important;
-    }
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;      /* Centraliza horizontalmente */
+    justify-content: center !important;  /* Centraliza verticalmente */
+    width: 100% !important;
+    max-width: 90vw !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;           /* Centraliza o bloco dentro do container */
+    text-align: center !important; 
+    margin-left: 25px;
+    } 
     .logo-dark img {
-        display: block !important;
-        margin: 0 auto 0.5rem auto !important;
-        height: 64px !important;
-        width: 64px !important;
-        min-width: 48px !important;
-        min-height: 48px !important;
-        max-width: 80px !important;
-        max-height: 80px !important;
+        width: 70px !important;
+        height: 70px !important;
+        min-width: 50px !important;
+        min-height: 50px !important;
+        max-width: 70px !important;
+        max-height: 70px !important;
+        margin-right: 8px !important;
         object-fit: contain !important;
         margin-top: 15px !important;
-        float: none;
     }
-
     .logo-dark > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-width: 0;
-        max-width: 60vw;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;      /* Centraliza horizontalmente */
+    justify-content: center !important;  /* Centraliza verticalmente */
+    width: 100% !important;
+    max-width: 90vw !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;           /* Centraliza o bloco dentro do container */
+    margin-left: 20px !important;
     }
     .logo-dark span {
-        display: block;
-        width: 100%;
-        font-size: clamp(1.1rem, 4vw, 2.0rem);
-        line-height: 1.1;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-align: left;
-        word-break: break-word;
-        clear: both; 
-        margin-bottom: 0.2em; /* Espaço entre nome e slogan */
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        color: #e9d460 !important;
+        line-height: 1.2 !important;
+        margin: 0.2rem 0 0.2rem 0 !important;
+        letter-spacing: 1px !important;
+        text-align: center !important;
+        display: block !important;
     }
     .logo-dark > div > div {
-        display: block;
-        width: 100%;
-        font-size: clamp(0.7rem, 2vw, 1.0rem);
-        line-height: 1.2;
-        text-align: left;
-        word-break: break-word;
-        margin-top: 0;
-        color: #e9d460;
+        font-size: 1rem !important;
+        color: #e9d460 !important;
+        margin-top: 0.2rem !important;
+        text-align: center !important;
+        font-weight: 400 !important;
+        letter-spacing: 1px !important;
+        display: block !important;
     }
 }
-
 
 @media (max-width: 900px) {
     .portfolio-carousel-wrapper { padding: 0 10px; }
