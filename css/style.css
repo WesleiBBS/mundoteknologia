@@ -616,31 +616,56 @@ body.light-mode .btn-dark.highlight:hover {
         cursor: grab;
         scroll-behavior: smooth;
     }
+    
+    .logo-dark {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        width: 100vw !important;
+        text-align: center !important;
+        margin: 1.2rem 0 1rem 0 !important;
+    }
     .logo-dark img {
-        width: 80px !important;
-        height: 70px !important;
-        min-width: 80px !important;
-        min-height: 70px !important;
+        display: block !important;
+        margin: 0 auto 0.5rem auto !important;
+        height: 64px !important;
+        width: 64px !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
         max-width: 80px !important;
-        max-height: 70px !important;
-        margin-right: 8px !important;
-        margin-top: 10px !important;
+        max-height: 80px !important;
         object-fit: contain !important;
     }
+    .logo-dark > div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 90vw !important;
+        min-width: 0 !important;
+        text-align: center !important;
+    }
     .logo-dark span {
-    width: 80px !important;
-    height: 70px !important;
-    min-width: 80px !important;
-    min-height: 70px !important;
-    max-width: 80px !important;
-    max-height: 70px !important;
-    margin-right: 8px !important;
-    margin-top: 10px !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-
-}
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        color: #e9d460 !important;
+        line-height: 1.2 !important;
+        margin: 0.2rem 0 0.2rem 0 !important;
+        letter-spacing: 1px !important;
+        text-align: center !important;
+        display: block !important;
+    }
+    .logo-dark > div > div {
+        font-size: 1rem !important;
+        color: #e9d460 !important;
+        margin-top: 0.2rem !important;
+        text-align: center !important;
+        font-weight: 400 !important;
+        letter-spacing: 1px !important;
+        display: block !important;
+    }
 }
 
 @media (max-width: 900px) {
