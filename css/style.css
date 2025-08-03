@@ -627,7 +627,8 @@ body.light-mode .btn-dark.highlight:hover {
     min-width: 0 !important;
     margin: 0 auto !important;           /* Centraliza o bloco dentro do container */
     text-align: center !important; 
-    }
+    margin-left: 15px;
+    } 
     .logo-dark img {
         width: 50px !important;
         height: 50px !important;
@@ -637,6 +638,7 @@ body.light-mode .btn-dark.highlight:hover {
         max-height: 50px !important;
         margin-right: 8px !important;
         object-fit: contain !important;
+        margin-top: 10px !important;
     }
     .logo-dark > div {
     display: flex !important;
