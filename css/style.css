@@ -1792,6 +1792,7 @@ html {
     gap: clamp(0.5vw, 2vw, 24px);
     width: 100%;
     flex-wrap: wrap;
+    margin-right: 20px;
 }
 
 .logo-dark img {
