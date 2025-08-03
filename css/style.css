@@ -1797,8 +1797,8 @@ html {
 .logo-dark img {
         display: block !important;
         margin: 0 auto 0.5rem auto !important;
-        height: 64px !important;
-        width: 64px !important;
+        height: 74px !important;
+        width: 74px !important;
         min-width: 48px !important;
         min-height: 48px !important;
         max-width: 80px !important;
@@ -1819,7 +1819,7 @@ html {
 }
 
 .logo-dark span {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
         font-weight: 700 !important;
         color: #e9d460 !important;
         line-height: 1.2 !important;
