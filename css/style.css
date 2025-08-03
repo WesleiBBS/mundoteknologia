@@ -627,6 +627,27 @@ body.light-mode .btn-dark.highlight:hover {
         margin-top: 10px !important;
         object-fit: contain !important;
     }
+    .logo-dark span {
+    width: 80px !important;
+    height: 70px !important;
+    min-width: 80px !important;
+    min-height: 70px !important;
+    max-width: 80px !important;
+    max-height: 70px !important;
+    margin-right: 8px !important;
+    margin-top: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.1 !important;
+    text-align: left !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+}
 }
 
 @media (max-width: 900px) {
