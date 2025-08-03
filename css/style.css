@@ -644,6 +644,7 @@ body.light-mode .btn-dark.highlight:hover {
         width: 100% !important;
         max-width: 90vw !important;
         min-width: 0 !important;
+        margin-left: 20px;
         text-align: center !important;
     }
     .logo-dark span {
