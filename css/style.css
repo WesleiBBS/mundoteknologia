@@ -617,60 +617,37 @@ body.light-mode .btn-dark.highlight:hover {
         scroll-behavior: smooth;
     }
     
-    .logo-dark {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;      /* Centraliza horizontalmente */
-    justify-content: center !important;  /* Centraliza verticalmente */
-    width: 100% !important;
-    max-width: 90vw !important;
-    min-width: 0 !important;
-    margin: 0 auto !important;           /* Centraliza o bloco dentro do container */
-    text-align: center !important; 
-    margin-left: 25px;
-    } 
-    .logo-dark img {
-        width: 50px !important;
-        height: 50px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
-        max-width: 50px !important;
-        max-height: 50px !important;
-        margin-right: 8px !important;
-        object-fit: contain !important;
-        margin-top: 10px !important;
-    }
+    
     .logo-dark > div {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;      /* Centraliza horizontalmente */
-    justify-content: center !important;  /* Centraliza verticalmente */
-    width: 100% !important;
-    max-width: 90vw !important;
-    min-width: 0 !important;
-    margin: 0 auto !important;           /* Centraliza o bloco dentro do container */
-    margin-left: 20px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+        max-width: 60vw;
     }
     .logo-dark span {
-        font-size: 1.5rem !important;
-        font-weight: 700 !important;
-        color: #e9d460 !important;
-        line-height: 1.2 !important;
-        margin: 0.2rem 0 0.2rem 0 !important;
-        letter-spacing: 1px !important;
-        text-align: center !important;
-        display: block !important;
+        display: block;
+        width: 100%;
+        font-size: clamp(1.1rem, 4vw, 2.0rem);
+        line-height: 1.1;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-align: left;
+        word-break: break-word;
+        margin-bottom: 0.2em; /* Espaço entre nome e slogan */
     }
     .logo-dark > div > div {
-        font-size: 1rem !important;
-        color: #e9d460 !important;
-        margin-top: 0.2rem !important;
-        text-align: center !important;
-        font-weight: 400 !important;
-        letter-spacing: 1px !important;
-        display: block !important;
+        display: block;
+        width: 100%;
+        font-size: clamp(0.7rem, 2vw, 1.0rem);
+        line-height: 1.2;
+        text-align: left;
+        word-break: break-word;
+        margin-top: 0;
+        color: #e9d460;
     }
 }
+
 
 @media (max-width: 900px) {
     .portfolio-carousel-wrapper { padding: 0 10px; }
