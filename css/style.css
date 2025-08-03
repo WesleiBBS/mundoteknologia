@@ -637,16 +637,9 @@ body.light-mode .btn-dark.highlight:hover {
     margin-right: 8px !important;
     margin-top: 10px !important;
     display: flex !important;
+    justify-content: center !important;
     align-items: center !important;
-    justify-content: flex-start !important;
-    font-size: 1.1rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 1px !important;
-    line-height: 1.1 !important;
-    text-align: left !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: normal !important;
+
 }
 }
 
