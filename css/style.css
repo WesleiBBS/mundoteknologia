@@ -144,7 +144,7 @@ nav {
 }
 /* Ajuste para a imagem da logo na barra de navegação */
 .logo-dark img {
-    width: auto;
+    
     margin-left: 5px;
     margin-right: 2px;
     display: block;
