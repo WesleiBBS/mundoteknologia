@@ -627,6 +627,7 @@ body.light-mode .btn-dark.highlight:hover {
         max-height: 80px !important;
         object-fit: contain !important;
         margin-top: 20px !important;
+        float: none;
     }
 
     .logo-dark > div {
@@ -645,6 +646,7 @@ body.light-mode .btn-dark.highlight:hover {
         letter-spacing: 1px;
         text-align: left;
         word-break: break-word;
+        clear: both; 
         margin-bottom: 0.2em; /* Espaço entre nome e slogan */
     }
     .logo-dark > div > div {
