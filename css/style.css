@@ -627,7 +627,7 @@ body.light-mode .btn-dark.highlight:hover {
     min-width: 0 !important;
     margin: 0 auto !important;           /* Centraliza o bloco dentro do container */
     text-align: center !important; 
-    margin-right: 25px;
+    margin-right: 45px;
     } 
     .logo-dark img {
         width: 70px !important;
