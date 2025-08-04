@@ -13,30 +13,20 @@
             color: #f5f5f5;
         }
         .admin-header-bar {
-            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 700px;
             margin: 32px auto 0 auto;
-            height: 48px;
-        }
-        .admin-header-bar .btn-dark.small {
-            position: absolute;
-            top: 0;
-            z-index: 2;
-        }
-        #btn-voltar {
-            left: 0;
-        }
-        #logout-admin {
-            right: 0;
-            display: none;
+            padding: 0 8px;
         }
         .admin-title {
             text-align: center;
-            margin: 36px 0 0 0;
-            font-size: 2.2rem;
+            margin: 28px 0 0 0;
+            font-size: 2.1rem;
             font-weight: 700;
             letter-spacing: 1px;
-            color: #ffe066;
+            color: #fff;
             text-shadow: 0 2px 12px #0008;
         }
         #mensagens-list {
@@ -104,7 +94,6 @@
         @media (max-width: 800px) {
             .admin-header-bar, #mensagens-list { max-width: 98vw; }
             .msg-card { padding: 14px 8px 12px 12px; }
-            .admin-title { font-size: 1.3rem; }
         }
     </style>
     <!-- Firebase SDK -->
@@ -115,8 +104,8 @@
 <body>
     <header class="header-dark">
         <div class="admin-header-bar">
-            <button id="btn-voltar" class="btn-dark small" style="left:0;">&larr; Voltar</button>
-            <button id="logout-admin" class="btn-dark small" style="right:0;display:none;">Sair</button>
+            <button id="btn-voltar" class="btn-dark small">&larr; Voltar</button>
+            <button id="logout-admin" class="btn-dark small" style="display:none;">Sair</button>
         </div>
         <h2 class="admin-title">Mensagens Recebidas</h2>
     </header>
