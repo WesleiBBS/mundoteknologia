@@ -630,12 +630,12 @@ body.light-mode .btn-dark.highlight:hover {
     margin-right: 45px;
     } 
     .logo-dark img {
-        width: 70px !important;
-        height: 70px !important;
+        width: 90px !important;
+        height: 90px !important;
         min-width: 50px !important;
         min-height: 50px !important;
-        max-width: 70px !important;
-        max-height: 70px !important;
+        max-width: 90px !important;
+        max-height: 90px !important;
         margin-right: 8px !important;
         object-fit: contain !important;
         margin-top: 15px !important;
