@@ -251,18 +251,18 @@
     updateMsgCount();
 
      onAuthStateChanged(auth, (user) => {
-        if (
-            user &&
-            ADMINS.includes(user.uid)
-        ) {
-            document.getElementById('admin').style.display = 'block';
-            document.getElementById('logout-admin').style.display = 'inline-block';
-            carregarMensagens();
-        } else {
-            document.getElementById('admin').style.display = 'none';
-            document.getElementById('logout-admin').style.display = 'none';
-        }
-    });
+    if (
+        user &&
+        ADMINS.includes(user.uid)
+    ) {
+        document.getElementById('admin').style.display = 'block';
+        document.getElementById('logout-admin').style.display = 'inline-block';
+        // carregarMensagens(); // Mensagens só na página admin-mensagens.html
+    } else {
+        document.getElementById('admin').style.display = 'none';
+        document.getElementById('logout-admin').style.display = 'none';
+    }
+});
 
     // Envio do formulário para o Firebase
     document.getElementById('contact-form').addEventListener('submit', function(e) {
