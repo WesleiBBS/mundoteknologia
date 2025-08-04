@@ -632,8 +632,8 @@ body.light-mode .btn-dark.highlight:hover {
     .logo-dark img {
         width: 90px !important;
         height: 90px !important;
-        min-width: 50px !important;
-        min-height: 50px !important;
+        min-width: 90px !important;
+        min-height: 90px !important;
         max-width: 90px !important;
         max-height: 90px !important;
         margin-right: 8px !important;
