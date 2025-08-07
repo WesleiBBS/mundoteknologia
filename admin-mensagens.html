@@ -57,7 +57,6 @@
             background: linear-gradient(90deg, #5f2eea 60%, #264e9f 100%);
             color: #190d45;
             box-shadow: 0 4px 16px #0005;
-            
         }
         .admin-title {
             text-align: center;
@@ -113,6 +112,23 @@
             margin-top: 10px;
             letter-spacing: 0.5px;
         }
+        .btn-excluir-msg {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+        .btn-excluir-msg span {
+            font-size: 1.3em;
+            color: #ff5252;
+            transition: color 0.2s;
+        }
+        .btn-excluir-msg:hover span {
+            color: #ff0000;
+        }
         @media (max-width: 800px) {
             .admin-header-bar, #mensagens-list { max-width: 98vw; }
             .msg-card { padding: 14px 8px 12px 12px; }
@@ -139,7 +155,7 @@
     </footer>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
         const firebaseConfig = {
@@ -189,6 +205,7 @@
                 let messages = [];
                 snapshot.forEach(function(child) {
                     const msg = child.val();
+                    msg._key = child.key; // Salva a chave para exclusão
                     if (msg.data) {
                         msg._dataObj = new Date(msg.data);
                     } else {
@@ -213,16 +230,31 @@
                 }).forEach(day => {
                     html += `<div class="msg-day-title">${day}</div>`;
                     grouped[day].forEach(msg => {
-                        html += `<div class="msg-card">
+                        html += `<div class="msg-card" data-key="${msg._key}">
                             <div class="msg-info"><b>Nome:</b> ${msg.nome || '<span style="color:#ff5252;">(não informado)</span>'}</div>
                             <div class="msg-info"><b>Email:</b> ${msg.email || '<span style="color:#ff5252;">(não informado)</span>'}</div>
                             <div class="msg-info"><b>Mensagem:</b> ${msg.mensagem || '<span style="color:#ff5252;">(vazia)</span>'}</div>
                             <div class="msg-date">${formatDate(msg.data)}</div>
+                            <button class="btn-excluir-msg" title="Excluir mensagem">
+                                <span>🗑️</span>
+                            </button>
                         </div>`;
                     });
                 });
 
                 lista.innerHTML = html || "<p style='text-align:center;color:#ffe066;'>Nenhuma mensagem recebida.</p>";
+
+                // Adiciona evento de exclusão
+                document.querySelectorAll('.btn-excluir-msg').forEach(btn => {
+                    btn.onclick = function(e) {
+                        e.stopPropagation();
+                        const card = btn.closest('.msg-card');
+                        const key = card.getAttribute('data-key');
+                        if (confirm('Deseja excluir esta mensagem?')) {
+                            remove(ref(db, 'mensagens/' + key));
+                        }
+                    };
+                });
             });
         }
 
