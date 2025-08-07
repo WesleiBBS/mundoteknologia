@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js"></script>
 </head>
 <body>
     <!-- Botão para alternar tema -->
@@ -159,8 +160,6 @@
             </div>
         </section>
         <section id="admin" class="about-section-dark" style="display:none;">
-            
-            
         </section>
         <!-- Modal de Login/Cadastro Admin -->
         <div id="admin-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
@@ -212,6 +211,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAbsVCpF09twr4wpCYHB_cbA1oNkCuqtj0",
@@ -226,6 +226,27 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const auth = getAuth(app);
+
+    // Notificações Push via Firebase Messaging
+    const messaging = getMessaging(app);
+
+    // Solicita permissão para notificações push
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+           getToken(messaging, { vapidKey: "BO5Lzjm7dDXJknLBpv4nvn8oFFDmMnguOGAEYGLhBGVzIqqWd6H5_Vd8UB4KOC3qkxbropwd0V2UExPDH8KK3tc" }).then((currentToken) => {
+                if (currentToken) {
+                    // Salve esse token no banco para enviar notificações para este usuário/admin
+                    console.log("Token FCM:", currentToken);
+                }
+            });
+        }
+    });
+
+    // Recebe notificações enquanto o site está aberto
+    onMessage(messaging, (payload) => {
+        alert("Nova mensagem recebida!");
+        // Você pode personalizar a exibição aqui
+    });
 
     // UIDs dos administradores (NÃO há mais lista de e-mails)
     const ADMINS = [
@@ -249,19 +270,21 @@
     if (msgLink) msgLink.style.display = 'inline-block';
     updateMsgCount();
 
-     onAuthStateChanged(auth, (user) => {
-    if (
-        user &&
-        ADMINS.includes(user.uid)
-    ) {
+    onAuthStateChanged(auth, async (user) => {
+    if (user && ADMINS.includes(user.uid)) {
         document.getElementById('admin').style.display = 'block';
         document.getElementById('logout-admin').style.display = 'inline-block';
-        // carregarMensagens(); // Mensagens só na página admin-mensagens.html
+        // Salva o token FCM do admin logado
+        const currentToken = await getToken(messaging, { vapidKey: "BO5Lzjm7dDXJknLBpv4nvn8oFFDmMnguOGAEYGLhBGVzIqqWd6H5_Vd8UB4KOC3qkxbropwd0V2UExPDH8KK3tc" });
+        if (currentToken) {
+            // Salva no caminho: adminsTokens/{uid}
+            push(ref(db, 'adminsTokens/' + user.uid), currentToken);
+        }
     } else {
         document.getElementById('admin').style.display = 'none';
         document.getElementById('logout-admin').style.display = 'none';
     }
-});
+    });
 
     // Envio do formulário para o Firebase
     document.getElementById('contact-form').addEventListener('submit', function(e) {
