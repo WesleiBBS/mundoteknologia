@@ -1,0 +1,24 @@
+{
+  "name": "mundoteknologia",
+  "version": "1.0.0",
+  "description": "Um site moderno e responsivo para apresentar seu portfólio de aplicativos e projetos.",
+  "main": "firebase-messaging-sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WesleiBBS/WorldInova.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WesleiBBS/WorldInova/issues"
+  },
+  "homepage": "https://github.com/WesleiBBS/WorldInova#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "firebase-admin": "^13.4.0"
+  }
+}
